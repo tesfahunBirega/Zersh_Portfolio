@@ -7,5 +7,5 @@ RUN yarn build
 
 FROM nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /dist /usr/share/nginx/html
+COPY --from=builder /dist/ /usr/share/nginx/html
 EXPOSE 8000
