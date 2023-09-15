@@ -1,9 +1,9 @@
 FROM node as builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm install 
+RUN yarn 
 COPY . .
-RUN npm run build
+RUN yarn build
 
 FROM nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
