@@ -11,6 +11,7 @@ import {
   Works,
   StarsCanvas,
 } from "./components";
+import Skills from "./components/Skills";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Hero />
         </div>
         <About />
+        <Skills />
         <Experience />
         <Tech />
         <Works />

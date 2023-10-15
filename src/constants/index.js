@@ -1,6 +1,8 @@
 import endebete from '../assets/company/1.png'
 import dashboard from '../assets/tech/dashboard.png'
 import agency from '../assets/tech/agencyy.png'
+import flutter from '../assets/tech/flutter.jpg'
+import stockydashboard from '../assets//tech/stockydashboard.png'
 import {
   mobile,
   backend,
@@ -37,6 +39,10 @@ export const navLinks = [
     title: "About",
   },
   {
+    id: "skills",
+    title: "Skills",
+  },
+  {
     id: "work",
     title: "Work",
   },
@@ -71,10 +77,82 @@ const services = [
  
 ];
 
+const skillsFrontend = [
+  {
+    title: "React.js | Redux , Redux Thunk",
+    level: 95,
+  },
+  {
+    title: "Next.js",
+    level: 80,
+  },
+  {
+    title: "Flutter",
+    level: 70,
+  },
+  {
+    title: "Three.js / React Three Fiber",
+    level: 40,
+  },
+  {
+    title: "Tailwind , CSS",
+    level: 90,
+  },
+  {
+    title: "Framer-motion",
+    level: 80,
+  },
+  {
+    title: "Figma",
+    level: 70,
+  },
+];
+const skillsBackend = [
+  {
+    title: "Express.js",
+    level: 90,
+  },
+  {
+    title: "Next.js",
+    level: 70,
+  },
+  {
+    title: "TypeORM",
+    level: 95,
+  },
+  {
+    title: "Prisma",
+    level: 95,
+  },
+  {
+    title: "Postgresql",
+    level: 80,
+  },
+  {
+    title: "Mongodb",
+    level: 75,
+  }
+];
+const skillsDevops = [
+  {
+    title: "Docker",
+    level: 90,
+  },
+  {
+    title: "Nginx",
+    level: 70,
+  },
+  {
+    title: "Jenkinks",
+    level: 95,
+  },
+ 
+];
+
 const technologies = [
   {
-    name: "HTML 5",
-    icon: html,
+    name: "Flutter",
+    icon: flutter,
   },
   {
     name: "CSS 3",
@@ -126,6 +204,8 @@ const technologies = [
     icon: docker,
   },
 ];
+
+
 
 const experiences = [
   {
@@ -199,6 +279,76 @@ const testimonials = [
 
 const projects = [
   {
+    name: "Stocky",
+    description:
+      "Developed 'Stocky,' a dynamic stock market analysis platform. Users can register as buyers or sellers, and the system generates trend analysis for products from both perspectives. By considering user preferences and market data, Stocky provides valuable insights for sellers and buyers, aiding them in making informed decisions. ",
+    tags: [
+      {
+        name: "react.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "express.js",
+        color: "green-text-gradient",
+      },
+      {
+        name: "postgresql",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "docker",
+        color: "blue-text-gradient",
+      },
+    ],
+    image: stockydashboard,
+    link:"https://dashboard-nk3k.onrender.com",
+    source_code_link: "https://github.com/nand-n/Dashboard_1.0",
+  },
+  {
+    name: "Service Desc ",
+    description:
+      "Created 'SD,' a versatile CRM and ticket management tool tailored for both client and registered company employees. This system efficiently handles customer inquiries and internal issue tracking. It enables seamless communication and problem resolution for the clients and employees of registered companies, enhancing overall customer satisfaction.",
+    tags: [
+      {
+        name: "react.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "redux",
+        color: "green-text-gradient",
+      },
+      {
+        name: "tailwindcss",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: dashboard,
+    link:"https://dashboard-nk3k.onrender.com",
+    source_code_link: "https://github.com/nand-n/Dashboard_1.0",
+  },
+  {
+    name: "Project Management tool ",
+    description:
+      "Developed an intuitive and robust project management tool, streamlining collaboration and task tracking. Implemented features for task assignment, progress monitoring, and seamless communication, enhancing team efficiency and project delivery. .",
+    tags: [
+      {
+        name: "react.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "redux",
+        color: "green-text-gradient",
+      },
+      {
+        name: "tailwindcss",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: dashboard,
+    link:"https://dashboard-nk3k.onrender.com",
+    source_code_link: "https://github.com/nand-n/Dashboard_1.0",
+  },
+  {
     name: "Rigid Dashboard",
     description:
       "A Comprehancive dashboard to vishalize and  a convenient and efficient solution for transportation needs.",
@@ -225,9 +375,9 @@ const projects = [
     source_code_link: "https://github.com/nand-n/Dashboard_1.0",
   },
   {
-    name: "Agency Landing page",
+    name: "Dolche Pay",
     description:
-      "Agency Landing page for , dashboard , view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "'Dolche Pay,' an innovative finance platform that combines credit scoring, peer-to-peer transaction processing, lending, and an equity crowdfunding (Equb) platform. Dolche Pay empowers users to assess creditworthiness, facilitate peer-to-peer transactions, access credit, and invest in equity opportunities, all within a single, integrated platform. ",
     tags: [
       {
         name: "react.js",
@@ -245,6 +395,50 @@ const projects = [
     image: agency,
     link:"https://agency-landing-page.onrender.com/",
     source_code_link: "https://github.com/",
+  },
+  {
+    name: "Dolche SaaS",
+    description:
+      "Created 'Dolche,'a SaaS fintech platform empowering MSMEs and entrepreneurs to take control of their business finances. Companies can register and utilize Dolche for comprehensive finance management, including income and expense tracking, invoicing, and cash flow analysis. By categorizing transactions and providing data-driven insights, Dolche enables informed decision-making for businesses of all sizes.",
+    tags: [
+      {
+        name: "react.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "express.js",
+        color: "green-text-gradient",
+      },
+      {
+        name: "tailwinds",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: agency,
+    link:"https://agency-landing-page.onrender.com/",
+    source_code_link: "https://github.com/",
+  },
+  {
+    name: "Bigo game",
+    description:
+      " Bigo an exciting virtual lottery and number-based game. Customers can participate, guess the winning numbers, and have the chance to earn money while having fun. Bigo offers an entertaining and rewarding gaming experience for players of all levels.",
+    tags: [
+      {
+        name: "react.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "express.js",
+        color: "green-text-gradient",
+      },
+      {
+        name: "tailwinds",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: jobit,
+    link:"https://agency-landing-page.onrender.com/",
+    source_code_link: "https://github.com/nand-n/Agency-website.git",
   },
   {
     name: "Agency Landing page",
@@ -312,27 +506,9 @@ const projects = [
     link:"https://adis-gebrena.onrender.com/",
     source_code_link: "https://github.com/",
   },
-  {
-    name: "Trip Guide",
-    description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
-    tags: [
-      {
-        name: "nextjs",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "supabase",
-        color: "green-text-gradient",
-      },
-      {
-        name: "css",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: tripguide,
-    source_code_link: "https://github.com/",
-  },
+  
 ];
 
-export { services, technologies, experiences, testimonials, projects };
+export { services, technologies, experiences, testimonials, projects ,skillsFrontend,
+  skillsBackend,
+  skillsDevops };

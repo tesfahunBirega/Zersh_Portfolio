@@ -1,11 +1,12 @@
 import Tilt from "react-tilt";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 
 import { styles } from "../styles";
 import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
+import { useEffect } from "react";
 
 const ProjectCard = ({
   index,
@@ -14,7 +15,23 @@ const ProjectCard = ({
   tags,
   image,
   source_code_link,
+  link,
 }) => {
+  const controls = useAnimation();
+  const bounceAnimation = {
+    z: [0, -20, 0, 20, 0],
+    scale: [1, 0.8, 1, 1.2, 1], // Scaling animation for forward and backward bounces
+    transition: {
+      duration: 0.8,
+      repeat: Infinity,
+    },
+  };
+
+  useEffect(() => {
+    // Start the bouncing animation when the component mounts
+    controls.start(bounceAnimation);
+  }, [controls]);
+
   return (
     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
       <Tilt
@@ -44,12 +61,22 @@ const ProjectCard = ({
           <h3 className="text-white font-bold text-[24px]">{name}</h3>
           <p className="mt-2 text-secondary text-[14px]">{description}</p>
         </div>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <p key={tag.name} className={`text-[14px] ${tag.color}`}>
-              #{tag.name}
-            </p>
-          ))}
+        <div className="flex justify-between items-center">
+          <div className="mt-4 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <p key={tag.name} className={`text-[14px] ${tag.color}`}>
+                #{tag.name}
+              </p>
+            ))}
+          </div>
+          <motion.div
+            whileTap={{ scale: 0.9 }}
+            animate={controls}
+            onClick={() => window.open(link, "_blank")}
+            className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
+          >
+            <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[15px] border-l-sky-800 border-b-[10px] border-b-transparent"></div>
+          </motion.div>
         </div>
       </Tilt>
     </motion.div>
