@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
-import { testimonials } from "../constants";
+import { projects, testimonials } from "../constants";
+import { ProjectCard } from "./Works";
 
 const FeedbackCard = ({
   index,
@@ -44,18 +45,25 @@ const FeedbackCard = ({
 
 const Feedbacks = () => {
   return (
-    <div className="mt-12 bg-black-100 rounded-[20px]">
+    <div className="mt-12 bg-black-100 rounded-[20px]" id="projects">
       <div
         className={`${styles.padding} bg-tertiary rounded-2xl min-h-[300px]`}
       >
         <motion.div variants={textVariant()}>
-          <p className={styles.sectionSubText}>What others say</p>
-          <h2 className={styles.sectionHeadText}>Testimonials.</h2>
+          <p className={styles.sectionSubText}>My Projects</p>
+          <h2 className={styles.sectionHeadText}>Projects.</h2>
         </motion.div>
       </div>
-      <div className={`${styles.paddingX} -mt-20 pb-14 flex flex-wrap gap-7`}>
+      {/* <div className={`${styles.paddingX} -mt-20 pb-14 flex flex-wrap gap-7`}>
         {testimonials.map((testimonial, index) => (
           <FeedbackCard key={testimonial.name} index={index} {...testimonial} />
+        ))}
+      </div> */}
+      <div
+        className={`${styles.paddingX} -mt-20 pb-14 flex justify-start overflow-x-scroll px-4 py-4 gap-7`}
+      >
+        {projects.map((project, index) => (
+          <ProjectCard key={`project-${index}`} index={index} {...project} />
         ))}
       </div>
     </div>

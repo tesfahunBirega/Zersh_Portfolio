@@ -7,6 +7,56 @@ import { SectionWrapper } from "../hoc";
 import { skillsBackend, skillsFrontend, skillsDevops } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 
+const Skill = ({ title, data, style }) => {
+  return (
+    <motion.div whileInView={"visible"} className={style}>
+      <h2 className="text-3xl font-bold">{title} </h2>
+      <div className="mt-8 space-y-4">
+        {data.map((skill, index) => (
+          <div key={index} className="w-64">
+            <motion.h3
+              initial={{
+                opacity: 0,
+              }}
+              variants={{
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    duration: 1,
+                    delay: 1 + index * 0.2,
+                  },
+                },
+              }}
+              className="text-xl font-bold text-gray-100"
+            >
+              {skill.title}
+            </motion.h3>
+            <div className="h-2 w-full bg-gray-200 rounded-full mt-2">
+              <motion.div
+                initial={{
+                  scaleX: 0,
+                  originX: 0,
+                }}
+                variants={{
+                  visible: {
+                    scaleX: 1,
+                    transition: {
+                      duration: 1,
+                      delay: 1 + index * 0.2,
+                    },
+                  },
+                }}
+                className="h-full bg-indigo-500 rounded-full"
+                style={{ width: `${skill.level}%` }}
+              ></motion.div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
 const Skills = () => {
   return (
     <>
@@ -24,142 +74,21 @@ const Skills = () => {
         </motion.p>
       </div>
       <div className="grid grid-col justify-evenly items-start  gap-8 mt-8">
-        <motion.div whileInView={"visible"} className="col-span-1 col-start-1 ">
-          <h2 className="text-3xl font-bold">Frontend Skills </h2>
-          <div className="mt-8 space-y-4">
-            {skillsFrontend.map((skill, index) => (
-              <div key={index} className="w-64">
-                <motion.h3
-                  initial={{
-                    opacity: 0,
-                  }}
-                  variants={{
-                    visible: {
-                      opacity: 1,
-                      transition: {
-                        duration: 1,
-                        delay: 1 + index * 0.2,
-                      },
-                    },
-                  }}
-                  className="text-xl font-bold text-gray-100"
-                >
-                  {skill.title}
-                </motion.h3>
-                <div className="h-2 w-full bg-gray-200 rounded-full mt-2">
-                  <motion.div
-                    initial={{
-                      scaleX: 0,
-                      originX: 0,
-                    }}
-                    variants={{
-                      visible: {
-                        scaleX: 1,
-                        transition: {
-                          duration: 1,
-                          delay: 1 + index * 0.2,
-                        },
-                      },
-                    }}
-                    className="h-full bg-indigo-500 rounded-full"
-                    style={{ width: `${skill.level}%` }}
-                  ></motion.div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div whileInView={"visible"} className="col-span-1 col-start-2">
-          <h2 className="text-3xl font-bold">Backend Skills </h2>
-          <div className="mt-8 space-y-4">
-            {skillsBackend.map((skill, index) => (
-              <div key={index} className="w-64">
-                <motion.h3
-                  initial={{
-                    opacity: 0,
-                  }}
-                  variants={{
-                    visible: {
-                      opacity: 1,
-                      transition: {
-                        duration: 1,
-                        delay: 1 + index * 0.2,
-                      },
-                    },
-                  }}
-                  className="text-xl font-bold text-gray-100"
-                >
-                  {skill.title}
-                </motion.h3>
-                <div className="h-2 w-full bg-gray-200 rounded-full mt-2">
-                  <motion.div
-                    initial={{
-                      scaleX: 0,
-                      originX: 0,
-                    }}
-                    variants={{
-                      visible: {
-                        scaleX: 1,
-                        transition: {
-                          duration: 1,
-                          delay: 1 + index * 0.2,
-                        },
-                      },
-                    }}
-                    className="h-full bg-indigo-500 rounded-full"
-                    style={{ width: `${skill.level}%` }}
-                  ></motion.div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-        <motion.div whileInView={"visible"} className="col-span-1 col-start-3">
-          <h2 className="text-3xl font-bold">DevOps Skills </h2>
-          <div className="mt-8 space-y-4">
-            {skillsDevops.map((skill, index) => (
-              <div key={index} className="w-64">
-                <motion.h3
-                  initial={{
-                    opacity: 0,
-                  }}
-                  variants={{
-                    visible: {
-                      opacity: 1,
-                      transition: {
-                        duration: 1,
-                        delay: 1 + index * 0.2,
-                      },
-                    },
-                  }}
-                  className="text-xl font-bold text-gray-100"
-                >
-                  {skill.title}
-                </motion.h3>
-                <div className="h-2 w-full bg-gray-200 rounded-full mt-2">
-                  <motion.div
-                    initial={{
-                      scaleX: 0,
-                      originX: 0,
-                    }}
-                    variants={{
-                      visible: {
-                        scaleX: 1,
-                        transition: {
-                          duration: 1,
-                          delay: 1 + index * 0.2,
-                        },
-                      },
-                    }}
-                    className="h-full bg-indigo-500 rounded-full"
-                    style={{ width: `${skill.level}%` }}
-                  ></motion.div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+        <Skill
+          title={"Frontend Skills"}
+          data={skillsFrontend}
+          style={"col-span-1 col-start-1"}
+        />
+        <Skill
+          title={"Backend Skills"}
+          data={skillsBackend}
+          style={"col-span-1 col-start-2"}
+        />
+        <Skill
+          title={"DevOps Skills"}
+          data={skillsDevops}
+          style={"col-span-1 col-start-3"}
+        />
       </div>
     </>
   );

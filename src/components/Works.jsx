@@ -8,7 +8,7 @@ import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 import { useEffect } from "react";
 
-const ProjectCard = ({
+export const ProjectCard = ({
   index,
   name,
   description,
@@ -104,7 +104,7 @@ const Works = () => {
         </motion.p>
       </div>
 
-      <div className="mt-20 flex justify-start overflow-x-scroll  gap-4 px-4 py-4">
+      <div className="mt-20 flex justify-start overflow-x-scroll  gap-4 px-4 py-4 ">
         {projects.map((project, index) => (
           <ProjectCard key={`project-${index}`} index={index} {...project} />
         ))}
