@@ -45,7 +45,7 @@ const FeedbackCard = ({
 
 const Feedbacks = () => {
   return (
-    <div className="mt-12 bg-black-100 rounded-[20px]" id="projects">
+    <div className="mt-12 bg-black-100 rounded-[20px]" id="project">
       <div
         className={`${styles.padding} bg-tertiary rounded-2xl min-h-[300px]`}
       >
@@ -60,10 +60,10 @@ const Feedbacks = () => {
         ))}
       </div> */}
       <div
-        className={`${styles.paddingX} -mt-20 pb-14 flex justify-start overflow-x-scroll px-4 py-4 gap-7`}
+        className={`${styles.paddingX} -mt-20 pb-14 grid-flow-row  px-8 md:flex md:flex-cols-4 overflow-x-scroll md:px-4 py-4 gap-7`}
       >
         {projects.map((project, index) => (
-          <ProjectCard key={`project-${index}`} index={index} {...project} />
+          <ProjectCard key={index} index={index} {...project} />
         ))}
       </div>
     </div>
