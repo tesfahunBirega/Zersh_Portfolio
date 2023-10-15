@@ -73,7 +73,7 @@ const Skills = () => {
           The following skills showcases my skills & expertise.
         </motion.p>
       </div>
-      <div className="grid grid-col justify-evenly items-start  gap-8 mt-8">
+      <div className="grid grid-flow-row md:grid-col  justify-evenly items-start  gap-8 mt-8">
         <Skill
           title={"Frontend Skills"}
           data={skillsFrontend}
