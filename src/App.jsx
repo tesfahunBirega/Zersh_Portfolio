@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import {
   About,
@@ -28,10 +28,17 @@ const App = () => {
         <Experience />
         {/* <Works /> */}
         <Feedbacks />
+
         {/* <ProjectDetailPage /> */}
         <div className="relative z-0">
           <Contact />
           <StarsCanvas />
+          {/* <Routes>
+            <Route
+              path="/projectdetail/:name"
+              element={<ProjectDetailPage />}
+            />
+          </Routes> */}
         </div>
       </div>
     </BrowserRouter>
