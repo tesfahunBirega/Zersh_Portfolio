@@ -73,7 +73,7 @@ const Feedbacks = () => {
         ))}
       </div> */}
       <div
-        className={`${styles.paddingX} -mt-20 pb-14 grid-flow-row  px-8 md:flex md:flex-cols-4 overflow-x-scroll md:px-4 py-4 gap-7`}
+        className={`${styles.paddingX} -mt-20 pb-14 grid-flow-row  px-8 md:flex md:flex-cols-4 overflow-x-scroll md:px-12 py-4 gap-7`}
       >
         {projects.map((project, index) => (
           <ProjectCard key={index} index={index} {...project} />
