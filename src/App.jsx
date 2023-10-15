@@ -10,6 +10,7 @@ import {
   Tech,
   Works,
   StarsCanvas,
+  ProjectDetailPage,
 } from "./components";
 import Skills from "./components/Skills";
 
@@ -27,6 +28,7 @@ const App = () => {
         <Experience />
         {/* <Works /> */}
         <Feedbacks />
+        {/* <ProjectDetailPage /> */}
         <div className="relative z-0">
           <Contact />
           <StarsCanvas />

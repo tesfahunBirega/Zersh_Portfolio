@@ -53,7 +53,20 @@ const Feedbacks = () => {
           <p className={styles.sectionSubText}>My Projects</p>
           <h2 className={styles.sectionHeadText}>Projects.</h2>
         </motion.div>
+        <div className="w-full flex " id="project">
+          <motion.p
+            variants={fadeIn("", "", 0.1, 1)}
+            className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
+          >
+            Following projects showcases my skills and experience through
+            real-world work experiance. Each project is briefly described with
+            links to code repositories and live demos in it. It reflects my
+            ability to solve complex problems, work with different technologies,
+            and manage projects effectively.
+          </motion.p>
+        </div>
       </div>
+
       {/* <div className={`${styles.paddingX} -mt-20 pb-14 flex flex-wrap gap-7`}>
         {testimonials.map((testimonial, index) => (
           <FeedbackCard key={testimonial.name} index={index} {...testimonial} />
