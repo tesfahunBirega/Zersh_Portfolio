@@ -371,7 +371,6 @@ const projects = [
     link:"https://dashboard-nk3k.onrender.com",
     source_code_link: "https://github.com/nand-n/Dashboard_1.0",
   },
-
   {
     name: "Dolche Pay",
     description:
