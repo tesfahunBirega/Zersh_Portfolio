@@ -523,7 +523,7 @@ const projects = [
     ],
     image: agriconnect,
     link:"https://adis-gebrena.onrender.com/",
-    source_code_link: "https://github.com/",
+    source_code_link: "https://github.com/nand-n/adis-gibrena",
   },
   
 ];
