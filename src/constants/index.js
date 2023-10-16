@@ -210,7 +210,6 @@ const technologies = [
 ];
 
 
-
 const experiences = [
   {
     title: "Upwork Freelance",
