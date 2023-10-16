@@ -367,7 +367,6 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-
     image: dashboard,
     link:"https://dashboard-nk3k.onrender.com",
     source_code_link: "https://github.com/nand-n/Dashboard_1.0",
