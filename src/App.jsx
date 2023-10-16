@@ -13,34 +13,17 @@ import {
   ProjectDetailPage,
 } from "./components";
 import Skills from "./components/Skills";
+import Home from "./Pages/Home";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="relative z-0 bg-primary">
-        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          <Navbar />
-          <Hero />
-        </div>
-        <About />
-        <Skills />
-        <Tech />
-        <Experience />
-        {/* <Works /> */}
-        <Feedbacks />
-
-        {/* <ProjectDetailPage /> */}
-        <div className="relative z-0">
-          <Contact />
-          <StarsCanvas />
-          {/* <Routes>
-            <Route
-              path="/projectdetail/:name"
-              element={<ProjectDetailPage />}
-            />
-          </Routes> */}
-        </div>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+      <Routes>
+        <Route path="/projectdetail/:name" element={<ProjectDetailPage />} />
+      </Routes>
     </BrowserRouter>
   );
 };

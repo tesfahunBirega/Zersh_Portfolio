@@ -1,8 +1,12 @@
 import endebete from '../assets/company/1.png'
+import endebetecomp from '../assets/tech/endebete.png'
 import dashboard from '../assets/tech/dashboard.png'
 import agency from '../assets/tech/agencyy.png'
 import flutter from '../assets/tech/flutter.jpg'
 import stockydashboard from '../assets//tech/stockydashboard.png'
+import agriconnect from '../assets/tech/agriconnect.png'
+import sd from '../assets/tech/sd.png'
+import pm from '../assets/tech/pm2.png'
 import {
   mobile,
   backend,
@@ -295,10 +299,7 @@ const projects = [
         name: "postgresql",
         color: "pink-text-gradient",
       },
-      {
-        name: "docker",
-        color: "blue-text-gradient",
-      },
+      
     ],
     image: stockydashboard,
     link:"https://dashboard-nk3k.onrender.com",
@@ -322,7 +323,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: dashboard,
+    image: sd,
     link:"https://dashboard-nk3k.onrender.com",
     source_code_link: "https://github.com/nand-n/Dashboard_1.0",
   },
@@ -344,7 +345,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: dashboard,
+    image: pm,
     link:"https://dashboard-nk3k.onrender.com",
     source_code_link: "https://github.com/nand-n/Dashboard_1.0",
   },
@@ -360,10 +361,6 @@ const projects = [
       {
         name: "framer-motion",
         color: "green-text-gradient",
-      },
-      {
-        name: "syncfusion",
-        color: "yellow-text-gradient",
       },
       {
         name: "tailwindcss",
@@ -485,6 +482,28 @@ const projects = [
     source_code_link: "https://github.com/nand-n/Agency-website.git",
   },
   {
+    name: "Endebete",
+    description:
+      "A Home Rental Companyt for retail based company,dashboard,view estimated salary ranges for positions, and locate available jobs based on their current location.",
+    tags: [
+      {
+        name: "react.js",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "express.js",
+        color: "green-text-gradient",
+      },
+      {
+        name: "tailwinds",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: endebetecomp,
+    link:"https://endebete.com/",
+    source_code_link: "https://github.com/nand-n/endebete",
+  },
+  {
     name: "Agri-Connect",
     description:
       "A Company Landing page for agri tech ,dashboard , view estimated salary ranges for positions, and locate available jobs based on their current location.",
@@ -502,7 +521,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
+    image: agriconnect,
     link:"https://adis-gebrena.onrender.com/",
     source_code_link: "https://github.com/",
   },

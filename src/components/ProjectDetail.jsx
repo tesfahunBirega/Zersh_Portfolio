@@ -1,36 +1,14 @@
 import { motion } from "framer-motion";
-
-const ProjectDetailPage = () => {
-  const projectTitle = "Project Name";
-  const projectDescription = "Detailed project description goes here.";
-  const uiDesigns = [
-    { link: "https://figma.com/design1" },
-    { link: "https://figma.com/design2" },
-  ];
-  const userJourneyMaps = [
-    { link: "https://journeymap1.com" },
-    { link: "https://journeymap2.com" },
-  ];
-
-  return (
-    <div>
-      <ProjectDetail
-        title={projectTitle}
-        description={projectDescription}
-        uiDesigns={uiDesigns}
-        userJourneyMaps={userJourneyMaps}
-      />
-    </div>
-  );
-};
-
-export default ProjectDetailPage;
+import { StarsCanvas } from "./canvas";
+import Navbar from "./Navbar";
+import Hero from "./Hero";
+import { useLocation, useParams } from "react-router-dom";
 
 const ProjectDetail = ({ title, description, uiDesigns, userJourneyMaps }) => {
   return (
-    <div className="flex flex-col md:flex-row md:grid md:grid-cols-2 md:justify-evenly gap-4 md:gap-8 mt-8">
+    <div className="flex flex-col md:flex-row md:grid md:grid-cols-2 md:justify-evenly gap-4 md:gap-8 mt-0 h-screen">
       <div className="md:col-span-2">
-        <h2 className="text-3xl font-bold">{title}</h2>
+        <h2 className="text-3xl font-bold">Project Name : {title}</h2>
         <p className="text-gray-600 mt-4">{description}</p>
       </div>
       <div className="md:col-span-1">
@@ -60,3 +38,43 @@ const ProjectDetail = ({ title, description, uiDesigns, userJourneyMaps }) => {
     </div>
   );
 };
+
+const ProjectDetailPage = () => {
+  const projectName = useParams();
+  console.log(projectName.name);
+  const projectTitle = projectName.name;
+
+  const projectDescription = "Detailed project description goes here.";
+  const uiDesigns = [
+    { link: "https://figma.com/design1" },
+    { link: "https://figma.com/design2" },
+  ];
+  const userJourneyMaps = [
+    { link: "https://journeymap1.com" },
+    { link: "https://journeymap2.com" },
+  ];
+
+  return (
+    <div className="relative z-0 bg-primary">
+      <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+        <Navbar project />
+        {/* <Hero /> */}
+
+        {/* <div className=""> */}
+        <StarsCanvas />
+
+        {/* </div> */}
+        <div className="mt-0 pt-28  px-32">
+          <ProjectDetail
+            title={projectTitle}
+            description={projectDescription}
+            uiDesigns={uiDesigns}
+            userJourneyMaps={userJourneyMaps}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProjectDetailPage;

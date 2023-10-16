@@ -5,7 +5,7 @@ import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
 
-const Navbar = () => {
+const Navbar = ({ project }) => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -70,16 +70,22 @@ const Navbar = () => {
         </Link>
 
         <ul className="list-none hidden sm:flex flex-row gap-10">
-          {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${
-                active === nav.id ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
-            >
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
-          ))}
+          {project ? (
+            <></>
+          ) : (
+            <>
+              {navLinks.map((nav) => (
+                <li
+                  key={nav.id}
+                  className={`${
+                    active === nav.id ? "text-white" : "text-secondary"
+                  } hover:text-white text-[18px] font-medium cursor-pointer`}
+                >
+                  <a href={`#${nav.id}`}>{nav.title}</a>
+                </li>
+              ))}
+            </>
+          )}
         </ul>
 
         <div className="sm:hidden flex flex-1 justify-end items-center">
