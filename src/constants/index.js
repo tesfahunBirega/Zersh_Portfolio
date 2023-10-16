@@ -208,7 +208,6 @@ const technologies = [
     icon: docker,
   },
 ];
-
 const experiences = [
   {
     title: "Upwork Freelance",
