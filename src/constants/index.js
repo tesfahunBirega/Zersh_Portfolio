@@ -438,9 +438,9 @@ const projects = [
     source_code_link: "https://github.com/nand-n/Agency-website.git",
   },
   {
-    name: "Agency Landing page",
+    name: "Modern web 3",
     description:
-      "Agency Landing page for , dashboard , view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "A fully responseive visually apeal and beautiful interactive , web 3 like lading page.",
     tags: [
       {
         name: "react.js",
@@ -456,7 +456,7 @@ const projects = [
       },
     ],
     image: jobit,
-    link:"https://agency-landing-page.onrender.com/",
+    link:"https://modern-web.onrender.com/",
     source_code_link: "https://github.com/",
   },
   {
