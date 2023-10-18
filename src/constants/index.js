@@ -477,7 +477,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
+    image: agency,
     link:"https://agency-landing-page.onrender.com/",
     source_code_link: "https://github.com/nand-n/Agency-website.git",
   },
