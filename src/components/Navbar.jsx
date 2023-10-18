@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
+import avatarlogo from "../../public/log1.svg";
 
 const Navbar = ({ project }) => {
   const [active, setActive] = useState("");
@@ -62,7 +63,7 @@ const Navbar = ({ project }) => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
+          <img src={avatarlogo} alt="logo" className="w-9 h-9 object-contain" />
           <p className="text-white text-[18px] font-bold cursor-pointer flex ">
             Nahom &nbsp;
             <span className="sm:block hidden"> | Debele</span>
