@@ -7,6 +7,9 @@ import stockydashboard from '../assets//tech/stockydashboard.png'
 import agriconnect from '../assets/tech/agriconnect.png'
 import sd from '../assets/tech/sd.png'
 import pm from '../assets/tech/pm2.png'
+import dolchepay from '../assets/tech/dolchepay.png'
+import modernweb from '../assets/tech/modernweb.png'
+import bigo from '../assets/tech/bigo.png'
 import {
   mobile,
   backend,
@@ -386,7 +389,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: agency,
+    image: dolchepay,
     link:"https://agency-landing-page.onrender.com/",
     source_code_link: "https://github.com/",
   },
@@ -430,7 +433,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
+    image: bigo,
     link:"https://agency-landing-page.onrender.com/",
     source_code_link: "https://github.com/nand-n/Agency-website.git",
   },
@@ -452,7 +455,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
+    image: modernweb,
     link:"https://modern-web.onrender.com/",
     source_code_link: "https://github.com/",
   },
