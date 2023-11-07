@@ -285,7 +285,7 @@ const projects = [
   {
     name: "Stocky",
     description:
-      "Developed 'Stocky,' a dynamic stock market analysis platform. Users can register as buyers or sellers, and the system generates trend analysis for products from both perspectives. By considering user preferences and market data, Stocky provides valuable insights for sellers and buyers, aiding them in making informed decisions. ",
+      "Developed 'Stocky,' a dynamic stock market analysis platform. It offers trend analysis for products from both buyer and seller perspectives, utilizing user preferences and market data to provide valuable insights for informed decision-making.",
     tags: [
       {
         name: "react.js",
@@ -308,7 +308,7 @@ const projects = [
   {
     name: "Service Desc ",
     description:
-      "Created 'SD,' a versatile CRM and ticket management tool tailored for both client and registered company employees. This system efficiently handles customer inquiries and internal issue tracking. It enables seamless communication and problem resolution for the clients and employees of registered companies, enhancing overall customer satisfaction.",
+      "Created 'SD,' a versatile CRM and ticket management tool for clients and registered company employees. It streamlines communication and issue resolution, enhancing overall customer satisfaction.",
     tags: [
       {
         name: "react.js",
@@ -330,7 +330,7 @@ const projects = [
   {
     name: "Project Management tool ",
     description:
-      "Developed an intuitive and robust project management tool, streamlining collaboration and task tracking. Implemented features for task assignment, progress monitoring, and seamless communication, enhancing team efficiency and project delivery. .",
+      "Developed an intuitive project management tool with task assignment, progress tracking, and seamless communication features, boosting team efficiency and project delivery..",
     tags: [
       {
         name: "react.js",
@@ -374,7 +374,7 @@ const projects = [
   {
     name: "Dolche Pay",
     description:
-      "'Dolche Pay,' an innovative finance platform that combines credit scoring, peer-to-peer transaction processing, lending, and an equity crowdfunding (Equb) platform. Dolche Pay empowers users to assess creditworthiness, facilitate peer-to-peer transactions, access credit, and invest in equity opportunities, all within a single, integrated platform. ",
+      "'Dolche Pay,' an innovative finance platform that integrates credit scoring, peer-to-peer transactions, lending, and equity crowdfunding (Equb). It empowers users to assess creditworthiness, facilitate transactions, access credit, unified platform. ",
     tags: [
       {
         name: "react.js",
@@ -396,7 +396,7 @@ const projects = [
   {
     name: "Dolche SaaS",
     description:
-      "Created 'Dolche,'a SaaS fintech platform empowering MSMEs and entrepreneurs to take control of their business finances. Companies can register and utilize Dolche for comprehensive finance management, including income and expense tracking, invoicing, and cash flow analysis. By categorizing transactions and providing data-driven insights, Dolche enables informed decision-making for businesses of all sizes.",
+      "Created 'Dolche,'a SaaS fintech platform for comprehensive business finance management, offering income and expense tracking, invoicing, and data-driven insights to empower MSMEs and entrepreneurs.",
     tags: [
       {
         name: "react.js",
