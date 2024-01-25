@@ -119,6 +119,11 @@ const Navbar = ({ project }) => {
             </ul>
           </div>
         </div>
+        <Link to="/blogs" className="flex items-center gap-2">
+          <p className="hidden sm:block text-secondary hover:text-white font-poppins font-medium cursor-pointer text-[16px]">
+            Blogs
+          </p>
+        </Link>
       </div>
     </nav>
   );
