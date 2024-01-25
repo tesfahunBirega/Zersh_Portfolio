@@ -1,19 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import {
-  About,
-  Contact,
-  Experience,
-  Feedbacks,
-  Hero,
-  Navbar,
-  Tech,
-  Works,
-  StarsCanvas,
-  ProjectDetailPage,
-} from "./components";
-import Skills from "./components/Skills";
+import { ProjectDetailPage } from "./components";
 import Home from "./Pages/Home";
+import Blogs from "./Pages/Blogs";
 
 const App = () => {
   return (
@@ -23,6 +12,7 @@ const App = () => {
       </Routes>
       <Routes>
         <Route path="/projectdetail/:name" element={<ProjectDetailPage />} />
+        <Route path="/blogs/" element={<Blogs />} />
       </Routes>
     </BrowserRouter>
   );
