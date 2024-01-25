@@ -4,6 +4,8 @@ import Card from "../components/Card";
 function Blogs() {
   const blogData = [
     {
+      id: "1",
+      author: "Author 1",
       title: "Blog 1",
       description:
         "This is the first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -12,6 +14,8 @@ function Blogs() {
       createdDate: "January 10, 2022",
     },
     {
+      id: "2",
+      author: "Author 1",
       title: "Blog 2",
       description:
         "This is the second blog post. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -20,6 +24,8 @@ function Blogs() {
       createdDate: "February 15, 2022",
     },
     {
+      id: "3",
+      author: "Author 3",
       title: "Blog 3",
       description:
         "This is the third blog post. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
@@ -28,6 +34,8 @@ function Blogs() {
       createdDate: "March 20, 2022",
     },
     {
+      id: "1",
+      author: "Author 3",
       title: "Blog 3",
       description:
         "This is the third blog post. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
