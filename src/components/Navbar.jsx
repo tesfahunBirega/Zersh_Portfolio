@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
+import { Avatar, Menu } from "antd";
 import avatarlogo from "/log1.svg";
+import { Icosahedron } from "@react-three/drei";
+import SubMenu from "antd/es/menu/SubMenu";
 
 const Navbar = ({ project }) => {
   const [active, setActive] = useState("");
@@ -124,6 +127,23 @@ const Navbar = ({ project }) => {
             Blogs
           </p>
         </Link>
+        <div className="flex justify-end items-center p-4">
+          {/* <Avatar
+            size="large"
+            style={{ backgroundColor: "#87d068", cursor: "pointer" }}
+            icon={<Icosahedron />}
+          /> */}
+          <Menu theme="dark" mode="horizontal">
+            <SubMenu title="Account">
+              <Menu.Item key="login">
+                <Link to="/login">Login</Link>
+              </Menu.Item>
+              <Menu.Item key="signup">
+                <Link to="/signup">Sign Up</Link>
+              </Menu.Item>
+            </SubMenu>
+          </Menu>
+        </div>
       </div>
     </nav>
   );
