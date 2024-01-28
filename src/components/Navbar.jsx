@@ -122,27 +122,24 @@ const Navbar = ({ project }) => {
             </ul>
           </div>
         </div>
-        <Link to="/blogs" className="flex items-center gap-2">
-          <p className="hidden sm:block text-secondary hover:text-white font-poppins font-medium cursor-pointer text-[16px]">
-            Blogs
-          </p>
-        </Link>
-        <div className="flex justify-end items-center p-4">
-          {/* <Avatar
-            size="large"
-            style={{ backgroundColor: "#87d068", cursor: "pointer" }}
-            icon={<Icosahedron />}
-          /> */}
-          <Menu theme="dark" mode="horizontal">
-            <SubMenu title="Account">
-              <Menu.Item key="login">
-                <Link to="/login">Login</Link>
-              </Menu.Item>
-              <Menu.Item key="signup">
-                <Link to="/signup">Sign Up</Link>
-              </Menu.Item>
-            </SubMenu>
-          </Menu>
+        <div className="flex justify-center items-center gap-2">
+          <Link to="/blogs" className="flex items-center gap-2">
+            <p className="hidden sm:block text-secondary hover:text-white font-poppins font-medium cursor-pointer text-[16px]">
+              Blogs
+            </p>
+          </Link>
+          <div className="flex justify-end items-center p-4">
+            <Menu className="rounded" theme="dark" mode="horizontal">
+              <SubMenu title="Account">
+                <Menu.Item key="login">
+                  <Link to="/login">Login</Link>
+                </Menu.Item>
+                <Menu.Item key="signup">
+                  <Link to="/signup">Sign Up</Link>
+                </Menu.Item>
+              </SubMenu>
+            </Menu>
+          </div>
         </div>
       </div>
     </nav>
