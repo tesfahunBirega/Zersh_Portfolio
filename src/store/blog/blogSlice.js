@@ -39,7 +39,7 @@ export const blogsSlice = createSlice({
             })
             .addCase(fetchBlogs.fulfilled, (state,action)=>{
                 state.loading = false
-                state.blogs.push(action.payload)
+                state.blogs =[ ...state.blogs,action.payload]
             })
             .addCase(fetchBlogs.rejected , (state, action)=>{
                 state.loading = false 

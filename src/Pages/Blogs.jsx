@@ -4,13 +4,10 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../store/blog/blogAction";
 
 function Blogs({ blogs, fetchBlogs }) {
-  // const dispatch = useDispatch();
-  // const blogs = useSelector((state) => state.blogs.blogs);
   useEffect(() => {
     fetchBlogs();
   }, []);
-  console.log(blogs, "blog");
-
+  console.log(blogs, "blogs");
   return (
     <div className="relative z-0 bg-primary h-screen overflow-y-scroll scroll-smooth">
       <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center h-1/2 px-20">
@@ -33,7 +30,7 @@ function Blogs({ blogs, fetchBlogs }) {
 
 const mapStateToProps = (state) => {
   return {
-    blogs: state.blogs.blogs[0],
+    blogs: state.blogs.blogs,
   };
 };
 
