@@ -15,7 +15,7 @@ export const blogSlice = createSlice({
         })
         .addCase(fetchBlog.fulfilled, (state,action)=>{
             state.loading = false
-            state.blog.push(action.payload)
+            state.blog=action.payload
         })
         .addCase(fetchBlog.rejected , (state , action )=>{
             state.loading = false

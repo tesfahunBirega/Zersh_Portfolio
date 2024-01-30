@@ -7,7 +7,6 @@ function Blogs({ blogs, fetchBlogs }) {
   useEffect(() => {
     fetchBlogs();
   }, []);
-  console.log(blogs, "blogs");
   return (
     <div className="relative z-0 bg-primary h-screen overflow-y-scroll scroll-smooth">
       <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center h-1/2 px-20">

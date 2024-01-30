@@ -7,7 +7,7 @@ export const fetchBlog = createAsyncThunk(
 
         const abortController = new AbortController()
 
-        const response = await fetch(`api/blog/${blogId}` , {
+        const response = await fetch(`${baseUrl}blogs/${blogId}` , {
             signal:abortController.signal
         })
         if(response.status !== 200){

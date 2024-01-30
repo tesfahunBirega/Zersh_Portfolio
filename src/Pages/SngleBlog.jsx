@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
+import { useParams } from "react-router-dom";
+import { fetchBlog } from "../store/blog/blogAction";
+import { connect } from "react-redux";
 
-function SingleBlog() {
-  const blog = {
-    id: "1",
-    author: "Author 1",
-    title: "Blog 1",
-    description:
-      "This is the first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    body: "This is the first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus justo vel turpis blandit, eu hendrerit lectus auctor. Nullam et orci auctor, hendrerit sapien at, varius dui. Nam quis metus ut orci ullamcorper vulputate.This is the first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus justo vel turpis blandit, eu hendrerit lectus auctor. Nullam et orci auctor, hendrerit sapien at, varius dui. Nam quis metus ut orci ullamcorper vulputate.This is the first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus justo vel turpis blandit, eu hendrerit lectus auctor. Nullam et orci auctor, hendrerit sapien at, varius dui. Nam quis metus ut orci ullamcorper vulputate.This is the first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus justo vel turpis blandit, eu hendrerit lectus auctor. Nullam et orci auctor, hendrerit sapien at, varius dui. Nam quis metus ut orci ullamcorper vulputate.This is the first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus justo vel turpis blandit, eu hendrerit lectus auctor. Nullam et orci auctor, hendrerit sapien at, varius dui. Nam quis metus ut orci ullamcorper vulputate.This is the first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus justo vel turpis blandit, eu hendrerit lectus auctor. Nullam et orci auctor, hendrerit sapien at, varius dui. Nam quis metus ut orci ullamcorper vulputate.This is the first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus justo vel turpis blandit, eu hendrerit lectus auctor. Nullam et orci auctor, hendrerit sapien at, varius dui. Nam quis metus ut orci ullamcorper vulputate.This is the first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus justo vel turpis blandit, eu hendrerit lectus auctor. Nullam et orci auctor, hendrerit sapien at, varius dui. Nam quis metus ut orci ullamcorper vulputate.This is the first blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus justo vel turpis blandit, eu hendrerit lectus auctor. Nullam et orci auctor, hendrerit sapien at, varius dui. Nam quis metus ut orci ullamcorper vulputate.",
-    imageUrl: "https://placekitten.com/400/300",
-    category: "Technology",
-    createdDate: "January 10, 2022",
-  };
+function SingleBlog({ blog, fetchBlog }) {
+  const blogId = useParams();
+
+  useEffect(() => {
+    fetchBlog(blogId.id);
+  }, [blogId.id]);
+
   const [darkMode, setDarkMode] = useState(true);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
-
   return (
     <div className="relative z-0 bg-primary h-screen overflow-y-scroll scroll-smooth">
       <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center h-1/2 px-20">
@@ -119,4 +116,16 @@ function SingleBlog() {
   );
 }
 
-export default SingleBlog;
+const mapStateToProps = (state) => {
+  return {
+    blog: state.blog.blog,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchBlog: (id) => dispatch(fetchBlog(id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleBlog);
