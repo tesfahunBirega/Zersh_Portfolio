@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { baseUrl } from "../../constants";
 
 export const fetchBlog = createAsyncThunk(
     'blogs/fetchbyid',
@@ -24,9 +25,12 @@ export const fetchBlogs = createAsyncThunk(
 
         const abortController = new AbortController()
 
-        const response = await fetch(`api/blogs` , {
+        const response = await fetch(`${baseUrl}blogs` 
+        ,
+         {
             signal:abortController.signal
-        })
+        }
+        )
         if(response.status !== 200){
             abortController.abort()
             return thinkApi.rejectWithValue("Failed to fetch blogs data.")

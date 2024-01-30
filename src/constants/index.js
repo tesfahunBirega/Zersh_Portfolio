@@ -528,6 +528,8 @@ const projects = [
   
 ];
 
+const baseUrl = "http://localhost:3000/api/v1/"
+
 export { services, technologies, experiences, testimonials, projects ,skillsFrontend,
   skillsBackend,
-  skillsDevops };
+  skillsDevops,baseUrl };

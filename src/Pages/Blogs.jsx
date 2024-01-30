@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "../components/Card";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { fetchBlogs } from "../store/blog/blogAction";
 
-function Blogs() {
-  const dispatch = useDispatch();
-  const blogs = useSelector((state) => state.blogs.blogs);
+function Blogs({ blogs, fetchBlogs }) {
+  // const dispatch = useDispatch();
+  // const blogs = useSelector((state) => state.blogs.blogs);
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
   console.log(blogs, "blog");
 
   return (
@@ -27,4 +31,16 @@ function Blogs() {
   );
 }
 
-export default Blogs;
+const mapStateToProps = (state) => {
+  return {
+    blogs: state.blogs.blogs[0],
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchBlogs: () => dispatch(fetchBlogs()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Blogs);
