@@ -37,7 +37,7 @@ const Okr = () => {
   return (
     <div className="container mx-auto mt-8">
       <h1 className="text-3xl font-bold mb-4">Goals Management</h1>
-      <Button type="primary" onClick={showModal} className="mb-4">
+      <Button type="primary" onClick={showModal} className=" mb-4">
         Add Goal
       </Button>
       <Modal
