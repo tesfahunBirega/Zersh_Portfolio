@@ -1,7 +1,16 @@
 import React from "react";
+import { Input } from "antd";
 
-function Inputs() {
-  return <div>Inputs</div>;
+const { Search } = Input;
+function Inputs({ placeholder, onSearch, style, ...rest }) {
+  return (
+    <Search
+      placeholder={placeholder}
+      onSearch={onSearch}
+      style={style}
+      {...rest}
+    />
+  );
 }
 
 export default Inputs;
