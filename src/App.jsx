@@ -19,6 +19,7 @@ const App = () => {
         <Route path="/blogs/:id" element={<SingleBlog />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/performance" element={<Okr />} />
       </Routes>
     </BrowserRouter>
   );
