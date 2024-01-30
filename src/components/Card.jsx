@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Card = ({
-  id,
+  _id,
   author,
   title,
   description,
@@ -12,7 +12,7 @@ const Card = ({
 }) => {
   return (
     <Link
-      to={`/blogs/${id}`}
+      to={`/blogs/${_id}`}
       className="bg-tertiary hover:translate-y-[-10px] transition-transform cursor-pointer rounded-md shadow-md white-200 border-2-white"
     >
       <img
