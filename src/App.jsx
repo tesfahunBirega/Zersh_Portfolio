@@ -6,6 +6,7 @@ import Blogs from "./Pages/Blogs";
 import SingleBlog from "./Pages/SngleBlog";
 import Signup from "./components/Auth/Signup";
 import Login from "./components/Auth/Login";
+import Okr from "./Pages/Okr";
 
 const App = () => {
   return (
