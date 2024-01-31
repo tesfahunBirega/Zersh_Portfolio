@@ -7,6 +7,7 @@ import SingleBlog from "./Pages/SngleBlog";
 import Signup from "./components/Auth/Signup";
 import Login from "./components/Auth/Login";
 import Okr from "./Pages/Okr";
+import Note from "./Pages/Note";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/okr" element={<Okr />} />
+        <Route path="/note" element={<Note />} />
       </Routes>
     </BrowserRouter>
   );
