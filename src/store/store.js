@@ -1,4 +1,4 @@
-import { combineReducers, configureStore, createListenerMiddleware } from "@reduxjs/toolkit"
+import { configureStore, createListenerMiddleware } from "@reduxjs/toolkit"
 import rootReducer from "./rootReducer";
 
 const listenerMiddlewareInstance = createListenerMiddleware({
