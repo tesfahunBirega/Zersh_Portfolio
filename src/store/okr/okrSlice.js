@@ -5,12 +5,6 @@ export const getOkrSlice = createSlice({
     name:"okr",
     initialState:{
         goals:[],
-        yearly:[],
-        quarterly:[],
-        monthly:[],
-        weekly:[],
-        daily:[],
-
         loading:false,
         error:null
     },
@@ -34,11 +28,6 @@ export const getOkrsSlice = createSlice({
     name:'okrs',
     initialState:{
         goals:[],
-        yearly:[],
-        quarterly:[],
-        monthly:[],
-        weekly:[],
-        daily:[],
         loading:false,
         error:null
     },
