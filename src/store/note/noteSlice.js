@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchNote, fetchNotes } from "./noteAction";
 
-export const getOkrSlice = createSlice({
+export const getNoteSlice = createSlice({
     name:"note",
     initialState:{
         note:[],
@@ -24,8 +24,8 @@ export const getOkrSlice = createSlice({
     }
 })
 
-export const getOkrsSlice = createSlice({
-    name:'okrs',
+export const getNotesSlice = createSlice({
+    name:'notes',
     initialState:{
         notes:[],
         loading:false,
