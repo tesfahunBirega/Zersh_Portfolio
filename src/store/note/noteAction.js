@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseUrl } from "../../constants";
 
-export const fetchOkr = createAsyncThunk(
+export const fetchNote = createAsyncThunk(
     'note/fetchbyid',
     async(noteId, thinkApi)=>{
 
@@ -19,7 +19,7 @@ export const fetchOkr = createAsyncThunk(
     }
 )
 
-export const fetchOkrs = createAsyncThunk(
+export const fetchNotes = createAsyncThunk(
     'notes',
     async(thinkApi)=>{
 
