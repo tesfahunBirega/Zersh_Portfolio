@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Card from "../components/Card";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../store/blog/blogAction";
+import { Navbar } from "../components";
 
 function Blogs({ blogs, fetchBlogs }) {
   useEffect(() => {
@@ -9,6 +10,8 @@ function Blogs({ blogs, fetchBlogs }) {
   }, []);
   return (
     <div className="relative z-0 bg-primary h-screen overflow-y-scroll scroll-smooth">
+      <Navbar />
+
       <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center h-1/2 px-20">
         {/* Header content goes here */}
       </div>
