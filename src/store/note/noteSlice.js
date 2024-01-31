@@ -27,7 +27,7 @@ export const getOkrSlice = createSlice({
 export const getOkrsSlice = createSlice({
     name:'okrs',
     initialState:{
-        goals:[],
+        notes:[],
         loading:false,
         error:null
     },
