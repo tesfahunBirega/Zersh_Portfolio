@@ -3,24 +3,22 @@ import React from "react";
 import { List, Button, Table } from "antd";
 
 const NoteList = ({ notes, deleteNote }) => {
-  <List
-    className="mt-4"
-    bordered
-    dataSource={notes}
-    renderItem={(note) => (
-      <List.Item>
-        <div className="flex justify-between w-full">
-          <div>
-            <p>{note.text}</p>
-            <p className="text-xs text-gray-500">{note.category}</p>
-          </div>
-          <Button type="link" danger onClick={() => handleDeleteNote(note.id)}>
+  console.log(notes);
+  <div className="mt-4">
+    {notes.map((note, index) => (
+      <div
+        key={index}
+        className="bg-gray-100 p-2 mb-2 flex justify-between items-center"
+      >
+        <div>{note.text}</div>
+        <div>
+          <Button type="danger" onClick={() => deleteNote(index)}>
             Delete
           </Button>
         </div>
-      </List.Item>
-    )}
-  />;
+      </div>
+    ))}
+  </div>;
 };
 
 export default NoteList;
