@@ -13,8 +13,13 @@ const Dashboard = ({ children }) => {
         </div>
         <div className="flex-1 overflow-y-auto">
           <nav className="flex-1 px-2 py-4 space-y-2">
-            {sidebarRoutes.map((item) => (
-              <NavLink to={item.to} activeClassName="bg-gray-700" exact>
+            {sidebarRoutes.map((item, index) => (
+              <NavLink
+                key={index}
+                to={item.to}
+                activeClassName="bg-gray-700"
+                exact
+              >
                 {item.icon} {item.name}
               </NavLink>
             ))}
