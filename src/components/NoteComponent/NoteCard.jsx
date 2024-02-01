@@ -6,20 +6,17 @@ const NoteCard = ({ note }) => {
     backgroundColor: note.color,
     borderRadius: "8px",
     boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
-    cursor: "pointer",
-    marginBottom: "16px",
     padding: "12px",
-    transition: "box-shadow 0.3s ease-in-out",
     width: "300px",
   };
 
   return (
-    <Card style={cardStyle} hoverable>
-      <h3 style={{ marginBottom: "8px", fontSize: "18px", fontWeight: "bold" }}>
-        {note.title}
-      </h3>
-      <p style={{ fontSize: "14px", marginBottom: "12px" }}>{note.content}</p>
-    </Card>
+    <div className="mb-4 mx-2">
+      <Card style={cardStyle} hoverable>
+        <h3 className="text-lg font-bold mb-2">{note.title}</h3>
+        <p className="text-sm">{note.content}</p>
+      </Card>
+    </div>
   );
 };
 

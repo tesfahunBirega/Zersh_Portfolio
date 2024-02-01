@@ -87,7 +87,7 @@ function Note() {
         />
         <div className="flex flex-wrap">
           {filteredNotes.map((note) => (
-            <NoteCard key={note.id} note={note} />
+            <NoteCard deleteNote={deleteNote} key={note.id} note={note} />
           ))}
         </div>
       </div>
