@@ -60,7 +60,7 @@ const NoteForm = ({ addNote, visble, setVisble }) => {
           <Option value="Study">Study</Option>
         </Select>
       </div>
-      {error && error}
+      {error && <div className="text-red-500 text-sm">{error}</div>}
     </Modal>
   );
 };

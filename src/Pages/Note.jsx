@@ -11,6 +11,8 @@ function Note() {
       body: "body",
     },
   ]);
+
+  console.log(notes, "notes");
   const [openAddNote, setAddNote] = useState(false);
 
   const addNote = (note) => {
