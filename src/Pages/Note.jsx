@@ -5,6 +5,7 @@ import NoteList from "../components/NoteComponent/NoteList";
 import { Button, Pagination } from "antd";
 import CategoryTabs from "../components/NoteComponent/CategoryTabs";
 import NoteCard from "../components/NoteComponent/NoteCard";
+import { generateRandomHexColor } from "../utils/randomColor";
 
 function Note() {
   const [notes, setNotes] = useState([

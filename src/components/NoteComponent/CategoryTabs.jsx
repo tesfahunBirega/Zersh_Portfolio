@@ -1,5 +1,6 @@
 import React from "react";
 import { Tabs } from "antd";
+import { generateRandomHexColor } from "../../utils/randomColor";
 
 const { TabPane } = Tabs;
 
@@ -9,9 +10,17 @@ const CategoryTabs = ({ categories, onSelectCategory }) => {
   };
 
   return (
-    <Tabs defaultActiveKey="All" onTabClick={handleTabClick}>
+    <Tabs
+      className={`text-[${generateRandomHexColor()}]`}
+      defaultActiveKey="All"
+      onTabClick={handleTabClick}
+    >
       {categories.map((category) => (
-        <TabPane tab={category} key={category} />
+        <TabPane
+          className={`text-[${generateRandomHexColor()}]`}
+          tab={category}
+          key={category}
+        />
       ))}
     </Tabs>
   );
