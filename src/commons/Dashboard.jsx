@@ -15,7 +15,7 @@ const Dashboard = ({ children }) => {
           <nav className="flex-1 px-2 py-4 space-y-2">
             {sidebarRoutes.map((item) => (
               <NavLink to={item.to} activeClassName="bg-gray-700" exact>
-                {item.name}
+                {item.icon} {item.name}
               </NavLink>
             ))}
           </nav>
@@ -27,12 +27,12 @@ const Dashboard = ({ children }) => {
 };
 
 const NavLink = ({ to, activeClassName, exact, children }) => {
-  const match = window.location.pathname == to;
+  const match = window.location.pathname.includes(to);
 
   return (
     <Link
       to={`/dashboard/${to}`}
-      className={`block py-2 px-4 text-white hover:bg-gray-600 ${
+      className={`py-2 px-4 text-white hover:bg-gray-600  flex justify-start items-center gap-2 ${
         match ? activeClassName : ""
       }`}
     >

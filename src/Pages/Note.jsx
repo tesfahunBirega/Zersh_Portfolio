@@ -1,7 +1,12 @@
 import React from "react";
+import Dashboard from "../commons/Dashboard";
 
 function Note() {
-  return <div>Note</div>;
+  return (
+    <Dashboard>
+      <div>Note</div>
+    </Dashboard>
+  );
 }
 
 export default Note;

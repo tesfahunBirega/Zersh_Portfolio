@@ -533,20 +533,24 @@ const baseUrl = "http://localhost:3000/api/v1/"
 const sidebarRoutes =[
   {
 name:"Dashboard",
-  to:'/'
+  to:'/',
+  icon:"icon"
 },
 {
   name:"Okr",
-    to:'/okr'
+    to:'okr',
+    icon:"icon"
   },
   {
     name:"Notes",
-      to:'/notes'
+      to:'notes',
+      icon:"icon"
     },
-    {
-      name:"reports",
-        to:'/reports'
-      }
+{
+  name:"reports",
+  to:'reports',
+  icon:"icon"
+}
 ]
 
 export { services,sidebarRoutes, technologies, experiences, testimonials, projects ,skillsFrontend,
