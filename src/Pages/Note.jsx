@@ -5,7 +5,12 @@ import NoteList from "../components/NoteComponent/NoteList";
 import { Button } from "antd";
 
 function Note() {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([
+    {
+      name: "Note 1",
+      body: "body",
+    },
+  ]);
   const [openAddNote, setAddNote] = useState(false);
 
   const addNote = (note) => {
