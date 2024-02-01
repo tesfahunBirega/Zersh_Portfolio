@@ -534,22 +534,22 @@ const sidebarRoutes =[
   {
 name:"Dashboard",
   to:'/',
-  icon:"icon"
+  icon:"-->"
 },
 {
   name:"Okr",
     to:'okr',
-    icon:"icon"
+    icon:"-->"
   },
   {
     name:"Notes",
       to:'notes',
-      icon:"icon"
+      icon:"-->"
     },
 {
   name:"reports",
   to:'reports',
-  icon:"icon"
+  icon:"-->"
 }
 ]
 
