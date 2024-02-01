@@ -38,7 +38,11 @@ function Note() {
             Add Note
           </Button>
         </div>
-        <NoteForm addNote={addNote} visble={openAddNote} />
+        <NoteForm
+          addNote={addNote}
+          visble={openAddNote}
+          setVisble={setAddNote}
+        />
         <NoteList notes={notes} deleteNote={deleteNote} />
       </div>
     </Dashboard>

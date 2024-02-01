@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { Input, Button, Select, Modal } from "antd";
 const { Option } = Select;
 
-const NoteForm = ({ addNote, visble }) => {
+const NoteForm = ({ addNote, visble, setVisble }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
+  const [error, setError] = useState(null);
 
   const handleAddNote = () => {
     if (title && content && category) {
@@ -20,13 +21,21 @@ const NoteForm = ({ addNote, visble }) => {
       setContent("");
       setCategory("");
     } else {
-      alert("Please fill in all fields.");
+      setError("Please fill in all fields.");
     }
   };
 
   return (
-    <Modal onCancel={() => {}} onOk={() => {}} open={visble}>
-      <div className="mb-4">
+    <Modal
+      title={"Create Note"}
+      onCancel={() => setVisble((prev) => !prev)}
+      onOk={() => handleAddNote}
+      open={visble}
+      okButtonProps={{
+        className: "bg-gray-500 hover:gray-800",
+      }}
+    >
+      <div className="mb-4 mt-8">
         <Input
           placeholder="Title"
           value={title}
@@ -50,10 +59,8 @@ const NoteForm = ({ addNote, visble }) => {
           <Option value="Personal">Personal</Option>
           <Option value="Study">Study</Option>
         </Select>
-        <Button type="primary" onClick={handleAddNote}>
-          Add Note
-        </Button>
       </div>
+      {error && error}
     </Modal>
   );
 };
