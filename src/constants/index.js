@@ -532,8 +532,8 @@ const baseUrl = "http://localhost:3000/api/v1/"
 
 const sidebarRoutes =[
   {
-name:"Dashboard",
-  to:'/',
+name:"Reports",
+  to:'',
   icon:"->"
 },
 {

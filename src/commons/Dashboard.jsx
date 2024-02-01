@@ -1,10 +1,8 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { sidebarRoutes } from "../constants";
 
 const Dashboard = ({ children }) => {
-  const { dashboardId } = useParams();
-
   return (
     <div className="flex h-screen">
       <div className="flex flex-col w-64 bg-gray-800">
@@ -32,7 +30,9 @@ const Dashboard = ({ children }) => {
 };
 
 const NavLink = ({ to, activeClassName, exact, children }) => {
-  const match = window.location.pathname.includes(to);
+  // const match = window.location.pathname.includes(to);
+
+  const match = useLocation().pathname.split("dashboard/")[1] == to;
 
   return (
     <Link
