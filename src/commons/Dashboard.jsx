@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import { sidebarRoutes } from "../constants";
 
 const Dashboard = ({ children }) => {
   const { dashboardId } = useParams();
@@ -12,18 +13,11 @@ const Dashboard = ({ children }) => {
         </div>
         <div className="flex-1 overflow-y-auto">
           <nav className="flex-1 px-2 py-4 space-y-2">
-            <NavLink to="/" activeClassName="bg-gray-700" exact>
-              Dashboard
-            </NavLink>
-            <NavLink to="/okr" activeClassName="bg-gray-700">
-              Okr
-            </NavLink>
-            <NavLink to="/dashboard/analytics" activeClassName="bg-gray-700">
-              Note
-            </NavLink>
-            <NavLink to="/dashboard/settings" activeClassName="bg-gray-700">
-              Settings
-            </NavLink>
+            {sidebarRoutes.map((item) => (
+              <NavLink to={item.to} activeClassName="bg-gray-700" exact>
+                {item.name}
+              </NavLink>
+            ))}
           </nav>
         </div>
       </div>
@@ -37,7 +31,7 @@ const NavLink = ({ to, activeClassName, exact, children }) => {
 
   return (
     <Link
-      to={to}
+      to={`/dashboard/${to}`}
       className={`block py-2 px-4 text-white hover:bg-gray-600 ${
         match ? activeClassName : ""
       }`}

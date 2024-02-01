@@ -530,6 +530,28 @@ const projects = [
 
 const baseUrl = "http://localhost:3000/api/v1/"
 
-export { services, technologies, experiences, testimonials, projects ,skillsFrontend,
+const sidebarRoutes =[
+  {
+name:"Dashboard",
+  to:'/'
+},
+{
+  name:"Okr",
+    to:'/okr'
+  },
+  {
+    name:"Notes",
+      to:'/notes'
+    },
+    {
+      name:"reports",
+        to:'/reports'
+      }
+]
+
+export { services,sidebarRoutes, technologies, experiences, testimonials, projects ,skillsFrontend,
   skillsBackend,
   skillsDevops,baseUrl };
+
+
+
