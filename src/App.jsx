@@ -8,6 +8,7 @@ import Signup from "./components/Auth/Signup";
 import Login from "./components/Auth/Login";
 import Okr from "./Pages/Okr";
 import Note from "./Pages/Note";
+import DashboardBlogs from "./Pages/DashboardBlogs";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard/okr" element={<Okr />} />
         <Route path="/dashboard/notes" element={<Note />} />
+        <Route path="/dashboard/blogs" element={<DashboardBlogs />} />
       </Routes>
     </BrowserRouter>
   );
