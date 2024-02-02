@@ -547,8 +547,8 @@ name:"Reports",
       icon:"->"
     },
 {
-  name:"reports",
-  to:'reports',
+  name:"Blogs",
+  to:'blogs',
   icon:"->"
 }
 ]
