@@ -25,6 +25,7 @@ const App = () => {
         <Route path="/dashboard/okr" element={<Okr />} />
         <Route path="/dashboard/notes" element={<Note />} />
         <Route path="/dashboard/blogs" element={<DashboardBlogs />} />
+        <Route path="/dashboard/projects" element={<DashboardBlogs />} />
       </Routes>
     </BrowserRouter>
   );
