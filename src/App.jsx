@@ -10,6 +10,7 @@ import Okr from "./Pages/Okr";
 import Note from "./Pages/Note";
 import DashboardBlogs from "./Pages/DashboardBlogs";
 import ProjectsDashboard from "./Pages/ProjectsDashboard";
+import Reports from "./Pages/Reports";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/blogs/:id" element={<SingleBlog />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard/reports" element={<Reports />} />
         <Route path="/dashboard/okr" element={<Okr />} />
         <Route path="/dashboard/notes" element={<Note />} />
         <Route path="/dashboard/blogs" element={<DashboardBlogs />} />
