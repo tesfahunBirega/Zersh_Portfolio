@@ -44,6 +44,7 @@ function DashboardBlogs({ blogs, fetchBlogs }) {
     // deleteBlog(blogId);
   };
 
+  console.log(blogs, "blogs");
   return (
     <Dashboard>
       <div className="container mx-auto p-4">
