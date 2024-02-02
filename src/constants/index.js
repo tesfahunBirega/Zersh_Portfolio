@@ -550,6 +550,11 @@ name:"Reports",
   name:"Blogs",
   to:'blogs',
   icon:"->"
+},
+{
+  name:"Projects",
+  to:'projects',
+  icon:"->"
 }
 ]
 
