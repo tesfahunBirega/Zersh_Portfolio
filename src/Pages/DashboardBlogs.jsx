@@ -1,50 +1,65 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
-import { fetchBlogs } from "../store/blog/blogAction";
+import { createBlog, fetchBlogs } from "../store/blog/blogAction";
 import Dashboard from "../commons/Dashboard";
 import { connect } from "react-redux";
-import { Button, Modal, Pagination } from "antd";
+import { Button, Input, Modal, Pagination, Upload, message } from "antd";
+import TextArea from "antd/es/input/TextArea";
+import { UploadOutlined } from "@ant-design/icons";
 
-function DashboardBlogs({ blogs, fetchBlogs }) {
+function DashboardBlogs({ blogs, fetchBlogs, createBlog }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
   const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const [formData, setFormData] = useState({
+    author: "",
+    title: "",
+    description: "",
+    body: "",
+    category: "",
+    image: null,
+  });
 
   const onPageChange = (page) => {
     setCurrentPage(page);
   };
+  console.log(blogs, "blogs");
 
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const currentBlogs = blogs.slice(startIndex, endIndex);
-
+  const currentBlogs = blogs.length > 0 && blogs.slice(startIndex, endIndex);
   useEffect(() => {
     fetchBlogs();
   }, []);
 
   const handleCreateModalOk = () => {
-    // Add logic to create a new blog
-    // Call createBlog action
-    // createBlog(newBlogData);
+    createBlog(formData);
     setIsCreateModalVisible(false);
   };
 
   const handleEditModalOk = () => {
-    // Add logic to update the selected blog
-    // Call updateBlog action
     // updateBlog(selectedBlog.id, updatedBlogData);
     setIsEditModalVisible(false);
   };
 
   const handleDelete = (blogId) => {
-    // Add logic to delete the selected blog
-    // Call deleteBlog action
     // deleteBlog(blogId);
   };
 
-  console.log(blogs, "blogs");
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleImageUpload = (info) => {
+    if (info.file.status === "done") {
+      message.success(`${info.file.name} file uploaded successfully`);
+      setFormData({ ...formData, image: info.file });
+    } else if (info.file.status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  };
   return (
     <Dashboard>
       <div className="container mx-auto p-4">
@@ -108,7 +123,66 @@ function DashboardBlogs({ blogs, fetchBlogs }) {
         onOk={handleCreateModalOk}
         onCancel={() => setIsCreateModalVisible(false)}
       >
-        {/* Add form fields for creating a new blog */}
+        <div>
+          <label htmlFor="author">Author:</label>
+          <Input
+            type="text"
+            id="author"
+            name="author"
+            value={formData.author}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="title">Title:</label>
+          <Input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="description">Description:</label>
+          <Input
+            type="text"
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="body">Body:</label>
+          <TextArea
+            id="body"
+            name="body"
+            value={formData.body}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="category">Category:</label>
+          <Input
+            type="text"
+            id="category"
+            name="category"
+            value={formData.category}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="image">Image:</label>
+          <Upload
+            name="image"
+            accept="image/*"
+            customRequest={handleImageUpload}
+            showUploadList={false}
+          >
+            <Button icon={<UploadOutlined />}>Upload Image</Button>
+          </Upload>
+        </div>
       </Modal>
 
       <Modal

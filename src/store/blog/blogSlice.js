@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchBlog, fetchBlogs } from "./blogAction";
+import { createBlog, fetchBlog, fetchBlogs } from "./blogAction";
 
 export const blogSlice = createSlice({
     name:"blog",
@@ -28,6 +28,7 @@ export const blogsSlice = createSlice({
     name:'blogs',
     initialState:{
         blogs:[],
+        blog:[],
         loading:false,
         error:null
     },
@@ -45,6 +46,17 @@ export const blogsSlice = createSlice({
                 state.loading = false 
                 state.error = action.error.message
             })
+            .addCase(createBlog.pending, (state) => {
+                state.status = 'loading';
+              })
+            .addCase(createBlog.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.blogs.push(action.payload);
+            })
+            .addCase(createBlog.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            });
     }
 })
 

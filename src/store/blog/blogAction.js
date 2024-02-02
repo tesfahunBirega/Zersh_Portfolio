@@ -39,3 +39,26 @@ export const fetchBlogs = createAsyncThunk(
         return await response.json()
     }
 )
+
+export const createBlog = createAsyncThunk(
+    'blogs/create',
+  async (blogData, thunkAPI) => {
+    try {
+      const response = await fetch(`${baseUrl}blogs`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(blogData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create blog');
+      }
+
+      return await response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+)
