@@ -62,3 +62,48 @@ export const createBlog = createAsyncThunk(
     }
   }
 )
+
+export const updateBlog = createAsyncThunk(
+    'blogs/update',
+  async (id,blogData, thunkAPI) => {
+    try {
+      const response = await fetch(`${baseUrl}blogs/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(blogData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update blog');
+      }
+
+      return await response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+)
+
+export const deleteBlog = createAsyncThunk(
+    'blogs/delete',
+  async (id, thunkAPI) => {
+    try {
+      const response = await fetch(`${baseUrl}blogs/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update blog');
+      }
+
+      return await response.json();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+)
