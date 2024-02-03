@@ -98,12 +98,7 @@ function DashboardBlogs({ blogs, fetchBlogs, createBlog, deleteBlog }) {
                       >
                         Edit
                       </Button>
-                      {/* <Button
-                        className={"text-white"}
-                        onClick={() => handleDelete(blog._id)}
-                      >
-                        Delete
-                      </Button> */}
+
                       <Popconfirm
                         title="Are you sure you want to delete this blog?"
                         onConfirm={() => handleDelete(blog._id)}
