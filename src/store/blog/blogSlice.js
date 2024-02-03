@@ -85,7 +85,7 @@ export const blogsSlice = createSlice({
               })
             .addCase(deleteBlog.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.blogs.filter(item=>item.id!= action.payload.id);
+                state.blogs=state.blogs.filter(item=>item._id!= action.payload._id);
             })
             .addCase(deleteBlog.rejected, (state, action) => {
                 state.status = 'failed';

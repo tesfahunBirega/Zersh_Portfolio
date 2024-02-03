@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
-import { createBlog, fetchBlogs } from "../store/blog/blogAction";
+import { createBlog, deleteBlog, fetchBlogs } from "../store/blog/blogAction";
 import Dashboard from "../commons/Dashboard";
 import { connect } from "react-redux";
 import { Button, Input, Modal, Pagination, Upload, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { UploadOutlined } from "@ant-design/icons";
 
-function DashboardBlogs({ blogs, fetchBlogs, createBlog }) {
+function DashboardBlogs({ blogs, fetchBlogs, createBlog, deleteBlog }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
   const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
@@ -39,12 +39,12 @@ function DashboardBlogs({ blogs, fetchBlogs, createBlog }) {
   };
 
   const handleEditModalOk = () => {
-    // updateBlog(selectedBlog.id, updatedBlogData);
+    updateBlog(selectedBlog.id, updatedBlogData);
     setIsEditModalVisible(false);
   };
 
   const handleDelete = (blogId) => {
-    // deleteBlog(blogId);
+    deleteBlog(blogId);
   };
 
   const handleInputChange = (e) => {
@@ -92,7 +92,7 @@ function DashboardBlogs({ blogs, fetchBlogs, createBlog }) {
                       </Button>
                       <Button
                         className={"text-white"}
-                        onClick={() => handleDelete(blog.id)}
+                        onClick={() => handleDelete(blog._id)}
                       >
                         Delete
                       </Button>
@@ -190,7 +190,66 @@ function DashboardBlogs({ blogs, fetchBlogs, createBlog }) {
         onOk={handleEditModalOk}
         onCancel={() => setIsEditModalVisible(false)}
       >
-        {/* Add form fields for editing the selected blog */}
+        <div>
+          <label htmlFor="author">Author:</label>
+          <Input
+            type="text"
+            id="author"
+            name="author"
+            value={formData.author}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="title">Title:</label>
+          <Input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="description">Description:</label>
+          <Input
+            type="text"
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="body">Body:</label>
+          <TextArea
+            id="body"
+            name="body"
+            value={formData.body}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="category">Category:</label>
+          <Input
+            type="text"
+            id="category"
+            name="category"
+            value={formData.category}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="image">Image:</label>
+          <Upload
+            name="image"
+            accept="image/*"
+            customRequest={handleImageUpload}
+            showUploadList={false}
+          >
+            <Button icon={<UploadOutlined />}>Upload Image</Button>
+          </Upload>
+        </div>
       </Modal>
     </Dashboard>
   );
