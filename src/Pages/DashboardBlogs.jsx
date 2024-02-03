@@ -3,7 +3,15 @@ import Card from "../components/Card";
 import { createBlog, deleteBlog, fetchBlogs } from "../store/blog/blogAction";
 import Dashboard from "../commons/Dashboard";
 import { connect } from "react-redux";
-import { Button, Input, Modal, Pagination, Upload, message } from "antd";
+import {
+  Button,
+  Input,
+  Modal,
+  Pagination,
+  Popconfirm,
+  Upload,
+  message,
+} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { UploadOutlined } from "@ant-design/icons";
 
@@ -64,7 +72,7 @@ function DashboardBlogs({ blogs, fetchBlogs, createBlog, deleteBlog }) {
       <div className="container mx-auto p-4">
         <div className="overflow-y-auto px-20">
           <div className=" flex justify-between items-center mb-10 ">
-            <div className="text-4xl font-sans font-bold">Create Blog</div>
+            <div className="text-4xl font-sans font-bold">Blogs </div>
             <Button
               className={"text-white"}
               onClick={() => {
@@ -90,12 +98,20 @@ function DashboardBlogs({ blogs, fetchBlogs, createBlog, deleteBlog }) {
                       >
                         Edit
                       </Button>
-                      <Button
+                      {/* <Button
                         className={"text-white"}
                         onClick={() => handleDelete(blog._id)}
                       >
                         Delete
-                      </Button>
+                      </Button> */}
+                      <Popconfirm
+                        title="Are you sure you want to delete this blog?"
+                        onConfirm={() => handleDelete(blog._id)}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <Button className="text-white">Delete</Button>
+                      </Popconfirm>
                     </div>
                   </div>
                 </React.Fragment>
