@@ -1,10 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../store/blog/blogAction";
 import { Navbar } from "../components";
+import { Pagination } from "antd";
 
 function Blogs({ blogs, fetchBlogs }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
+
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const currentBlogs = blogs.length > 0 && blogs.slice(startIndex, endIndex);
   useEffect(() => {
     fetchBlogs();
   }, []);
@@ -17,8 +28,8 @@ function Blogs({ blogs, fetchBlogs }) {
       </div>
       <div className="overflow-y-auto px-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {blogs.length >= 1 ? (
-            blogs?.map((blog, index) => <Card key={index} {...blog} />)
+          {currentBlogs.length >= 1 ? (
+            currentBlogs?.map((blog, index) => <Card key={index} {...blog} />)
           ) : (
             <div className="col-span-3 font-sans items-center max-w-6xl mx-auto my-12 px-36 py-12 bg-tertiary text-white shadow-md rounded-md transition-colors duration-500">
               Ther is no any blog posted!
@@ -26,6 +37,13 @@ function Blogs({ blogs, fetchBlogs }) {
           )}
         </div>
       </div>
+      <Pagination
+        className="mt-4 mx-20"
+        current={currentPage}
+        total={blogs.length}
+        pageSize={pageSize}
+        onChange={onPageChange}
+      />
     </div>
   );
 }

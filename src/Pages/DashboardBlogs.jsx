@@ -25,7 +25,6 @@ function DashboardBlogs({ blogs, fetchBlogs, createBlog }) {
   const onPageChange = (page) => {
     setCurrentPage(page);
   };
-  console.log(blogs, "blogs");
 
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
