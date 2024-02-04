@@ -47,10 +47,10 @@ export const createBlog = createAsyncThunk(
       const response = await fetch(`${baseUrl}blogs`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'multipart/form-data',
-          "accept":"*"
+          'Content-Type': 'application/json',
+          "Accept":"*/*"
         },
-        body: JSON.stringify(blogData),
+        body: blogData,
       });
       console.log(response , "response");
       if (!response.ok) {
