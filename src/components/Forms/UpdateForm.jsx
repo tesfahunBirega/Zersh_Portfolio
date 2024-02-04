@@ -3,25 +3,24 @@ import { Modal, Form, Input, Button, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 const UpdateBlogModal = ({ blog, visible, onUpdate, onCancel, loading }) => {
   const [form] = Form.useForm();
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
 
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
-      onUpdate(values);
+      onUpdate({ ...values, image: imageFile });
     } catch (error) {
       console.error("Validation failed:", error);
     }
   };
 
-  const handleImageUpload = (info) => {
-    if (info.file.status === "done") {
-      setImageUrl(info.file.url); // Set the image URL directly
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
+  const handleImageChange = (info) => {
+    if (info.file.originFileObj) {
+      setImageFile(info.file.originFileObj);
     }
   };
+
+  console.log(imageFile, "imageFile");
 
   return (
     <Modal
@@ -77,24 +76,20 @@ const UpdateBlogModal = ({ blog, visible, onUpdate, onCancel, loading }) => {
           <label htmlFor="category">Image</label>
           <Form.Item name="image" rules={[{ required: true }]}>
             <Upload
-              listType="picture-card"
+              customRequest={() => {}}
               showUploadList={false}
-              onChange={handleImageUpload}
+              onChange={handleImageChange}
             >
-              {imageUrl ? (
-                <img
-                  src={imageUrl}
-                  alt="Uploaded"
-                  style={{ maxWidth: "100%" }}
-                />
-              ) : (
-                <div>
-                  <UploadOutlined />
-                  <div style={{ marginTop: 8 }}>Upload</div>
-                </div>
-              )}
+              <Button icon={<UploadOutlined />}>Select Image</Button>
             </Upload>
           </Form.Item>
+          {imageFile && (
+            <img
+              src={URL.createObjectURL(imageFile)}
+              alt="Selected"
+              style={{ maxWidth: "100%" }}
+            />
+          )}
         </div>
       </Form>
     </Modal>
