@@ -5,7 +5,7 @@ function ProjectsDashboard() {
   return (
     <Dashboard>
       {" "}
-      <div>ProjectsDashboard</div>
+      <div className="">ProjectsDashboard</div>
     </Dashboard>
   );
 }

@@ -14,8 +14,16 @@ import {
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { UploadOutlined } from "@ant-design/icons";
+import UpdateForm from "../components/Forms/UpdateForm";
+import UpdateBlogModal from "../components/Forms/UpdateForm";
 
-function DashboardBlogs({ blogs, fetchBlogs, createBlog, deleteBlog }) {
+function DashboardBlogs({
+  blogs,
+  fetchBlogs,
+  createBlog,
+  deleteBlog,
+  loading,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
   const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
@@ -67,6 +75,8 @@ function DashboardBlogs({ blogs, fetchBlogs, createBlog, deleteBlog }) {
       message.error(`${info.file.name} file upload failed.`);
     }
   };
+
+  console.log(selectedBlog, "selectedblog");
   return (
     <Dashboard>
       <div className="container mx-auto p-4">
@@ -195,73 +205,13 @@ function DashboardBlogs({ blogs, fetchBlogs, createBlog, deleteBlog }) {
         </div>
       </Modal>
 
-      <Modal
-        title="Edit Blog"
-        open={isEditModalVisible}
-        onOk={handleEditModalOk}
+      <UpdateBlogModal
+        blog={selectedBlog}
+        visible={isEditModalVisible}
         onCancel={() => setIsEditModalVisible(false)}
-      >
-        <div>
-          <label htmlFor="author">Author:</label>
-          <Input
-            type="text"
-            id="author"
-            name="author"
-            value={formData.author}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <Input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description:</label>
-          <Input
-            type="text"
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="body">Body:</label>
-          <TextArea
-            id="body"
-            name="body"
-            value={formData.body}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="category">Category:</label>
-          <Input
-            type="text"
-            id="category"
-            name="category"
-            value={formData.category}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="image">Image:</label>
-          <Upload
-            name="image"
-            accept="image/*"
-            customRequest={handleImageUpload}
-            showUploadList={false}
-          >
-            <Button icon={<UploadOutlined />}>Upload Image</Button>
-          </Upload>
-        </div>
-      </Modal>
+        onUpdate={handleEditModalOk}
+        loading={loading}
+      />
     </Dashboard>
   );
 }
@@ -269,6 +219,7 @@ function DashboardBlogs({ blogs, fetchBlogs, createBlog, deleteBlog }) {
 const mapStateToProps = (state) => {
   return {
     blogs: state.blogs.blogs,
+    loading: state.blogs.loading,
   };
 };
 
