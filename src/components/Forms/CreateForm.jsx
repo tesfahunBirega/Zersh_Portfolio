@@ -10,7 +10,6 @@ const CreateBlogModal = ({ visible, onCreate, onCancel, loading }) => {
     try {
       const values = await form.validateFields();
       console.log(values, "values");
-      r;
       onCreate({ ...values, image: imageFile });
     } catch (error) {
       console.error("Validation failed:", error);
@@ -18,7 +17,7 @@ const CreateBlogModal = ({ visible, onCreate, onCancel, loading }) => {
   };
 
   const handleImageChange = (info) => {
-    if (info.file.originFileObj) {
+    if (info.file) {
       setImageFile(info.file.originFileObj);
     }
   };

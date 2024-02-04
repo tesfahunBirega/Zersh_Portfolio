@@ -47,11 +47,12 @@ export const createBlog = createAsyncThunk(
       const response = await fetch(`${baseUrl}blogs`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
+          "accept":"*"
         },
         body: JSON.stringify(blogData),
       });
-
+      console.log(response , "response");
       if (!response.ok) {
         throw new Error('Failed to create blog');
       }
