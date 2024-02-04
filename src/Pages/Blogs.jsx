@@ -4,6 +4,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../store/blog/blogAction";
 import { Navbar } from "../components";
 import { Pagination } from "antd";
+import RandomColorCard from "../components/Commons/RandomColorCard";
 
 function Blogs({ blogs, fetchBlogs }) {
   const [currentPage, setCurrentPage] = useState(1);

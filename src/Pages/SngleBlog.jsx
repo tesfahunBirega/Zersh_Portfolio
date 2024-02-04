@@ -101,7 +101,7 @@ function SingleBlog({ blog, fetchBlog }) {
                   Body
                 </h2>
                 <p
-                  className={`text-lg leading-relaxed ${
+                  className={`text-lg leading-relaxed  break-words ${
                     darkMode ? "text-gray-300" : "text-black"
                   }`}
                 >
