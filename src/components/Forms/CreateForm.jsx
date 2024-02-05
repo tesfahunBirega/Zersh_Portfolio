@@ -33,8 +33,10 @@ const CreateBlogModal = ({ visible, onCreate, onCancel, loading }) => {
         </Button>,
         <Button
           key="create"
-          type="primary"
           loading={loading}
+          style={{
+            className: "bg-gray-500 hover:bg-gray-800",
+          }}
           onClick={handleSubmit}
         >
           Create
