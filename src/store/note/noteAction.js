@@ -12,7 +12,7 @@ export const fetchNote = createAsyncThunk(
         })
         if(response.status !== 200){
             abortController.abort()
-            return thinkApi.rejectWithValue("Failed to fetch user data.")
+            return thinkApi.rejectWithValue("Failed to fetch note data.")
         }
 
         return await response.json()
@@ -25,7 +25,7 @@ export const fetchNotes = createAsyncThunk(
 
         const abortController = new AbortController()
 
-        const response = await fetch(`${baseUrl}note` 
+        const response = await fetch(`${baseUrl}notes` 
         ,
          {
             signal:abortController.signal
