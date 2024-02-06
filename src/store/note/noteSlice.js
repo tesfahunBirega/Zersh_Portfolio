@@ -1,33 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchNote, fetchNotes } from "./noteAction";
-
-export const getNoteSlice = createSlice({
-    name:"note",
-    initialState:{
-        note:[],
-        loading:false,
-        error:null
-    },
-    reducers:{},
-    extraReducers:(builder)=>{
-        builder.addCase(fetchNote.pending,(state)=>{
-            state.loading = true
-        })
-        .addCase(fetchNote.fulfilled, (state,action)=>{
-            state.loading = false
-            state.blog=action.payload
-        })
-        .addCase(fetchNote.rejected , (state , action )=>{
-            state.loading = false
-            state.error = action.error.message
-        })
-    }
-})
+import { createNote, deleteNote, fetchNote, fetchNotes } from "./noteAction";
 
 export const getNotesSlice = createSlice({
     name:'notes',
     initialState:{
         notes:[],
+        note:{},
         loading:false,
         error:null
     },
@@ -39,9 +17,42 @@ export const getNotesSlice = createSlice({
             })
             .addCase(fetchNotes.fulfilled, (state,action)=>{
                 state.loading = false
-                state.blogs = action.payload
+                state.notes = action.payload
             })
             .addCase(fetchNotes.rejected , (state, action)=>{
+                state.loading = false 
+                state.error = action.error.message
+            })
+            .addCase(fetchNote.pending , (state)=>{
+                state.loading = true
+            })
+            .addCase(fetchNote.fulfilled, (state,action)=>{
+                state.loading = false
+                state.note = action.payload
+            })
+            .addCase(fetchNote.rejected , (state, action)=>{
+                state.loading = false 
+                state.error = action.error.message
+            })
+            .addCase(createNote.pending , (state)=>{
+                state.loading = true
+            })
+            .addCase(createNote.fulfilled, (state,action)=>{
+                state.loading = false
+                state.notes.push(action.payload)
+            })
+            .addCase(createNote.rejected , (state, action)=>{
+                state.loading = false 
+                state.error = action.error.message
+            })
+            .addCase(deleteNote.pending , (state)=>{
+                state.loading = true
+            })
+            .addCase(deleteNote.fulfilled, (state,action)=>{
+                state.loading = false
+                state.notes=state.notes.filter(item=>item._id!= action.payload._id)
+            })
+            .addCase(deleteNote.rejected , (state, action)=>{
                 state.loading = false 
                 state.error = action.error.message
             })
