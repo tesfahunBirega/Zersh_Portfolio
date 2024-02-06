@@ -13,8 +13,18 @@ import {
   fetchNotes,
   updateNote,
 } from "../store/note/noteAction";
+import { fetchcatagories } from "../store/catagory/catagoryyAction";
 
-function Note({ notes, note, loading, fetchNotes, createNote, deleteNote }) {
+function Note({
+  notes,
+  note,
+  loading,
+  fetchNotes,
+  createNote,
+  deleteNote,
+  catagories,
+  fetchCatagory,
+}) {
   // const [notes, setNotes] = useState([
   //   {
   //     id: 1,
@@ -26,8 +36,9 @@ function Note({ notes, note, loading, fetchNotes, createNote, deleteNote }) {
   // ]);
   useEffect(() => {
     fetchNotes();
+    fetchCatagory();
   }, []);
-  console.log(notes, "notes");
+  console.log(notes, catagories, "notes - catagories");
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -107,6 +118,7 @@ function Note({ notes, note, loading, fetchNotes, createNote, deleteNote }) {
 const mapStateToProps = (state) => {
   return {
     notes: state.notes.notes,
+    catagories: state.catagories.catagories,
     note: state.notes.note,
     loading: state.notes.loading,
   };
@@ -118,6 +130,7 @@ const mapDispatchToProps = (dispatch) => {
     createNote: (noteData) => dispatch(createNote(noteData)),
     updateNote: (noteId, noteData) => dispatch(updateNote(noteId, noteData)),
     deleteNote: (noteId) => dispatch(deleteNote(noteId)),
+    fetchCatagory: () => dispatch(fetchcatagories()),
   };
 };
 

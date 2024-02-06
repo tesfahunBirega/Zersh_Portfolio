@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   okr:getOkrSlice.reducer,
   okrs:getOkrsSlice.reducer,
   project:projectSlice.reducer,
-  catagory:CatagorySlice.reducer
+  catagories:CatagorySlice.reducer
 });
 
 export default rootReducer;
