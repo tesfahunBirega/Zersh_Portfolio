@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { sidebarRoutes } from "../constants";
+import avatarlogo from "/log1.svg";
 
 const Dashboard = ({ children }) => {
   return (
@@ -8,9 +9,13 @@ const Dashboard = ({ children }) => {
       <div className="flex flex-col w-64 bg-gray-800">
         <Link
           to={"/"}
-          className="h-16 flex items-center justify-center text-white text-lg font-semibold"
+          className="h-16 flex items-center justify-start ml-4 text-white text-lg font-semibold"
         >
-          Dashboard
+          <img src={avatarlogo} alt="logo" className="w-9 h-9 object-contain" />
+          <p className="text-white text-[18px] font-bold cursor-pointer flex ">
+            Nahom &nbsp;
+            <span className="sm:block hidden"> | Debele</span>
+          </p>
         </Link>
         <div className="flex-1 overflow-y-auto">
           <nav className="flex-1 px-2 py-4 space-y-2">
