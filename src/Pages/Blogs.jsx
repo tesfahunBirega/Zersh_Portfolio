@@ -4,6 +4,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../store/blog/blogAction";
 import { Navbar } from "../components";
 import { Pagination } from "antd";
+import { PageHeader, Tag } from "antd/es";
 import RandomColorCard from "../components/Commons/RandomColorCard";
 
 function Blogs({ blogs, fetchBlogs }) {
@@ -26,6 +27,12 @@ function Blogs({ blogs, fetchBlogs }) {
 
       <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center h-1/2 px-20">
         {/* Header content goes here */}
+        <PageHeader
+          className="site-page-header"
+          title="Welcome to Our Blog"
+          subTitle={`Explore ${blogs?.length} Blogs`}
+          tags={<Tag color="blue">Latest</Tag>}
+        />
       </div>
       <div className="overflow-y-auto px-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
