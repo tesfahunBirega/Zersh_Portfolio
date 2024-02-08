@@ -18,7 +18,6 @@ const CreateBlogModal = ({
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
-      console.log(values, "values");
       onCreate({ ...values, image: imageFile, body: content });
     } catch (error) {
       console.error("Validation failed:", error);
