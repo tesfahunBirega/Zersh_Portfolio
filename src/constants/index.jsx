@@ -521,6 +521,8 @@ const projects = [
 ];
 
 const baseUrl = "http://localhost:3000/api/v1/";
+const imgBaseUrl = "http://localhost:3000";
+
 import { FundProjectionScreenOutlined } from "@ant-design/icons";
 import { FileTextOutlined } from "@ant-design/icons";
 import { ReadOutlined } from "@ant-design/icons";
@@ -565,4 +567,5 @@ export {
   skillsBackend,
   skillsDevops,
   baseUrl,
+  imgBaseUrl,
 };

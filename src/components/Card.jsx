@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { imgBaseUrl } from "../constants";
 
 const Card = ({
   _id,
@@ -16,7 +17,7 @@ const Card = ({
       className="bg-tertiary hover:translate-y-[-10px] transition-transform cursor-pointer rounded-md shadow-md white-200 border-2-white"
     >
       <img
-        src={imageUrl}
+        src={`${imgBaseUrl}${imageUrl}`}
         alt={title}
         className="mb-4 w-full h-48 object-cover rounded-md"
       />

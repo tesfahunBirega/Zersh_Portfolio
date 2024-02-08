@@ -3,6 +3,7 @@ import Card from "../components/Card";
 import { useParams } from "react-router-dom";
 import { fetchBlog } from "../store/blog/blogAction";
 import { connect } from "react-redux";
+import { imgBaseUrl } from "../constants";
 
 function SingleBlog({ blog, fetchBlog }) {
   const blogId = useParams();
@@ -15,6 +16,18 @@ function SingleBlog({ blog, fetchBlog }) {
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
+  };
+
+  const renderBody = () => {
+    // Regular expression to find image tags in the body
+    const imgRegex = /<img\s+.*?src="(.*?)"/g;
+    // Replace image tags with actual images
+    const bodyWithImages = blog?.body?.replace(imgRegex, (match, p1) => {
+      return `<img src="${p1}" style="max-width: 100%; height: auto;" />`;
+    });
+
+    // Render the body as HTML
+    return <div dangerouslySetInnerHTML={{ __html: bodyWithImages }} />;
   };
   return (
     <div className="relative z-0 bg-primary h-screen overflow-y-scroll scroll-smooth">
@@ -63,7 +76,7 @@ function SingleBlog({ blog, fetchBlog }) {
                 {blog.createdDate}
               </p>
               <img
-                src={blog.imageUrl}
+                src={`${imgBaseUrl}${blog.imageUrl}`}
                 alt={blog.title}
                 className="w-full mb-6 rounded-md"
               />
@@ -105,7 +118,8 @@ function SingleBlog({ blog, fetchBlog }) {
                     darkMode ? "text-gray-300" : "text-black"
                   }`}
                 >
-                  {blog.body}
+                  {/* {blog.body} */}
+                  {renderBody()}
                 </p>
               </div>
             </div>

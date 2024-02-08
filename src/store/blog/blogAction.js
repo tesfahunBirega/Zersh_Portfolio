@@ -43,14 +43,22 @@ export const fetchBlogs = createAsyncThunk(
 export const createBlog = createAsyncThunk(
     'blogs/create',
   async (blogData, thunkAPI) => {
+    console.log(blogData ,"blogData");
     try {
+      // const values = await form.validateFields();
+      const formData = new FormData();
+    formData.append('title', blogData.title);
+    formData.append('author', blogData.author);
+    formData.append('description', blogData.description);
+    formData.append('body', blogData.body);
+    formData.append('category', blogData.category);
+    formData.append('image', blogData.image);
       const response = await fetch(`${baseUrl}blogs`, {
         method: 'POST',
+        body: formData,
         headers: {
-          'Content-Type': 'application/json',
           "Accept":"*/*"
         },
-        body: blogData,
       });
       console.log(response , "response");
       if (!response.ok) {

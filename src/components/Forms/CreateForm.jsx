@@ -1,24 +1,33 @@
 import React, { useState } from "react";
 import { Modal, Form, Input, Button, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import "react-quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
 
-const CreateBlogModal = ({ visible, onCreate, onCancel, loading }) => {
+const CreateBlogModal = ({
+  visible,
+  onCreate,
+  onCancel,
+  loading,
+  width = "50%",
+}) => {
   const [form] = Form.useForm();
+  const [content, setContent] = useState("");
   const [imageFile, setImageFile] = useState(null);
 
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
       console.log(values, "values");
-      onCreate({ ...values, image: imageFile });
+      onCreate({ ...values, image: imageFile, body: content });
     } catch (error) {
       console.error("Validation failed:", error);
     }
   };
 
-  const handleImageChange = (info) => {
-    if (info.file) {
-      setImageFile(info.file.originFileObj);
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setImageFile(e.target.files[0]);
     }
   };
 
@@ -27,6 +36,7 @@ const CreateBlogModal = ({ visible, onCreate, onCancel, loading }) => {
       title="Create Blog"
       open={visible}
       onCancel={onCancel}
+      width={width}
       footer={[
         <Button key="cancel" onClick={onCancel}>
           Cancel
@@ -43,7 +53,7 @@ const CreateBlogModal = ({ visible, onCreate, onCancel, loading }) => {
         </Button>,
       ]}
     >
-      <Form form={form}>
+      <Form form={form} encType="multipart/form-data">
         <div className="my-2">
           <label htmlFor="body">Title</label>
           <Form.Item name="title" rules={[{ required: true }]}>
@@ -65,7 +75,39 @@ const CreateBlogModal = ({ visible, onCreate, onCancel, loading }) => {
         <div className="">
           <label htmlFor="body">Body</label>
           <Form.Item name="body" rules={[{ required: true }]}>
-            <Input.TextArea rows={4} />
+            {/* <Input.TextArea rows={4} /> */}
+            <ReactQuill
+              value={content}
+              onChange={setContent}
+              modules={{
+                toolbar: [
+                  [{ header: [1, 2, false] }],
+                  ["bold", "italic", "underline", "strike", "blockquote"],
+                  [
+                    { list: "ordered" },
+                    { list: "bullet" },
+                    { indent: "-1" },
+                    { indent: "+1" },
+                  ],
+                  ["link", "image", "video"],
+                  ["clean"],
+                ],
+              }}
+              formats={[
+                "header",
+                "bold",
+                "italic",
+                "underline",
+                "strike",
+                "blockquote",
+                "list",
+                "bullet",
+                "indent",
+                "link",
+                "image",
+                "video",
+              ]}
+            />
           </Form.Item>
         </div>
         <div className="">
@@ -77,13 +119,19 @@ const CreateBlogModal = ({ visible, onCreate, onCancel, loading }) => {
         <div className="">
           <label htmlFor="category">Image</label>
           <Form.Item name="image" rules={[{ required: true }]}>
-            <Upload
+            {/* <Upload
               customRequest={() => {}}
               showUploadList={false}
               onChange={handleImageChange}
             >
               <Button icon={<UploadOutlined />}>Select Image</Button>
-            </Upload>
+            </Upload> */}
+            <input
+              type="file"
+              accept="image/*"
+              name="image"
+              onChange={handleImageChange}
+            />
           </Form.Item>
           {imageFile && (
             <img
