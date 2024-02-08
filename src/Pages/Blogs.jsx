@@ -26,6 +26,11 @@ function Blogs({ blogs, fetchBlogs }) {
 
       <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center h-1/2 px-20">
         {/* Header content goes here */}
+        <div className="bg-gray-900 text-white py-8 px-4">
+          <h1 className="text-3xl font-bold">Welcome to Our Blog</h1>
+          <p className="text-lg">Explore {blogs?.length} Blogs</p>
+          <Tag color="blue">Latest</Tag>
+        </div>
       </div>
       <div className="overflow-y-auto px-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
