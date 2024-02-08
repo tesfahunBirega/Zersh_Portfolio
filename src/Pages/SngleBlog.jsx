@@ -19,7 +19,6 @@ function SingleBlog({ blog, fetchBlog }) {
   };
 
   const renderBody = () => {
-    // Regular expression to find image tags in the body
     const imgRegex = /<img\s+.*?src="(.*?)"/g;
     // Replace image tags with actual images
     const bodyWithImages = blog?.body?.replace(imgRegex, (match, p1) => {
