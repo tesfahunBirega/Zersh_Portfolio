@@ -126,6 +126,7 @@ function DashboardBlogs({
         />
       </div>
       <CreateBlogModal
+        setVisible={setIsCreateModalVisible}
         loading={loading}
         onCancel={() => setIsCreateModalVisible(false)}
         onCreate={createBlog}

@@ -23,7 +23,7 @@ function SingleBlog({ blog, fetchBlog }) {
     const imgRegex = /<img\s+.*?src="(.*?)"/g;
     // Replace image tags with actual images
     const bodyWithImages = blog?.body?.replace(imgRegex, (match, p1) => {
-      return `<img src="${p1}" style="max-width: 100%; height: auto;" />`;
+      return `<img src="${p1}" style="max-width: 80%; height: auto;" />`;
     });
 
     // Render the body as HTML

@@ -10,6 +10,7 @@ const CreateBlogModal = ({
   onCancel,
   loading,
   width = "50%",
+  setVisible,
 }) => {
   const [form] = Form.useForm();
   const [content, setContent] = useState("");
@@ -19,6 +20,9 @@ const CreateBlogModal = ({
     try {
       const values = await form.validateFields();
       onCreate({ ...values, image: imageFile, body: content });
+      setTimeout(() => {
+        setVisible((prev) => !prev);
+      }, 3000);
     } catch (error) {
       console.error("Validation failed:", error);
     }
