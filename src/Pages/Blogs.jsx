@@ -3,8 +3,9 @@ import Card from "../components/Card";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../store/blog/blogAction";
 import { Navbar } from "../components";
-import { Pagination } from "antd";
+import { Carousel, Pagination, Tag } from "antd";
 import RandomColorCard from "../components/Commons/RandomColorCard";
+import { carouselItemsBlogs, exploreBlogsTags } from "../constants";
 
 function Blogs({ blogs, fetchBlogs }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,14 +26,28 @@ function Blogs({ blogs, fetchBlogs }) {
       <Navbar />
 
       <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center h-1/2 px-20">
-        {/* Header content goes here */}
-        <div className="bg-gray-900 text-white py-8 px-4">
-          <h1 className="text-3xl font-bold">Welcome to Our Blog</h1>
-          <p className="text-lg">Explore {blogs?.length} Blogs</p>
-          <Tag color="blue">Latest</Tag>
+        <div className="mt-28 h-full mb-4 bg-transparent text-white py-8 px-4">
+          <Carousel autoplay dots={false}>
+            {carouselItemsBlogs.map((item) => (
+              <div className="text-white" key={item.id}>
+                <h1 className="text-3xl font-bold">{item.title}</h1>
+                <p className="text-lg">{item.description}</p>
+              </div>
+            ))}
+          </Carousel>
+          <div className="mt-4">
+            <p className="text-lg">Explore {blogs?.length} Blogs</p>
+            {exploreBlogsTags?.map((item, index) => (
+              <div key={index}>
+                <Tag color={item.color} className="mr-2">
+                  {item.tag}
+                </Tag>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="overflow-y-auto px-20">
+      <div className="overflow-y-auto mt-8 px-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {currentBlogs.length >= 1 ? (
             currentBlogs?.map((blog, index) => <Card key={index} {...blog} />)

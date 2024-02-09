@@ -16,7 +16,7 @@ import {
 import { fetchcatagories } from "../store/catagory/catagoryyAction";
 
 function Note({
-  notes,
+  // notes,
   note,
   loading,
   fetchNotes,
@@ -25,15 +25,15 @@ function Note({
   catagories,
   fetchCatagory,
 }) {
-  // const [notes, setNotes] = useState([
-  //   {
-  //     id: 1,
-  //     title: "Note 1",
-  //     content: "Content of Note 1",
-  //     color: "#ffff99",
-  //     category: "Personal",
-  //   },
-  // ]);
+  const [notes, setNotes] = useState([
+    {
+      id: 1,
+      title: "Note 1",
+      content: "Content of Note 1",
+      color: "#ffff99",
+      category: "Personal",
+    },
+  ]);
   useEffect(() => {
     fetchNotes();
     fetchCatagory();
@@ -60,10 +60,10 @@ function Note({
       : notes.filter((note) => note.category === selectedCategory);
 
   const [openAddNote, setAddNote] = useState(false);
-  // const paginatedNotes = filteredNotes.slice(
-  //   (currentPage - 1) * pageSize,
-  //   currentPage * pageSize
-  // );
+  const paginatedNotes = filteredNotes.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
   const addNote = (note) => {
     createNote(note);
   };
@@ -89,27 +89,27 @@ function Note({
           </Button>
         </div>
 
-        {/* <CategoryTabs
+        <CategoryTabs
           categories={categories}
           onSelectCategory={handleSelectCategory}
-        /> */}
+        />
         <NoteForm
           addNote={addNote}
           visble={openAddNote}
           setVisble={setAddNote}
         />
         <div className="flex flex-wrap">
-          {/* {paginatedNotes.map((note) => (
+          {paginatedNotes.map((note) => (
             <NoteCard deleteNote={handleDeleteNote} key={note.id} note={note} />
-          ))} */}
+          ))}
         </div>
-        {/* <Pagination
+        <Pagination
           className="mt-4"
           current={currentPage}
           total={filteredNotes.length}
           pageSize={pageSize}
           onChange={handlePageChange}
-        /> */}
+        />
       </div>
     </Dashboard>
   );

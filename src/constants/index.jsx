@@ -523,11 +523,45 @@ const projects = [
 const baseUrl = "http://localhost:3000/api/v1/";
 const imgBaseUrl = "http://localhost:3000";
 
+const carouselItemsBlogs = [
+  {
+    id: 1,
+    title: "Discover Our Latest Blogs",
+    description: "Explore our collection of insightful articles.",
+  },
+  {
+    id: 2,
+    title: "Stay Informed with our Expert Writers",
+    description: "Get the latest trends and updates in the industry.",
+  },
+  {
+    id: 3,
+    title: "Join Our Community of Bloggers",
+    description: "Share your knowledge and experiences with others.",
+  },
+];
+
+const exploreBlogsTags = [
+  {
+    tag: "Technology",
+    color: "blue",
+  },
+  {
+    tag: "Lifestyle",
+    color: "green",
+  },
+  {
+    tag: "Coffee",
+    color: "orange",
+  },
+];
+
 import { FundProjectionScreenOutlined } from "@ant-design/icons";
 import { FileTextOutlined } from "@ant-design/icons";
 import { ReadOutlined } from "@ant-design/icons";
 import { ProjectOutlined } from "@ant-design/icons";
 import { FileDoneOutlined } from "@ant-design/icons";
+import { SettingOutlined } from "@ant-design/icons";
 const sidebarRoutes = [
   {
     name: "Reports",
@@ -554,6 +588,11 @@ const sidebarRoutes = [
     to: "projects",
     icon: <ProjectOutlined />,
   },
+  {
+    name: "Settings",
+    to: "settings",
+    icon: <SettingOutlined />,
+  },
 ];
 
 export {
@@ -568,4 +607,6 @@ export {
   skillsDevops,
   baseUrl,
   imgBaseUrl,
+  carouselItemsBlogs,
+  exploreBlogsTags,
 };
