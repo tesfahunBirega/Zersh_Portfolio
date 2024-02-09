@@ -80,7 +80,8 @@ const CategoryComponent = ({
     }
   };
 
-  //gone be changed
+  //the columns
+
   const columns = [
     {
       title: "Name",
