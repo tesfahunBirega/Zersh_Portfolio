@@ -63,6 +63,7 @@ import {
   SecurityScanOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
+import CategoryComponent from "../components/Settings/Category";
 
 const { Sider, Content } = Layout;
 
@@ -111,7 +112,7 @@ function Settings() {
               style={{ padding: 24, minHeight: 360 }}
             >
               Content for the selected menu item will appear here.
-              {selectedKey === "1" && <div>Category Content</div>}
+              {selectedKey === "1" && <CategoryComponent />}
               {selectedKey === "2" && <div>Profile Content</div>}
               {selectedKey === "3" && <div>General Settings Content</div>}
               {selectedKey === "4" && <div>Account Settings Content</div>}
