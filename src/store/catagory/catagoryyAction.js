@@ -19,7 +19,7 @@ export const fetchCatagory = createAsyncThunk(
     }
 )
 
-export const fetchcatagories = createAsyncThunk(
+export const fetchCatagories = createAsyncThunk(
     'catagory',
     async(thinkApi)=>{
 
@@ -43,28 +43,33 @@ export const fetchcatagories = createAsyncThunk(
 
 
 export const createCatagory = createAsyncThunk(
-    'catagory/create',
-  async (catagoryData, thunkAPI) => {
-    try {
-      const response = await fetch(`${baseUrl}catagory`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "Accept":"*/*"
-        },
-        body: catagoryData,
-      });
-      console.log(response , "response");
-      if (!response.ok) {
-        throw new Error('Failed to create catagory');
-      }
-
-      return await response.json();
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+  'catagory/create',
+async (catagoryData, thunkAPI) => {
+  console.log(catagoryData ,"catagoryData");
+  try {
+    // const values = await form.validateFields();
+    const formData = new FormData();
+  formData.append('name', catagoryData.name);
+  formData.append('type', catagoryData.type);
+    const response = await fetch(`${baseUrl}blogs`, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        "Accept":"*/*"
+      },
+    });
+    console.log(response , "response");
+    if (!response.ok) {
+      throw new Error('Failed to create blog');
     }
+
+    return await response.json();
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
   }
+}
 )
+
 
 export const updateCatagory = createAsyncThunk(
     'catagory/update',

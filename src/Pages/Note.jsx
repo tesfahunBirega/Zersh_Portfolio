@@ -13,7 +13,7 @@ import {
   fetchNotes,
   updateNote,
 } from "../store/note/noteAction";
-import { fetchcatagories } from "../store/catagory/catagoryyAction";
+import { fetchCatagories } from "../store/catagory/catagoryyAction";
 
 function Note({
   // notes,
@@ -130,7 +130,7 @@ const mapDispatchToProps = (dispatch) => {
     createNote: (noteData) => dispatch(createNote(noteData)),
     updateNote: (noteId, noteData) => dispatch(updateNote(noteId, noteData)),
     deleteNote: (noteId) => dispatch(deleteNote(noteId)),
-    fetchCatagory: () => dispatch(fetchcatagories()),
+    fetchCatagory: () => dispatch(fetchCatagories()),
   };
 };
 

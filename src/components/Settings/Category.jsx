@@ -1,37 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { Table, Space, Modal, Form, Input, Button, message } from "antd";
-// import axios from "axios";
-// import "antd/dist/antd.css";
-// import "tailwindcss/tailwind.css";
+import {
+  Table,
+  Space,
+  Modal,
+  Form,
+  Input,
+  Button,
+  message,
+  Select,
+} from "antd";
 
-const { Column } = Table;
+import { connect } from "react-redux";
+import {
+  createCatagory,
+  deleteCatagory,
+  fetchCatagories,
+  updateCatagory,
+} from "../../store/catagory/catagoryyAction";
 
-const CategoryComponent = () => {
-  const [categories, setCategories] = useState([]);
+const CategoryComponent = ({
+  categories,
+  loading,
+  error,
+  fetchCategories,
+  createCatagory,
+  updateCategory,
+  deleteCategory,
+}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [pagination, setPagination] = useState({ current: 1, pageSize: 10 });
 
-  const fetchData = async (page = 1, pageSize = 10) => {
-    try {
-      //   const response = await axios.get("/api/categories", {
-      //     params: { page, pageSize },
-      //   });
-      //   setCategories(response.data.categories);
-      //   setPagination({
-      //     ...pagination,
-      //     total: response.data.totalCount,
-      //     current: page,
-      //     pageSize,
-      //   });
-      console.log("*************");
-    } catch (error) {
-      console.error("Error fetching categories: ", error);
-    }
-  };
-
+  console.log(categories, "categories");
   useEffect(() => {
-    fetchData();
+    fetchCategories();
   }, []);
 
   const showModal = () => {
@@ -40,35 +42,70 @@ const CategoryComponent = () => {
   };
 
   const handleOk = async () => {
-    try {
-      const values = await form.validateFields();
-      await axios.post("/api/categories", values);
-      setIsModalVisible(false);
-      message.success("Category added successfully");
-      fetchData();
-    } catch (error) {
-      console.error("Error adding category: ", error);
-    }
+    const values = await form.validateFields();
+    console.log(values, "values");
+    createCatagory(values);
+    setIsModalVisible(false);
+    // message.success("Category created successfully");
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
-  const handlePageChange = (page, pageSize) => {
-    fetchData(page, pageSize);
+  const handlePageChange = (pagination, filters, sorter) => {
+    setPagination(pagination);
+    fetchCategories({
+      page: pagination.current,
+      pageSize: pagination.pageSize,
+    });
   };
 
   const handleUpdate = async (record) => {
     try {
       const values = await form.validateFields();
-      //   await axios.put(`/api/categories/${record._id}`, values);
+      updateCategory(record._id, values);
       message.success("Category updated successfully");
-      fetchData();
     } catch (error) {
       console.error("Error updating category: ", error);
     }
   };
+
+  const handleDelete = async (categoryId) => {
+    try {
+      deleteCategory(categoryId);
+      message.success("Category deleted successfully");
+    } catch (error) {
+      console.error("Error deleting category: ", error);
+    }
+  };
+
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Type",
+      dataIndex: "type",
+      key: "type",
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (text, record) => (
+        <Space size="middle">
+          <Button type="primary" onClick={() => handleUpdate(record)}>
+            Edit
+          </Button>
+          <Button type="danger" onClick={() => handleDelete(record._id)}>
+            Delete
+          </Button>
+        </Space>
+      ),
+    },
+  ];
 
   return (
     <div className="container mx-auto p-4">
@@ -93,30 +130,49 @@ const CategoryComponent = () => {
           >
             <Input />
           </Form.Item>
+          <Form.Item
+            name="type"
+            label="Type"
+            rules={[
+              { required: true, message: "Please select the category type!" },
+            ]}
+          >
+            <Select>
+              <Select.Option value="finance">Finance</Select.Option>
+              <Select.Option value="blog">Blog</Select.Option>
+              <Select.Option value="notes">Notes</Select.Option>
+              <Select.Option value="accounting">Accounting</Select.Option>
+            </Select>
+          </Form.Item>
         </Form>
       </Modal>
       <Table
+        columns={columns}
         dataSource={categories}
         rowKey="_id"
         pagination={pagination}
         onChange={handlePageChange}
-      >
-        <Column title="Name" dataIndex="name" key="name" />
-        <Column
-          title="Action"
-          key="action"
-          render={(text, record) => (
-            <Space size="middle">
-              <Button type="primary" onClick={() => handleUpdate(record)}>
-                Edit
-              </Button>
-              <Button type="danger">Delete</Button>
-            </Space>
-          )}
-        />
-      </Table>
+      />
     </div>
   );
 };
 
-export default CategoryComponent;
+const mapStateToProps = (state) => {
+  return {
+    categories: state.catagories.catagories,
+    loading: state.catagories.loading,
+    error: state.catagories.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchCategories: (params) => dispatch(fetchCatagories(params)),
+    createCatagory: (categoryData) => dispatch(createCatagory(categoryData)),
+    updateCategory: (categoryId, categoryData) =>
+      dispatch(updateCatagory(categoryId, categoryData)),
+    deleteCategory: (categoryId) => dispatch(deleteCatagory(categoryId)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryComponent);
