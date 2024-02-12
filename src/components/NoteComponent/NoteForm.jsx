@@ -62,7 +62,7 @@ const NoteForm = ({ addNote, visble, setVisble, catagories }) => {
           {catagories
             ?.filter((item) => item?.type == "blog")
             .map((item, index) => (
-              <Option key={index} value={item.type}>
+              <Option key={index} value={item._id}>
                 {item.name}
               </Option>
             ))}
