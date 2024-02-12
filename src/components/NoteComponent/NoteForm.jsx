@@ -1,25 +1,28 @@
 // components/NoteForm.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Button, Select, Modal } from "antd";
+import { generateRandomHexColor } from "../../utils/randomColor";
 const { Option } = Select;
 
-const NoteForm = ({ addNote, visble, setVisble }) => {
+const NoteForm = ({ addNote, visble, setVisble, catagories }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
+  const [color, setColor] = useState();
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    setColor(generateRandomHexColor);
+  }, [title || content || category]);
   const handleAddNote = () => {
     if (title && content && category) {
       addNote({
         id: Math.floor(Math.random() * 1000),
         title,
         content,
+        color,
         category,
       });
-      setTitle("");
-      setContent("");
-      setCategory("");
     } else {
       setError("Please fill in all fields.");
     }
@@ -29,13 +32,14 @@ const NoteForm = ({ addNote, visble, setVisble }) => {
     <Modal
       title={"Create Note"}
       onCancel={() => setVisble((prev) => !prev)}
-      onOk={() => handleAddNote}
+      onOk={handleAddNote}
       open={visble}
+      style={{ backgroundColor: color }}
       okButtonProps={{
-        className: "bg-gray-500 hover:gray-800",
+        className: "bg-gray-500 hover:gray-800 border rounded-xl",
       }}
     >
-      <div className="mb-4 mt-8">
+      <div className={`mb-4 mt-8`}>
         <Input
           placeholder="Title"
           value={title}
@@ -55,9 +59,13 @@ const NoteForm = ({ addNote, visble, setVisble }) => {
           onChange={(value) => setCategory(value)}
           className="w-full mb-2"
         >
-          <Option value="Work">Work</Option>
-          <Option value="Personal">Personal</Option>
-          <Option value="Study">Study</Option>
+          {catagories
+            ?.filter((item) => item?.type == "blog")
+            .map((item, index) => (
+              <Option key={index} value={item.name}>
+                {item.name}
+              </Option>
+            ))}
         </Select>
       </div>
       {error && <div className="text-red-500 text-sm">{error}</div>}

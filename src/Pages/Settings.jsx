@@ -108,10 +108,9 @@ function Settings() {
         <Layout>
           <Content style={{ padding: "24px" }}>
             <div
-              className="site-layout-background text-black"
+              className="site-layout-background text-black overflow-y-scroll"
               style={{ padding: 24, minHeight: 360 }}
             >
-              Content for the selected menu item will appear here.
               {selectedKey === "1" && <CategoryComponent />}
               {selectedKey === "2" && <div>Profile Content</div>}
               {selectedKey === "3" && <div>General Settings Content</div>}

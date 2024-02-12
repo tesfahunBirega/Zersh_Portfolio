@@ -46,13 +46,10 @@ export const createNote = createAsyncThunk(
     'notes/create',
   async (noteData, thunkAPI) => {
     try {
-      const response = await fetch(`${baseUrl}notes`, {
-        method: 'POST',
+      const response = await axios.post(`${baseUrl}notes`, {...noteData}, {
         headers: {
-          'Content-Type': 'application/json',
-          "Accept":"*/*"
+          "Accept": "*/*"
         },
-        body: noteData,
       });
       console.log(response , "response");
       if (!response.ok) {

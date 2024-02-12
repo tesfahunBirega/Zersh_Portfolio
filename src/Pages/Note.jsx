@@ -16,7 +16,7 @@ import {
 import { fetchCatagories } from "../store/catagory/catagoryyAction";
 
 function Note({
-  // notes,
+  notes,
   note,
   loading,
   fetchNotes,
@@ -25,15 +25,15 @@ function Note({
   catagories,
   fetchCatagory,
 }) {
-  const [notes, setNotes] = useState([
-    {
-      id: 1,
-      title: "Note 1",
-      content: "Content of Note 1",
-      color: "#ffff99",
-      category: "Personal",
-    },
-  ]);
+  // const [notes, setNotes] = useState([
+  //   {
+  //     id: 1,
+  //     title: "Note 1",
+  //     content: "Content of Note 1",
+  //     color: "#ffff99",
+  //     category: "Personal",
+  //   },
+  // ]);
   useEffect(() => {
     fetchNotes();
     fetchCatagory();
@@ -94,7 +94,8 @@ function Note({
           onSelectCategory={handleSelectCategory}
         />
         <NoteForm
-          addNote={addNote}
+          catagories={catagories}
+          addNote={createNote}
           visble={openAddNote}
           setVisble={setAddNote}
         />

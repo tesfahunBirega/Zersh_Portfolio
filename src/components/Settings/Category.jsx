@@ -112,7 +112,12 @@ const CategoryComponent = ({
   return (
     <div className="container mx-auto p-4">
       <div className="mb-4 flex justify-end">
-        <Button type="primary" onClick={showModal}>
+        <Button
+          style={{
+            className: "text-gray-500 bg-gray-200",
+          }}
+          onClick={showModal}
+        >
           Add Category
         </Button>
       </div>
