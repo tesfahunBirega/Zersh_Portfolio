@@ -47,7 +47,7 @@ export const createNote = createAsyncThunk(
     'notes/create',
   async (noteData, thunkAPI) => {
     try {
-      const response = await axios.post(`${baseUrl}notes`, {...noteData}, {
+      const response = await axios.post(`${baseUrl}notes`, noteData , {
         headers: {
           "Accept": "*/*"
         },
