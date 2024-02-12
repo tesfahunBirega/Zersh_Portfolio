@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseUrl } from "../../constants";
+import axios from "axios";
 
 export const fetchNote = createAsyncThunk(
     'note/fetchbyid',
