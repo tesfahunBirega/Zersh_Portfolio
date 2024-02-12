@@ -49,6 +49,7 @@ export const createNote = createAsyncThunk(
     try {
        axios.post(`${baseUrl}notes`, noteData , {
         headers: {
+          "Content-Type": "application/json",
           "Accept": "*/*"
         },
       });
