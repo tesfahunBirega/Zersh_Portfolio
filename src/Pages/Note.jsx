@@ -37,6 +37,8 @@ function Note({
     setCurrentPage(page);
   };
 
+  console.log(notes, "notes");
+
   const categories = ["All", "Personal", "Work", "Ideas"];
 
   const [selectedCategory, setSelectedCategory] = useState("All");
