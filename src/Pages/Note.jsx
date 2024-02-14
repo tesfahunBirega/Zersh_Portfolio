@@ -17,8 +17,6 @@ import { fetchCatagories } from "../store/catagory/catagoryyAction";
 
 function Note({
   notes,
-  note,
-  loading,
   fetchNotes,
   createNote,
   deleteNote,
