@@ -11,10 +11,10 @@ const NoteCard = ({ note }) => {
   };
 
   return (
-    <div className="mb-4 mx-2">
-      <Card style={cardStyle} hoverable>
+    <div className="mb-4 mx-2 ">
+      <Card style={cardStyle} className=" text-balance break-words" hoverable>
         <h3 className="text-lg font-bold mb-2">{note.title}</h3>
-        <p className="text-sm">{note.content}</p>
+        <p className="text-sm ">{note.content}</p>
       </Card>
     </div>
   );

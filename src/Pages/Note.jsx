@@ -29,7 +29,7 @@ function Note({
     fetchNotes();
     fetchCatagory();
   }, []);
-  console.log(notes, catagories, "notes - catagories");
+
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
 
