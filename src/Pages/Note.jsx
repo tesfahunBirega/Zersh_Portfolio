@@ -25,15 +25,6 @@ function Note({
   catagories,
   fetchCatagory,
 }) {
-  // const [notes, setNotes] = useState([
-  //   {
-  //     id: 1,
-  //     title: "Note 1",
-  //     content: "Content of Note 1",
-  //     color: "#ffff99",
-  //     category: "Personal",
-  //   },
-  // ]);
   useEffect(() => {
     fetchNotes();
     fetchCatagory();
@@ -64,9 +55,6 @@ function Note({
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
-  const addNote = (note) => {
-    createNote(note);
-  };
   const hanldeAddNote = () => {
     setAddNote((prev) => !prev);
   };
