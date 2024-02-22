@@ -1,11 +1,99 @@
 import React from "react";
 import Dashboard from "../commons/Dashboard";
+import React, { useState } from 'react';
+import { Button, Collapse } from 'antd';
+
+const { Panel } = Collapse;
+
+const DailyGoalComponent = ({ goal }) => {
+  return (
+    <div>
+      <p>{goal}</p>
+    </div>
+  );
+};
+
+const WeeklyGoalComponent = ({ goals }) => {
+  return (
+    <Collapse accordion>
+      {goals.map((goal, index) => (
+        <Panel header={`Week ${index + 1}`} key={index}>
+          {goal.map((dailyGoal, dailyIndex) => (
+            <DailyGoalComponent key={dailyIndex} goal={dailyGoal} />
+          ))}
+        </Panel>
+      ))}
+    </Collapse>
+  );
+};
+
+const MonthlyGoalComponent = ({ goals }) => {
+  return (
+    <Collapse accordion>
+      {goals.map((goal, index) => (
+        <Panel header={`Month ${index + 1}`} key={index}>
+          <WeeklyGoalComponent goals={goal} />
+        </Panel>
+      ))}
+    </Collapse>
+  );
+};
+
+const QuarterlyGoalComponent = ({ goals }) => {
+  return (
+    <Collapse accordion>
+      {goals.map((goal, index) => (
+        <Panel header={`Quarter ${index + 1}`} key={index}>
+          <MonthlyGoalComponent goals={goal} />
+        </Panel>
+      ))}
+    </Collapse>
+  );
+};
+
+const HigherGoalComponent = ({ goal }) => {
+  return (
+    <div>
+      <h2>Yearly Higher Goal: {goal}</h2>
+    </div>
+  );
+};
 
 function ProjectsDashboard() {
+  const yearlyGoal = "Increase user engagement on our website by 30% compared to last year.";
+
+  const quarterlyGoals = [
+    [
+      [
+        ["Improve website navigation"],
+        ["Update website content and add new features"],
+        ["Conduct user testing and gather feedback"]
+      ],
+      [
+        ["Enhance social media presence"],
+        ["Create engaging content"],
+        ["Analyze social media metrics"]
+      ],
+      [
+        ["Implement personalized recommendations"],
+        ["Add user customization features"],
+        ["Monitor user engagement metrics"]
+      ],
+      [
+        ["Launch targeted email campaigns"],
+        ["Create promotional offers"],
+        ["Analyze email campaign performance"]
+      ]
+    ]
+  ];
+
+
   return (
     <Dashboard>
-      {" "}
-      <div className="">ProjectsDashboard</div>
+       <div style={{ padding: '20px' }}>
+      <HigherGoalComponent goal={yearlyGoal} />
+      <QuarterlyGoalComponent goals={quarterlyGoals} />
+    </div>
     </Dashboard>
   );
 }
