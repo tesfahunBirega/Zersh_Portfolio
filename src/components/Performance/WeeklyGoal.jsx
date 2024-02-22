@@ -1,3 +1,5 @@
+import { DailyGoalComponent } from "./DailyGoal";
+
 export const WeeklyGoalComponent = ({ goals }) => {
     return (
       <Collapse accordion>
