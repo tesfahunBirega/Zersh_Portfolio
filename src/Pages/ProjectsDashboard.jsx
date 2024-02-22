@@ -100,8 +100,10 @@ function ProjectsDashboard() {
   return (
     <Dashboard>
 
+<div className="flex justify-end">
+<Button styles={{className:"bg-gray-400"}} className="" type="primary" onClick={handleAddQuarterlyGoal}>Add Quarterly Goal</Button>
 
-<Button className="text-end" type="primary" onClick={handleAddQuarterlyGoal}>Add Quarterly Goal</Button>
+</div>
 
 <div style={{ padding: '20px' }}>
       <HigherGoalComponent goal={yearlyGoal} />
