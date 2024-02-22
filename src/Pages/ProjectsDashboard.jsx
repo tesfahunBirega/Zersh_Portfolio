@@ -6,13 +6,6 @@ import { MonthlyGoalComponent } from "../components/Performance/MonthlyGoal";
 
 const { Panel } = Collapse;
 
-const DailyGoalComponent = ({ goal }) => {
-  return (
-    <div>
-      <p>{goal}</p>
-    </div>
-  );
-};
 
 
 
