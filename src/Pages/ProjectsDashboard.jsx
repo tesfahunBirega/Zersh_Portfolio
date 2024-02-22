@@ -1,6 +1,7 @@
 import Dashboard from "../commons/Dashboard";
-import { Button, Collapse } from 'antd';
+import { Button, Collapse, Form, Input } from 'antd';
 import { MonthlyGoalComponent } from "../components/Performance/MonthlyGoal";
+import { useState } from "react";
 
 const { Panel } = Collapse;
 
@@ -25,39 +26,100 @@ const HigherGoalComponent = ({ goal }) => {
 };
 
 function ProjectsDashboard() {
-  const yearlyGoal = "Increase user engagement on our website by 30% compared to last year.";
+  
+  const [dailyGoal, setDailyGoal] = useState("");
+  const [weeklyGoals, setWeeklyGoals] = useState([["", "", "", ""]]);
+  const [monthlyGoals, setMonthlyGoals] = useState([weeklyGoals]);
+  const [quarterlyGoals, setQuarterlyGoals] = useState([monthlyGoals]);
+  const [yearlyGoal, setYearlyGoal] = useState("Increase user engagement on our website by 30% compared to last year.");
 
-  const quarterlyGoals = [
-    [
-      [
-        ["Improve website navigation"],
-        ["Update website content and add new features"],
-        ["Conduct user testing and gather feedback"]
-      ],
-      [
-        ["Enhance social media presence"],
-        ["Create engaging content"],
-        ["Analyze social media metrics"]
-      ],
-      [
-        ["Implement personalized recommendations"],
-        ["Add user customization features"],
-        ["Monitor user engagement metrics"]
-      ],
-      [
-        ["Launch targeted email campaigns"],
-        ["Create promotional offers"],
-        ["Analyze email campaign performance"]
-      ]
-    ]
-  ];
+  const handleAddDailyGoal = (weekIndex) => {
+    const newWeeklyGoals = weeklyGoals.map((week, wIndex) => {
+      if (wIndex === weekIndex) {
+        return [...week, ""];
+      }
+      return week;
+    });
+    setWeeklyGoals(newWeeklyGoals);
+  };
+
+  const handleAddWeeklyGoal = (monthIndex) => {
+    const newMonthlyGoals = monthlyGoals.map((month, mIndex) => {
+      if (mIndex === monthIndex) {
+        return [...month, [...weeklyGoals[0]]];
+      }
+      return month;
+    });
+    setMonthlyGoals(newMonthlyGoals);
+  };
+
+  const handleAddMonthlyGoal = (quarterIndex) => {
+    const newQuarterlyGoals = quarterlyGoals.map((quarter, qIndex) => {
+      if (qIndex === quarterIndex) {
+        return [...quarter, [...monthlyGoals[0]]];
+      }
+      return quarter;
+    });
+    setQuarterlyGoals(newQuarterlyGoals);
+  };
+
+  const handleAddQuarterlyGoal = () => {
+    setQuarterlyGoals([...quarterlyGoals, [...quarterlyGoals[0]]]);
+  };
+
+  const handleRemoveDailyGoal = (weekIndex, dayIndex) => {
+    const updatedWeeklyGoals = weeklyGoals.map((week, wIndex) => {
+      if (wIndex === weekIndex) {
+        return week.filter((_, dIndex) => dIndex !== dayIndex);
+      }
+      return week;
+    });
+    setWeeklyGoals(updatedWeeklyGoals);
+  };
+
+  const handleSaveDailyGoal = (weekIndex, dayIndex, value) => {
+    const updatedWeeklyGoals = weeklyGoals.map((week, wIndex) => {
+      if (wIndex === weekIndex) {
+        return week.map((day, dIndex) => {
+          if (dIndex === dayIndex) {
+            return value;
+          }
+          return day;
+        });
+      }
+      return week;
+    });
+    setWeeklyGoals(updatedWeeklyGoals);
+  };
+
+  const handleYearlyGoalChange = (e) => {
+    setYearlyGoal(e.target.value);
+  };
 
 
   return (
     <Dashboard>
-       <div style={{ padding: '20px' }}>
+
+
+<Button className="text-end" type="primary" onClick={handleAddQuarterlyGoal}>Add Quarterly Goal</Button>
+
+<div style={{ padding: '20px' }}>
       <HigherGoalComponent goal={yearlyGoal} />
-      <QuarterlyGoalComponent goals={quarterlyGoals} />
+      <QuarterlyGoalComponent
+        goals={quarterlyGoals}
+        onAddMonthly={handleAddMonthlyGoal}
+        onRemoveMonthly={() => setQuarterlyGoals(quarterlyGoals.slice(0, -1))}
+        onAddWeeklyMonthly={handleAddWeeklyGoal}
+        onRemoveWeeklyMonthly={(monthIndex) => setMonthlyGoals(monthlyGoals.filter((_, index) => index !== monthIndex))}
+        onAddDailyMonthly={handleAddDailyGoal}
+        onRemoveDailyMonthly={handleRemoveDailyGoal}
+        onSaveDailyMonthly={handleSaveDailyGoal}
+      />
+      <Form>
+        <Form.Item label="Yearly Higher Goal">
+          <Input value={yearlyGoal} onChange={handleYearlyGoalChange} />
+        </Form.Item>
+      </Form>
     </div>
     </Dashboard>
   );
