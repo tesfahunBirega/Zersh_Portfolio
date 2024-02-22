@@ -2,6 +2,7 @@ import React from "react";
 import Dashboard from "../commons/Dashboard";
 import React, { useState } from 'react';
 import { Button, Collapse } from 'antd';
+import { MonthlyGoalComponent } from "../components/Performance/MonthlyGoal";
 
 const { Panel } = Collapse;
 
@@ -27,17 +28,6 @@ const WeeklyGoalComponent = ({ goals }) => {
   );
 };
 
-const MonthlyGoalComponent = ({ goals }) => {
-  return (
-    <Collapse accordion>
-      {goals.map((goal, index) => (
-        <Panel header={`Month ${index + 1}`} key={index}>
-          <WeeklyGoalComponent goals={goal} />
-        </Panel>
-      ))}
-    </Collapse>
-  );
-};
 
 const QuarterlyGoalComponent = ({ goals }) => {
   return (
