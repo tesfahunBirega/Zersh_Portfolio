@@ -1,14 +1,8 @@
-import React from "react";
 import Dashboard from "../commons/Dashboard";
-import React, { useState } from 'react';
 import { Button, Collapse } from 'antd';
 import { MonthlyGoalComponent } from "../components/Performance/MonthlyGoal";
 
 const { Panel } = Collapse;
-
-
-
-
 
 const QuarterlyGoalComponent = ({ goals }) => {
   return (

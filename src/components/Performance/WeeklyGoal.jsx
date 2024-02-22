@@ -1,4 +1,8 @@
+import { Collapse } from "antd";
 import { DailyGoalComponent } from "./DailyGoal";
+
+
+const { Panel } = Collapse;
 
 export const WeeklyGoalComponent = ({ goals }) => {
     return (
