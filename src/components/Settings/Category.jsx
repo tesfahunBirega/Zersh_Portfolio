@@ -68,10 +68,11 @@ const CategoryComponent = ({
         title: 'Are you sure you want to delete?',
         okText: 'Yes',
         cancelText: 'No',
-        type: "error",
         okButtonProps: {
-          type: 'primary',
           danger: true,
+          style: {
+            backgroundColor: '#ff4d4f', 
+            color: '#fff',          },
         },
         onOk: () => {
           deleteCategory(categoryId);
@@ -98,7 +99,8 @@ const CategoryComponent = ({
       title: "Action",
       key: "action",
       render: (text, record) => (
-        <Space size="middle">
+        <div className="flex justify-start">
+           <Space size="middle">
         <Button 
            className=" hover:text-blue-800 text-blue-500 font-bold py-2 px-4 flex items-center " 
            onClick={() => setShowUpdateModal(record)}>
@@ -106,13 +108,21 @@ const CategoryComponent = ({
           size={24}/>
           </Button>
           <Button 
-          styles={{
-            className:"hover:text-red-600 text-red-500 font-bold py-2 px-4 flex items-center " 
-          }}
+           style={{
+             backgroundColor: '#ff4d4f',
+             color: '#fff', 
+             borderRadius: '4px', 
+             padding: '8px 16px', 
+             cursor: 'pointer', 
+             fontWeight: 'bold',
+           }}
+            className="flex items-center"
            onClick={() => handleDelete(record._id)}>
           <DeleteOutlined  size={24}/>
           </Button>
         </Space>
+        </div>
+       
       ),
     },
   ];
