@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import {
   Table,
   Space,
@@ -17,6 +18,7 @@ import {
   fetchCatagories,
   updateCatagory,
 } from "../../store/catagory/catagoryyAction";
+import UpdateCategoryModal from "../Forms/CatagoryForms/inxed";
 
 const CategoryComponent = ({
   categories,
@@ -30,12 +32,13 @@ const CategoryComponent = ({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [pagination, setPagination] = useState({ current: 1, pageSize: 10 });
-
-  console.log(categories, "categories");
+  const [showUpdateModal, setShowUpdateModal] = useState(null);
   useEffect(() => {
     fetchCategories();
   }, []);
 
+
+  console.log(showUpdateModal , "showUpdateModal");
   const showModal = () => {
     form.resetFields();
     setIsModalVisible(true);
@@ -45,8 +48,6 @@ const CategoryComponent = ({
     const values = await form.validateFields();
     console.log(values, "values");
     createCatagory(values);
-    setIsModalVisible(false);
-    // message.success("Category created successfully");
   };
 
   const handleCancel = () => {
@@ -61,26 +62,26 @@ const CategoryComponent = ({
     });
   };
 
-  const handleUpdate = async (record) => {
-    try {
-      const values = await form.validateFields();
-      updateCategory(record._id, values);
-      message.success("Category updated successfully");
-    } catch (error) {
-      console.error("Error updating category: ", error);
-    }
-  };
-
   const handleDelete = async (categoryId) => {
     try {
-      deleteCategory(categoryId);
-      message.success("Category deleted successfully");
+      Modal.confirm({
+        title: 'Are you sure you want to delete?',
+        okText: 'Yes',
+        cancelText: 'No',
+        type: "error",
+        okButtonProps: {
+          type: 'primary',
+          danger: true,
+        },
+        onOk: () => {
+          deleteCategory(categoryId);
+        },
+      });
     } catch (error) {
       console.error("Error deleting category: ", error);
     }
   };
 
-  //the columns
 
   const columns = [
     {
@@ -98,11 +99,18 @@ const CategoryComponent = ({
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <Button type="primary" onClick={() => handleUpdate(record)}>
-            Edit
+        <Button 
+           className=" hover:text-blue-800 text-blue-500 font-bold py-2 px-4 flex items-center " 
+           onClick={() => setShowUpdateModal(record)}>
+          <EditOutlined 
+          size={24}/>
           </Button>
-          <Button type="danger" onClick={() => handleDelete(record._id)}>
-            Delete
+          <Button 
+          styles={{
+            className:"hover:text-red-600 text-red-500 font-bold py-2 px-4 flex items-center " 
+          }}
+           onClick={() => handleDelete(record._id)}>
+          <DeleteOutlined  size={24}/>
           </Button>
         </Space>
       ),
@@ -125,6 +133,9 @@ const CategoryComponent = ({
         title="Add Category"
         open={isModalVisible}
         onOk={handleOk}
+        okButtonProps={{
+          className:"hover:text-red-600 text-red-500 font-bold py-2 px-4 text-center " 
+        }}
         onCancel={handleCancel}
       >
         <Form form={form} layout="vertical" name="category_form">
@@ -153,6 +164,13 @@ const CategoryComponent = ({
           </Form.Item>
         </Form>
       </Modal>
+
+      <UpdateCategoryModal 
+      category={showUpdateModal}
+      onCancel={()=>setShowUpdateModal(null)}
+      onUpdate={updateCategory}
+      visible={ !updateCatagory ? false : true }
+      />
       <Table
         columns={columns}
         dataSource={categories}
@@ -176,8 +194,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchCategories: (params) => dispatch(fetchCatagories(params)),
     createCatagory: (categoryData) => dispatch(createCatagory(categoryData)),
-    updateCategory: (categoryId, categoryData) =>
-      dispatch(updateCatagory(categoryId, categoryData)),
+    updateCategory: (data) => dispatch(updateCatagory(data)),
     deleteCategory: (categoryId) => dispatch(deleteCatagory(categoryId)),
   };
 };

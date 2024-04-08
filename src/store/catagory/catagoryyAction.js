@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseUrl } from "../../constants";
 
+import {
+  message,
+} from "antd";
 export const fetchCatagory = createAsyncThunk(
     'catagory/fetchbyid',
     async(catagoryId, thinkApi)=>{
@@ -44,27 +47,24 @@ export const fetchCatagories = createAsyncThunk(
 
 export const createCatagory = createAsyncThunk(
   'catagory/create',
-async (catagoryData, thunkAPI) => {
-  console.log(catagoryData ,"catagoryData");
+async (categoryData, thunkAPI) =>{
   try {
-    // const values = await form.validateFields();
-    const formData = new FormData();
-  formData.append('name', catagoryData.name);
-  formData.append('type', catagoryData.type);
-    const response = await fetch(`${baseUrl}blogs`, {
+    const response = await fetch(`${baseUrl}catagory`, {
       method: 'POST',
-      body: formData,
-      headers: {
-        "Accept":"*/*"
-      },
+      body: JSON.stringify(categoryData) ,
+     headers:{
+      'Content-Type': 'application/json',
+     }
     });
-    console.log(response , "response");
     if (!response.ok) {
       throw new Error('Failed to create blog');
     }
+    message.success("Category created successfully");
+
 
     return await response.json();
   } catch (error) {
+    message.error("Category created successfully");
     return thunkAPI.rejectWithValue(error.message);
   }
 }
@@ -73,22 +73,23 @@ async (catagoryData, thunkAPI) => {
 
 export const updateCatagory = createAsyncThunk(
     'catagory/update',
-  async (id,catagoryData, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      const response = await fetch(`${baseUrl}catagory/${id}`, {
+      const response = await fetch(`${baseUrl}catagory/${data.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(catagoryData),
+        body: JSON.stringify(data.catagoryData),
       });
 
       if (!response.ok) {
         throw new Error('Failed to update catagory');
       }
-
+      message.success("Category Updated successfully");
       return await response.json();
     } catch (error) {
+      message.error("Category Update Failed!");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -108,9 +109,10 @@ export const deleteCatagory = createAsyncThunk(
       if (!response.ok) {
         throw new Error('Failed to update catagory');
       }
-
+      message.success("Category deleted successfully");
       return await response.json();
     } catch (error) {
+      message.error("Category delete Failed " + error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

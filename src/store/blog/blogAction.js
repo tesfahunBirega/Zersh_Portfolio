@@ -43,9 +43,7 @@ export const fetchBlogs = createAsyncThunk(
 export const createBlog = createAsyncThunk(
     'blogs/create',
   async (blogData, thunkAPI) => {
-    console.log(blogData ,"blogData");
     try {
-      // const values = await form.validateFields();
       const formData = new FormData();
     formData.append('title', blogData.title);
     formData.append('author', blogData.author);
@@ -74,14 +72,14 @@ export const createBlog = createAsyncThunk(
 
 export const updateBlog = createAsyncThunk(
     'blogs/update',
-  async (id,blogData, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      const response = await fetch(`${baseUrl}blogs/${id}`, {
+      const response = await fetch(`${baseUrl}blogs/${data.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(blogData),
+        body: JSON.stringify(data.blogData),
       });
 
       if (!response.ok) {

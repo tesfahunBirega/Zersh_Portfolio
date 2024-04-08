@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
-import { createBlog, deleteBlog, fetchBlogs } from "../store/blog/blogAction";
+import { createBlog, deleteBlog, fetchBlogs, updateBlog } from "../store/blog/blogAction";
 import Dashboard from "../commons/Dashboard";
 import { connect } from "react-redux";
 import {

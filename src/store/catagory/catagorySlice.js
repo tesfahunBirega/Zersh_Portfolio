@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createCatagory, deleteCatagory, fetchCatagory, fetchCatagories } from "./catagoryyAction";
+import { createCatagory, deleteCatagory, fetchCatagory, fetchCatagories, updateCatagory } from "./catagoryyAction";
 
 export const CatagorySlice = createSlice({
     name:'catagories',
@@ -42,6 +42,17 @@ export const CatagorySlice = createSlice({
                 state.catagories=[...state.catagories, action.payload]
             })
             .addCase(createCatagory.rejected , (state, action)=>{
+                state.loading = false 
+                state.error = action.error.message
+            })
+            .addCase(updateCatagory.pending , (state)=>{
+                state.loading = true 
+            })
+            .addCase(updateCatagory.fulfilled , (state, action)=>{
+                state.loading = false 
+                state.catagories =  state.catagories.map((item) => item._id == action.payload._id ? action.payload : item)
+            })
+            .addCase(updateCatagory.rejected , (state, action)=>{
                 state.loading = false 
                 state.error = action.error.message
             })
