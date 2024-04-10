@@ -19,6 +19,7 @@ function Note({
   notes,
   fetchNotes,
   createNote,
+  updateNote,
   deleteNote,
   catagories,
   fetchCatagory,
@@ -46,9 +47,10 @@ function Note({
   const filteredNotes =
     selectedCategory === "All"
       ? notes
-      : notes.filter((note) => note.category.includes(catagories[selectedCategory]));
-
-  console.log(filteredNotes,"notesnotesnotes" , [catagories[selectedCategory]]);
+      : notes.filter((note) => {
+        const selectedCategoryId = catagories.find(category => category.name === selectedCategory)?._id;
+        return selectedCategoryId && note.category.includes(selectedCategoryId);
+    });
 
 
   const [openAddNote, setAddNote] = useState(false);
@@ -58,10 +60,6 @@ function Note({
   );
   const hanldeAddNote = () => {
     setAddNote((prev) => !prev);
-  };
-
-  const handleDeleteNote = (id) => {
-    deleteNote(id);
   };
 
   return (
@@ -90,7 +88,12 @@ function Note({
         />
         <div className="flex flex-wrap">
           {paginatedNotes.map((note) => (
-            <NoteCard deleteNote={handleDeleteNote} key={note.id} note={note} />
+            <NoteCard 
+            categories={catagories}
+            key={note._id}
+            onDelete={deleteNote}
+            onUpdateNote={updateNote}
+            note={note} />
           ))}
         </div>
         <Pagination
@@ -118,7 +121,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchNotes: () => dispatch(fetchNotes()),
     createNote: (noteData) => dispatch(createNote(noteData)),
-    updateNote: (noteId, noteData) => dispatch(updateNote(noteId, noteData)),
+    updateNote: (data) => dispatch(updateNote(data)),
     deleteNote: (noteId) => dispatch(deleteNote(noteId)),
     fetchCatagory: () => dispatch(fetchCatagories()),
   };

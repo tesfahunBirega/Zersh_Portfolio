@@ -75,14 +75,15 @@ export const createNote = createAsyncThunk(
 
 export const updateNote = createAsyncThunk(
     'notes/update',
-  async (id,noteData, thunkAPI) => {
+  async (data, thunkAPI) => {
+    console.log(data);
     try {
-      const response = await fetch(`${baseUrl}notes/${id}`, {
+      const response = await fetch(`${baseUrl}notes/${data.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(noteData),
+        body: JSON.stringify(data.noteData),
       });
 
       if (!response.ok) {
