@@ -28,14 +28,14 @@ function Note({
     fetchCatagory();
   }, []);
 
-  const pageSize = 6;
+  const pageSize = 20;
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  const categories = ["All", "Personal", "Work", "Ideas"];
+  const categoriesList = ["All", ...catagories?.filter(it => it.type == 'notes').map(item=> item.name)];
 
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -46,7 +46,10 @@ function Note({
   const filteredNotes =
     selectedCategory === "All"
       ? notes
-      : notes.filter((note) => note.category === selectedCategory);
+      : notes.filter((note) => note.category.includes(catagories[selectedCategory]));
+
+  console.log(filteredNotes,"notesnotesnotes" , [catagories[selectedCategory]]);
+
 
   const [openAddNote, setAddNote] = useState(false);
   const paginatedNotes = filteredNotes.slice(
@@ -76,7 +79,7 @@ function Note({
         </div>
 
         <CategoryTabs
-          categories={categories}
+          categories={categoriesList}
           onSelectCategory={handleSelectCategory}
         />
         <NoteForm

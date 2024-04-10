@@ -15,7 +15,7 @@ const CategoryTabs = ({ categories, onSelectCategory }) => {
       defaultActiveKey="All"
       onTabClick={handleTabClick}
     >
-      {categories.map((category) => (
+      {categories.map((category, i) => (
         <TabPane
           className={`text-[${generateRandomHexColor()}]`}
           tab={category}
