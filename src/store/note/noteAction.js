@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseUrl } from "../../constants";
 import axios from "axios";
+import {
+  message,
+} from "antd";
 
 export const fetchNote = createAsyncThunk(
     'note/fetchbyid',
@@ -47,19 +50,24 @@ export const createNote = createAsyncThunk(
     'notes/create',
   async (noteData, thunkAPI) => {
     try {
-       axios.post(`${baseUrl}notes`, noteData , {
+      const response = await axios.post(`${baseUrl}notes`, noteData , {
         headers: {
           "Content-Type": "application/json",
           "Accept": "*/*"
         },
       });
-      console.log(response , "response");
-      if (!response.ok) {
+    
+      if (response.
+        statusText
+         !='OK') {
         throw new Error('Failed to create note');
       }
-
-      return await response.json();
+     
+      message.success("Note created successfully");
+      return  response.data;
     } catch (error) {
+      message.error(`Note create Failed! ${error.message}`);
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
