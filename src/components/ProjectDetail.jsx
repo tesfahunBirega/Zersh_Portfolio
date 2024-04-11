@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { StarsCanvas } from "./canvas";
 import Navbar from "./Navbar";
+import { useParams } from "react-router-dom";
 
 const ProjectDetail = ({ title, description, uiDesigns, userJourneyMaps }) => {
   return (
