@@ -7,7 +7,7 @@ export const fetchProject = createAsyncThunk(
 
         const abortController = new AbortController()
 
-        const response = await fetch(`${baseUrl}projects/${blogId}` , {
+        const response = await fetch(`${baseUrl}project/${blogId}` , {
             signal:abortController.signal
         })
         if(response.status !== 200){
@@ -25,7 +25,7 @@ export const fetchProjects = createAsyncThunk(
 
         const abortController = new AbortController()
 
-        const response = await fetch(`${baseUrl}projects` 
+        const response = await fetch(`${baseUrl}project` 
         ,
          {
             signal:abortController.signal
@@ -42,14 +42,27 @@ export const fetchProjects = createAsyncThunk(
 
 export const createProject = createAsyncThunk(
     'projects/create',
-  async (blogData, thunkAPI) => {
+  async (project, thunkAPI) => {
+    const formData = new FormData();
+    formData.append('title', project.title);
+    formData.append('description', project.description);
+    project.topics.forEach((topic, index) => {
+      formData.append(`topics[${index}][name]`, topic.name);
+      formData.append(`topics[${index}][color]`, topic.color);
+    });
+    formData.append('image', project.image);
+    formData.append('gitHubLink', project.gitHubLink);
+    formData.append('projectLink', project.projectLink);
+
+
     try {
-      const response = await fetch(`${baseUrl}projects`, {
+      const response = await fetch(`${baseUrl}project`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          "Accept":"*/*"
+
         },
-        body: JSON.stringify(blogData),
+        body: formData,
       });
 
       if (!response.ok) {
@@ -67,7 +80,7 @@ export const updateProject = createAsyncThunk(
     'projects/update',
   async (id,blogData, thunkAPI) => {
     try {
-      const response = await fetch(`${baseUrl}projects/${id}`, {
+      const response = await fetch(`${baseUrl}project/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +103,7 @@ export const deleteProject = createAsyncThunk(
     'projects/delete',
   async (id, thunkAPI) => {
     try {
-      const response = await fetch(`${baseUrl}projects/${id}`, {
+      const response = await fetch(`${baseUrl}project/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

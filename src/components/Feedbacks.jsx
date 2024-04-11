@@ -5,6 +5,10 @@ import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
 import { projects, testimonials } from "../constants";
 import { ProjectCard } from "./Works";
+import { connect } from "react-redux";
+import { useEffect } from "react";
+import { fetchProjects } from "../store/project/projectAction";
+
 
 const FeedbackCard = ({
   index,
@@ -43,7 +47,15 @@ const FeedbackCard = ({
   </motion.div>
 );
 
-const Feedbacks = () => {
+const Feedbacks = ({
+  projects,
+loading,
+fetchProjects,
+}) => {
+
+  useEffect(()=>{
+    fetchProjects()
+  },[])
   return (
     <div className="mt-12 bg-black-100 rounded-[20px]" id="project">
       <div
@@ -75,7 +87,7 @@ const Feedbacks = () => {
       <div
         className={`${styles.paddingX} -mt-20 pb-14 grid-flow-row  px-8 md:flex md:flex-cols-4 overflow-x-scroll md:px-12 py-4 gap-7`}
       >
-        {projects.map((project, index) => (
+        {projects?.map((project, index) => (
           <ProjectCard key={index} index={index} {...project} />
         ))}
       </div>
@@ -83,4 +95,20 @@ const Feedbacks = () => {
   );
 };
 
-export default Feedbacks;
+
+const mapStateToProps = (state) => {
+  return {
+    projects: state.project.projects
+    ,
+    loading: state.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProjects: () => dispatch(fetchProjects()),
+   
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feedbacks);

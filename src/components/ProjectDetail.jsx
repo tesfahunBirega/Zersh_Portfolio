@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { StarsCanvas } from "./canvas";
 import Navbar from "./Navbar";
-import Hero from "./Hero";
-import { useLocation, useParams } from "react-router-dom";
 
 const ProjectDetail = ({ title, description, uiDesigns, userJourneyMaps }) => {
   return (
@@ -41,8 +39,8 @@ const ProjectDetail = ({ title, description, uiDesigns, userJourneyMaps }) => {
 
 const ProjectDetailPage = () => {
   const projectName = useParams();
-  console.log(projectName.name);
-  const projectTitle = projectName.name;
+  console.log(projectName.id);
+  const projectTitle = projectName.id;
 
   const projectDescription = "Detailed project description goes here.";
   const uiDesigns = [

@@ -595,6 +595,19 @@ const sidebarRoutes = [
   },
 ];
 
+const getRandomColor = () => {
+  const colors = [
+    "blue-text-gradient",
+    "green-text-gradient",
+    "pink-text-gradient",
+    "red-text-gradient",
+    "yellow-text-gradient",
+
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+};
+
+
 export {
   services,
   sidebarRoutes,
@@ -609,4 +622,5 @@ export {
   imgBaseUrl,
   carouselItemsBlogs,
   exploreBlogsTags,
+  getRandomColor
 };
