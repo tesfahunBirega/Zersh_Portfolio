@@ -562,6 +562,7 @@ import { ReadOutlined } from "@ant-design/icons";
 import { ProjectOutlined } from "@ant-design/icons";
 import { FileDoneOutlined } from "@ant-design/icons";
 import { SettingOutlined } from "@ant-design/icons";
+import { FcDocument } from "react-icons/fc";
 const sidebarRoutes = [
   {
     name: "Reports",
@@ -589,10 +590,17 @@ const sidebarRoutes = [
     icon: <ProjectOutlined />,
   },
   {
+    name: "Entrepreneurship",
+    to: "entrepreneurship",
+    icon: <FcDocument />,
+  },
+  {
     name: "Settings",
     to: "settings",
     icon: <SettingOutlined />,
   },
+  
+
 ];
 
 const getRandomColor = () => {
