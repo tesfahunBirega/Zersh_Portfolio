@@ -13,6 +13,7 @@ import ProjectsDashboard from "./Pages/ProjectsDashboard";
 import Reports from "./Pages/Reports";
 import Settings from "./Pages/Settings";
 import EntrepreneurshipBusinessPlanMaker from "./Pages/Entreprnourship";
+import Finance from "./Pages/Finance";
 
 const App = () => {
   return (
@@ -32,7 +33,7 @@ const App = () => {
         <Route path="/dashboard/blogs" element={<DashboardBlogs />} />
         <Route path="/dashboard/projects" element={<ProjectsDashboard />} />
         <Route path="/dashboard/entrepreneurship" element={<EntrepreneurshipBusinessPlanMaker />} />
-
+        <Route path="/dashboard/finance" element={<Finance />} />
         <Route path="/dashboard/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>

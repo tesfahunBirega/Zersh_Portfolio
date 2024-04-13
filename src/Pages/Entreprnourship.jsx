@@ -185,7 +185,7 @@ const EntrepreneurshipBusinessPlanMaker = () => {
           placeholder="Enter your business idea and market description here..." 
         />
 
-<Divider />
+        <Divider />
         <Title  style={{ color: 'white' }}  level={3}>Business Environment</Title>
         <Input.TextArea 
           rows={4} 

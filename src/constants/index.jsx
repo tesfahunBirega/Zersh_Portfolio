@@ -563,6 +563,8 @@ import { ProjectOutlined } from "@ant-design/icons";
 import { FileDoneOutlined } from "@ant-design/icons";
 import { SettingOutlined } from "@ant-design/icons";
 import { FcDocument } from "react-icons/fc";
+import { AiFillInsurance } from "react-icons/ai";
+import { IoDocumentLockSharp } from "react-icons/io5";
 const sidebarRoutes = [
   {
     name: "Reports",
@@ -590,10 +592,16 @@ const sidebarRoutes = [
     icon: <ProjectOutlined />,
   },
   {
-    name: "Entrepreneurship",
-    to: "entrepreneurship",
-    icon: <FcDocument />,
+    name: "Finance",
+    to: "finance",
+    icon: <AiFillInsurance />,
   },
+  {
+    name: "Entreprenurship",
+    to: "entrepreneurship",
+    icon: <IoDocumentLockSharp />,
+  },
+  
   {
     name: "Settings",
     to: "settings",
