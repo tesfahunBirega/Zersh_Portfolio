@@ -1,24 +1,40 @@
 
-import React, { useState } from 'react';
-import { Table, InputNumber } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Table, InputNumber, Button } from 'antd';
 import moment from 'moment';
 import { Line } from 'react-chartjs-2';
 import { connect } from 'react-redux';
-import { createFinance, deleteFinance, fetchFinances, updateFinance } from '../../store/finance/financeAction';
+import { createIncome, deleteIncome, fetchIncomes, updateIncome } from '../../store/finance/financeAction';
 import { fetchCatagories } from '../../store/catagory/catagoryyAction';
 
-const MonthSelector = () => {
+const MonthSelector = ({
+  incomes,
+fetchIncomes,
+createIncome
+}) => {
   const [amounts, setAmounts] = useState(Array(12).fill(0));
   const currentMonth = moment().month();
   const months = moment.months();
 
+    useEffect(()=>{
+      fetchIncomes()
+    },[])
+    console.log(incomes,'incomes');
   const handleAmountChange = (value, index) => {
     const newAmounts = [...amounts];
     newAmounts[index] = value;
     setAmounts(newAmounts);
   };
 
-  const plannedAmounts = [10000, 15000, 20000, 22000, 25000, 30000, 30000, 30000, 40000, 40000, 40000, 40000];
+  const handleCreateNote = () => {
+    // Dispatch createNote action with the current amounts
+    createIncome({
+      title: 'Amounts for ' + moment().format('MMMM YYYY'),
+      amounts: amounts,
+    });
+  };
+
+  const plannedAmounts = [10000, 15000, 15000, 15000, 15000, 15500, 16000, 20000, 40000, 40000, 40000, 40000];
 
   const differences = amounts.map((amount, index) => amount - plannedAmounts[index]);
 
@@ -148,6 +164,9 @@ const MonthSelector = () => {
   return (
     <>
       <Table columns={columns} dataSource={dataSource} pagination={false} bordered />
+      <div className="flex justify-end items-center my-2">
+      <Button type="primary" onClick={handleCreateNote}>Submit</Button>
+      </div>
       <div style={{ height: '200px' }}>
         <Line data={data} options={options} />
       </div>
@@ -156,19 +175,19 @@ const MonthSelector = () => {
 };
 const mapStateToProps = (state) => {
   return {
-    finances: state.finance,
-    catagories: state.finance,
-    finance: state.finance,
-    loading: state.finance,
+    incomes: state.finances.incomes,
+    catagories: state.catagories,
+    finance: state.incomes,
+    loading: state.incomes,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchFinances: () => dispatch(fetchFinances()),
-    createFinance: (financeData) => dispatch(createFinance(financeData)),
-    updateFinance: (data) => dispatch(updateFinance(data)),
-    deleteFinance: (financeId) => dispatch(deleteFinance(financeId)),
+    fetchIncomes: () => dispatch(fetchIncomes()),
+    createIncome: (financeData) => dispatch(createIncome(financeData)),
+    updateIncome: (data) => dispatch(updateIncome(data)),
+    deleteIncome: (financeId) => dispatch(deleteIncome(financeId)),
     fetchCatagory: () => dispatch(fetchCatagories()),
   };
 };

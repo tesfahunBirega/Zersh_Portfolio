@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createFinance, deleteFinance, fetchFinance, fetchFinances, updateFinance } from "./financeAction";
+import { createIncome, deleteIncome, fetchIncome, fetchIncomes, updateIncome } from "./financeAction";
 
-export const getFinancesSlice = createSlice({
-    name:'finance',
+export const FinancesSlice = createSlice({
+    name:'finances',
     initialState:{
         finances:[],
         finance:{},
@@ -18,58 +18,58 @@ export const getFinancesSlice = createSlice({
     reducers:{},
     extraReducers:(builder)=>{
         builder
-            .addCase(fetchFinances.pending , (state)=>{
+            .addCase(fetchIncome.pending , (state)=>{
                 state.loading = true
             })
-            .addCase(fetchFinances.fulfilled, (state,action)=>{
+            .addCase(fetchIncome.fulfilled, (state,action)=>{
                 state.loading = false
                 state.incomes = action.payload
             })
-            .addCase(fetchFinances.rejected , (state, action)=>{
+            .addCase(fetchIncome.rejected , (state, action)=>{
                 state.loading = false 
                 state.error = action.error.message
             })
-            .addCase(fetchFinance.pending , (state)=>{
+            .addCase(fetchIncomes.pending , (state)=>{
                 state.loading = true
             })
-            .addCase(fetchFinance.fulfilled, (state,action)=>{
+            .addCase(fetchIncomes.fulfilled, (state,action)=>{
                 state.loading = false
                 state.incomes = action.payload
             })
-            .addCase(fetchFinance.rejected , (state, action)=>{
+            .addCase(fetchIncomes.rejected , (state, action)=>{
                 state.loading = false 
                 state.error = action.error.message
             })
-            .addCase(createFinance.pending , (state)=>{
+            .addCase(createIncome.pending , (state)=>{
                 state.loading = true
             })
-            .addCase(createFinance.fulfilled, (state,action)=>{
+            .addCase(createIncome.fulfilled, (state,action)=>{
                 state.loading = false
                 state.incomes.push(action.payload)
             })
-            .addCase(createFinance.rejected , (state, action)=>{
+            .addCase(createIncome.rejected , (state, action)=>{
                 state.loading = false 
                 state.error = action.error.message
             })
-            .addCase(updateFinance.pending , (state)=>{
+            .addCase(updateIncome.pending , (state)=>{
                 state.loading = true 
             })
-            .addCase(updateFinance.fulfilled , (state, action)=>{
+            .addCase(updateIncome.fulfilled , (state, action)=>{
                 state.loading = false 
                 state.incomes =  state.incomes.map((item) => item._id == action.payload._id ? action.payload : item)
             })
-            .addCase(updateFinance.rejected , (state, action)=>{
+            .addCase(updateIncome.rejected , (state, action)=>{
                 state.loading = false 
                 state.error = action.error.message
             })
-            .addCase(deleteFinance.pending , (state)=>{
+            .addCase(deleteIncome.pending , (state)=>{
                 state.loading = true
             })
-            .addCase(deleteFinance.fulfilled, (state,action)=>{
+            .addCase(deleteIncome.fulfilled, (state,action)=>{
                 state.loading = false
                 state.incomes=state.incomes.filter(item=>item._id!= action.payload._id)
             })
-            .addCase(deleteFinance.rejected , (state, action)=>{
+            .addCase(deleteIncome.rejected , (state, action)=>{
                 state.loading = false 
                 state.error = action.error.message
             })

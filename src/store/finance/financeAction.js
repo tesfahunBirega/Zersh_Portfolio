@@ -5,8 +5,8 @@ import {
   message,
 } from "antd";
 
-export const fetchFinance = createAsyncThunk(
-    'finance/fetchbyid',
+export const fetchIncome = createAsyncThunk(
+    'finance/get',
     async(financeId, thinkApi)=>{
 
         const abortController = new AbortController()
@@ -23,13 +23,13 @@ export const fetchFinance = createAsyncThunk(
     }
 )
 
-export const fetchFinances = createAsyncThunk(
+export const fetchIncomes = createAsyncThunk(
     'finances',
     async(thinkApi)=>{
 
         const abortController = new AbortController()
 
-        const response = await fetch(`${baseUrl}finances` 
+        const response = await fetch(`${baseUrl}finance/income` 
         ,
          {
             signal:abortController.signal
@@ -46,7 +46,7 @@ export const fetchFinances = createAsyncThunk(
 
 
 
-export const createFinance = createAsyncThunk(
+export const createIncome = createAsyncThunk(
     'finances/create',
   async (financeData, thunkAPI) => {
     try {
@@ -73,7 +73,7 @@ export const createFinance = createAsyncThunk(
   }
 )
 
-export const updateFinance = createAsyncThunk(
+export const updateIncome = createAsyncThunk(
     'finances/update',
   async (data, thunkAPI) => {
     console.log(data);
@@ -97,7 +97,7 @@ export const updateFinance = createAsyncThunk(
   }
 )
 
-export const deleteFinance = createAsyncThunk(
+export const deleteIncome = createAsyncThunk(
     'finances/delete',
   async (id, thunkAPI) => {
     try {
