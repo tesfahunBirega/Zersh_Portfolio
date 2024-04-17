@@ -347,6 +347,7 @@ function ExpenseTabPart({ expenses, loading, fetchExpenses, categories, fetchCat
   ];
 
   const handleFilterChange = (key, value) => {
+    console.log(value ,filters , "value");
     setFilters({
       ...filters,
       [key]: value || '',
@@ -373,6 +374,8 @@ function ExpenseTabPart({ expenses, loading, fetchExpenses, categories, fetchCat
     setFormVisible(!formVisible);
   };
 
+  console.log(categories);
+
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -390,13 +393,12 @@ function ExpenseTabPart({ expenses, loading, fetchExpenses, categories, fetchCat
           setVisible={setFormVisible}
         />}
 
-      <div className="flex flex-wrap gap-4 mb-4">
+      <div className="grid justify-end items-center gap-2 mb-4">
         <RangePicker onChange={handleDateRangeChange} />
         <Input placeholder="Enter name" onChange={(e) => handleFilterChange('name', e.target.value)} />
         <Input placeholder="Enter amount" onChange={(e) => handleFilterChange('amount', e.target.value)} />
         <Select defaultValue="" style={{ width: 120 }} onChange={(value) => handleFilterChange('category', value)}>
-          <Option value="">All Categories</Option>
-          {categories.map(category => (
+          {categories?.filter(item=> item?.type =='expense')?.map(category => (
             <Option key={category.id} value={category.id}>{category.name}</Option>
           ))}
         </Select>
