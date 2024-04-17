@@ -170,6 +170,8 @@ const CategoryComponent = ({
               <Select.Option value="blog">Blog</Select.Option>
               <Select.Option value="notes">Notes</Select.Option>
               <Select.Option value="accounting">Accounting</Select.Option>
+              <Select.Option value="expense">Expense</Select.Option>
+              <Select.Option value="payment">Payment</Select.Option>
             </Select>
           </Form.Item>
         </Form>

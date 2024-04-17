@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import Dashboard from '../commons/Dashboard'
 
 import DynamicTabs from '../components/Commons/DynamicTabs'
+import IncomeTab from '../components/Finance/Income/incomTab';
+import ExpenseTabPart from '../components/Finance/Expense/expence';
 
-import IncomeTab from '../components/Finance/incomTab';
+
 
 const Tab = ({ children }) => {
     return <>{children}</>;
@@ -18,10 +20,8 @@ function Finance() {
        <IncomeTab />
       </Tab>
       <Tab tabName="Expence">
-      <DynamicTabs>
-            <Tab tabName="Food">Food Expence</Tab>
-            <Tab tabName="Transport">Transport Payment</Tab>
-        </DynamicTabs>
+      <ExpenseTabPart />
+     
       </Tab>
       <Tab tabName="Payment">
         <DynamicTabs>

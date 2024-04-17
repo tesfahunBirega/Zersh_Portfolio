@@ -116,3 +116,137 @@ export const deleteIncome = createAsyncThunk(
     }
   }
 )
+
+export const fetchExpense = createAsyncThunk(
+  'expenses/get',
+  async (expenseId, thunkAPI) => {
+    try {
+      const response = await axios.get(`${baseUrl}expenses/${expenseId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchExpenses = createAsyncThunk(
+  'expenses',
+  async (thunkAPI) => {
+    try {
+      const response = await axios.get(`${baseUrl}finance/expense`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const createExpense = createAsyncThunk(
+  'expenses/create',
+  async (expenseData, thunkAPI) => {
+    try {
+      const response = await axios.post(`${baseUrl}finance/expense`, expenseData);
+      message.success("Expense created successfully");
+      return response.data;
+    } catch (error) {
+      message.error(`Failed to create expense: ${error.message}`);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateExpense = createAsyncThunk(
+  'expenses/update',
+  async ({ id, expenseData }, thunkAPI) => {
+    try {
+      const response = await axios.patch(`${baseUrl}finance/expense/${id}`, expenseData);
+      message.success("Expense updated successfully");
+      return response.data;
+    } catch (error) {
+      message.error(`Failed to update expense: ${error.message}`);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteExpense = createAsyncThunk(
+  'expenses/delete',
+  async (id, thunkAPI) => {
+    try {
+      await axios.delete(`${baseUrl}finance/expense/${id}`);
+      message.success("Expense deleted successfully");
+      return id;
+    } catch (error) {
+      message.error(`Failed to delete expense: ${error.message}`);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+
+
+export const fetchPayment = createAsyncThunk(
+  'payments/get',
+  async (paymentId, thunkAPI) => {
+    try {
+      const response = await axios.get(`${baseUrl}payments/${paymentId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchPayments = createAsyncThunk(
+  'payments',
+  async (thunkAPI) => {
+    try {
+      const response = await axios.get(`${baseUrl}payments`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const createPayment = createAsyncThunk(
+  'payments/create',
+  async (paymentData, thunkAPI) => {
+    try {
+      const response = await axios.post(`${baseUrl}payments`, paymentData);
+      message.success("Payment created successfully");
+      return response.data;
+    } catch (error) {
+      message.error(`Failed to create payment: ${error.message}`);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updatePayment = createAsyncThunk(
+  'payments/update',
+  async ({ id, paymentData }, thunkAPI) => {
+    try {
+      const response = await axios.patch(`${baseUrl}payments/${id}`, paymentData);
+      message.success("Payment updated successfully");
+      return response.data;
+    } catch (error) {
+      message.error(`Failed to update payment: ${error.message}`);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deletePayment = createAsyncThunk(
+  'payments/delete',
+  async (id, thunkAPI) => {
+    try {
+      await axios.delete(`${baseUrl}payments/${id}`);
+      message.success("Payment deleted successfully");
+      return id;
+    } catch (error) {
+      message.error(`Failed to delete payment: ${error.message}`);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
