@@ -12,14 +12,33 @@ const MonthSelector = ({
 fetchIncomes,
 createIncome
 }) => {
-  const [amounts, setAmounts] = useState(Array(12).fill(0));
+  const [amounts, setAmounts] = useState(Array(12));
+
   const currentMonth = moment().month();
   const months = moment.months();
 
     useEffect(()=>{
       fetchIncomes()
     },[])
-    console.log(incomes,'incomes');
+
+    useEffect(() => {
+      if (incomes) {
+        const sortedIncomes = [...incomes].sort((a, b) => {
+          const monthA = moment().month(a.month).format('M');
+          const monthB = moment().month(b.month).format('M');
+          return monthA - monthB;
+        });
+    
+        const updatedAmounts = Array(12).fill(undefined);
+    
+        sortedIncomes.forEach((income) => {
+          const monthIndex = moment().month(income.month).format('M') - 1; 
+          updatedAmounts[monthIndex] = income.amount;
+        });
+    
+        setAmounts(updatedAmounts);
+      }
+    }, [incomes]);
   const handleAmountChange = (value, index) => {
     const newAmounts = [...amounts];
     newAmounts[index] = value;
@@ -27,10 +46,12 @@ createIncome
   };
 
   const handleCreateNote = () => {
-    // Dispatch createNote action with the current amounts
+    const currentMonthName = moment().format("MMMM");
+    const currentMonthIndex = moment().month() + 1;
+    const currentMonthAmount = amounts[currentMonthIndex - 1];
     createIncome({
-      title: 'Amounts for ' + moment().format('MMMM YYYY'),
-      amounts: amounts,
+      month: currentMonthName,
+      amount: currentMonthAmount,
     });
   };
 

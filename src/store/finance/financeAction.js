@@ -50,16 +50,14 @@ export const createIncome = createAsyncThunk(
     'finances/create',
   async (financeData, thunkAPI) => {
     try {
-      const response = await axios.post(`${baseUrl}finances`, financeData , {
+      const response = await axios.post(`${baseUrl}finance/income/`, financeData , {
         headers: {
           "Content-Type": "application/json",
           "Accept": "*/*"
         },
       });
     
-      if (response.
-        statusText
-         !='OK') {
+      if (!response) {
         throw new Error('Failed to create finance');
       }
      
