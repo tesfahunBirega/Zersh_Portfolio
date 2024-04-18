@@ -4,6 +4,8 @@ import Dashboard from '../commons/Dashboard'
 import DynamicTabs from '../components/Commons/DynamicTabs'
 import IncomeTab from '../components/Finance/Income/incomTab';
 import ExpenseTabPart from '../components/Finance/Expense/expence';
+import PaymentTabPart from '../components/Finance/Payment/payment';
+
 
 
 
@@ -24,10 +26,7 @@ function Finance() {
      
       </Tab>
       <Tab tabName="Payment">
-        <DynamicTabs>
-            <Tab tabName="Recuring payment">Recuring Payment</Tab>
-            <Tab tabName="One Time payment">One Time Payment</Tab>
-        </DynamicTabs>
+        <PaymentTabPart />
       </Tab>
     </DynamicTabs>
     </Dashboard>

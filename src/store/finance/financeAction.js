@@ -189,7 +189,7 @@ export const fetchPayment = createAsyncThunk(
   'payments/get',
   async (paymentId, thunkAPI) => {
     try {
-      const response = await axios.get(`${baseUrl}payments/${paymentId}`);
+      const response = await axios.get(`${baseUrl}finance/payment/${paymentId}`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -201,7 +201,7 @@ export const fetchPayments = createAsyncThunk(
   'payments',
   async (thunkAPI) => {
     try {
-      const response = await axios.get(`${baseUrl}payments`);
+      const response = await axios.get(`${baseUrl}finance/payment`);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -213,7 +213,7 @@ export const createPayment = createAsyncThunk(
   'payments/create',
   async (paymentData, thunkAPI) => {
     try {
-      const response = await axios.post(`${baseUrl}payments`, paymentData);
+      const response = await axios.post(`${baseUrl}finance/payment`, paymentData);
       message.success("Payment created successfully");
       return response.data;
     } catch (error) {
@@ -227,7 +227,7 @@ export const updatePayment = createAsyncThunk(
   'payments/update',
   async ({ id, paymentData }, thunkAPI) => {
     try {
-      const response = await axios.patch(`${baseUrl}payments/${id}`, paymentData);
+      const response = await axios.patch(`${baseUrl}finance/payment/${id}`, paymentData);
       message.success("Payment updated successfully");
       return response.data;
     } catch (error) {
@@ -241,7 +241,7 @@ export const deletePayment = createAsyncThunk(
   'payments/delete',
   async (id, thunkAPI) => {
     try {
-      await axios.delete(`${baseUrl}payments/${id}`);
+      await axios.delete(`${baseUrl}finance/payment/${id}`);
       message.success("Payment deleted successfully");
       return id;
     } catch (error) {

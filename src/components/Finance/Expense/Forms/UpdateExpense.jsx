@@ -18,7 +18,6 @@ const UpdateExpense = ({ expense, categories, updateExpense, visible, setVisible
         description,
         categoryId: category,
         }
-        console.log(  {id,expenseData} ,"the data");
       updateExpense(
         {id,expenseData}
       );
