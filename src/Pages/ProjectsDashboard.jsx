@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal, Pagination, Popconfirm, Upload, message } from "antd";
 import { connect } from "react-redux";
 import Dashboard from "../commons/Dashboard";
-// import ProjectCard from "../components/ProjectCard";
-// import ProjectForm from "../components/ProjectForm";
 import { createProject, deleteProject, fetchProjects, updateProject } from "../store/project/projectAction";
 import ProjectForm from "../components/Project/ProjectForm";
 import Works, { ProjectCard, ProjectCardDashboard } from "../components/Works";
@@ -33,11 +31,6 @@ function DashboardProjects({ projects, fetchProjects, createProject, deleteProje
   const endIndex = startIndex + pageSize;
   const currentProjects = projects?.length > 0 && projects?.slice(startIndex, endIndex);
 
-  const handleCreateModalOk = () => {
-    createProject(formData);
-    setIsCreateModalVisible(false);
-  };
-
   const handleEditModalOk = () => {
     updateProject(selectedProject._id, formData);
     setIsEditModalVisible(false);
@@ -46,8 +39,6 @@ function DashboardProjects({ projects, fetchProjects, createProject, deleteProje
   const handleDelete = (projectId) => {
     deleteProject(projectId);
   };
-
-  console.log(projects ,"projectsprojectsprojects");
 
   return (
     <Dashboard>

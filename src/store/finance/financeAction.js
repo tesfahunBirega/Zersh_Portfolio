@@ -157,9 +157,9 @@ export const createExpense = createAsyncThunk(
 
 export const updateExpense = createAsyncThunk(
   'expenses/update',
-  async ({ id, expenseData }, thunkAPI) => {
+  async (data , thunkAPI) => {
     try {
-      const response = await axios.patch(`${baseUrl}finance/expense/${id}`, expenseData);
+      const response = await axios.patch(`${baseUrl}finance/expense/${data.id}`,data.expenseData);
       message.success("Expense updated successfully");
       return response.data;
     } catch (error) {
