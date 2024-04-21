@@ -12,8 +12,8 @@ import DashboardBlogs from "./Pages/DashboardBlogs";
 import ProjectsDashboard from "./Pages/ProjectsDashboard";
 import Reports from "./Pages/Reports";
 import Settings from "./Pages/Settings";
-import EntrepreneurshipBusinessPlanMaker from "./Pages/Entreprnourship";
 import Finance from "./Pages/Finance";
+import Docs from "./Pages/Docs";
 
 const App = () => {
   return (
@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/dashboard/notes" element={<Note />} />
         <Route path="/dashboard/blogs" element={<DashboardBlogs />} />
         <Route path="/dashboard/projects" element={<ProjectsDashboard />} />
-        <Route path="/dashboard/entrepreneurship" element={<EntrepreneurshipBusinessPlanMaker />} />
+        <Route path="/dashboard/docs" element={<Docs />} />
         <Route path="/dashboard/finance" element={<Finance />} />
         <Route path="/dashboard/settings" element={<Settings />} />
       </Routes>

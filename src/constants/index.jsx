@@ -597,8 +597,8 @@ const sidebarRoutes = [
     icon: <AiFillInsurance />,
   },
   {
-    name: "Entreprenurship",
-    to: "entrepreneurship",
+    name: "Docs",
+    to: "docs",
     icon: <IoDocumentLockSharp />,
   },
   
