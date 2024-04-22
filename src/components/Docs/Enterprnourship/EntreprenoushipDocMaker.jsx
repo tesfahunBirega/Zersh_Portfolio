@@ -16,6 +16,7 @@ const EntrepreneurshipBusinessPlanMaker = () => {
     capitalItems: [],
     workingCapitalItems: [],
     salesPlan:[],
+    costPlan: [],
     businessProfile: {
       tradeName: '',
       businessOwnerName: '',
@@ -106,6 +107,45 @@ const calculateTotalByMonth = (type, monthIndex) => {
   return total;
 };
 
+const calculateTotalSpendingCostByMonth = (inputValues, monthIndex) => {
+  let totalCostByMonth = 0;
+  let sumOfCosts = 0;
+
+  // Iterate through each product
+  inputValues.forEach(product => {
+    // Reset sumOfCosts for each product
+    sumOfCosts = 0;
+
+    // Sum all costs for the specified month
+    Object.keys(product.values).forEach(key => {
+      if (key !== 'quantity' && product.values.quantity.data[monthIndex] >= 1) {
+        const expenditureData = product.values[key].data;
+        sumOfCosts += parseFloat(expenditureData[monthIndex]) || 0;
+      }
+    });
+
+    // Multiply the sum of costs by the quantity for the current product
+    const quantity = product.values.quantity.data[monthIndex] || 0;
+    totalCostByMonth += sumOfCosts * quantity;
+  });
+
+  return { totalCostByMonth, sumOfCosts };
+};
+
+
+const calculateTotalSpendingCostProdcutQuantityByMonth = (inputValues, monthIndex) => {
+  let totalQuantityByMonth = 0;
+
+  // Iterate through each product
+  inputValues.forEach(product => {
+    // Get the quantity for the specified month and add it to the total
+    totalQuantityByMonth += product.values.quantity.data[monthIndex] || 0;
+  });
+
+  return totalQuantityByMonth;
+};
+
+
 const handleWorkingCapitalChange = (name, value) => {
   const [parentKey, subKey, nestedKey] = name.split('.');
   
@@ -131,23 +171,6 @@ const handleWorkingCapitalChange = (name, value) => {
 
 const activeMonth = moment().month();
 
-// Function to handle adding a sales plan item
-// const handleAddSalesPlanItem = () => {
-//   const newItem = {
-//     key: Math.floor(Math.random() * 1000000),
-//     productName: '',
-//     price: 0,
-//     quantity: 0,
-//     income: Array(12).fill(0),
-//   };
-
-//   setInputValues(prevState => ({
-//     ...prevState,
-//     salesPlan: [...prevState.salesPlan, newItem],
-//   }));
-// };
-
-
 const handleAddSalesPlanItem = () => {
   const newItem = {
     key: Math.floor(Math.random() * 1000000),
@@ -171,7 +194,47 @@ const handleAddSalesPlanItem = () => {
   }));
 };
 
-// Function to handle input change for sales plan item
+
+const handleAddCostPlanItem= ()=>{
+  const newItem = {
+    key: Math.floor(Math.random() * 1000000),
+    productName: '',
+    values: {
+      price: {
+        type:"Single Price",
+        data: Array(12).fill(0)},
+      quantity: {
+        type:"Quantity",
+        data: Array(12).fill(0)},
+      material:{
+        type: 'Mateirals Cost',
+        data:Array(12).fill(0)
+      },
+      labour:{
+        type: 'Lebour Cost',
+        data:Array(12).fill(0)
+      },
+      operational:{
+        type: 'Operational Costs',
+        data:Array(12).fill(0)
+      },
+      others:{
+        type: 'Others',
+        data:Array(12).fill(0)
+      },
+      captitalExpenditure:{
+        type: "Capital Expenditure",
+        data:Array(12).fill(0)
+
+      }
+    }
+  };
+
+  setInputValues(prevState => ({
+    ...prevState,
+    costPlan: [...prevState.costPlan, newItem],
+  }));
+}
 const handleSalesPlanChange = (name, value, index) => {
   setInputValues(prevState => {
     const updatedSalesPlan = [...prevState.salesPlan];
@@ -180,6 +243,18 @@ const handleSalesPlanChange = (name, value, index) => {
     return {
       ...prevState,
       salesPlan: updatedSalesPlan,
+    };
+  });
+};
+
+
+const handleCostPlanChange=(name, value, index) => {
+  setInputValues(prevState => {
+    const updatedCostPlan = [...prevState.costPlan];
+    updatedCostPlan[index][name] = value;
+    return {
+      ...prevState,
+      costPlan: updatedCostPlan,
     };
   });
 };
@@ -244,6 +319,93 @@ const monthNames = [
     }
   });
 
+  const monthCostPlanColumns = Array.from({ length: 13 }).map((_, index) => {
+    if (index === 0) {
+      return {
+        title: 'Type',
+        dataIndex: 'type',
+        key: 'type',
+        render: (_, record) => {
+          return <div className='w-40'>
+      <Title style={{ color: 'black' }} level={5}>Single Price</Title>
+      <div className='h-2' />
+      <Divider />
+      <Title style={{ color: 'black' }} level={5}>Quantity</Title>
+      <div className='h-2' />
+      <Divider />
+      <Title style={{ color: 'black' }} level={5}>Lebour Cost</Title>
+      <div className='h-2' />
+      <Divider />
+      <Title style={{ color: 'black' }} level={5}>Material Cost</Title>
+      <div className='h-2' />
+      <Divider />
+      <Title style={{ color: 'black' }} level={5}>Capital Expenditure</Title>
+      <div className='h-2' />
+      <Divider />
+      <Title style={{ color: 'black' }} level={5}>Other Costs</Title>
+      </div>;
+        },
+      };
+    } else {
+      return {
+        title: monthNames[index],
+        dataIndex: `values.${index}`,
+        key: index,
+        render: (_, record  , rowIndex) => {
+          return (
+            <div>
+             
+              <Input
+                type="number"
+                value={record?.values[`price`]?.data[index - 1]}
+                onChange={(e) => handleCostPlanMonthChange(`values.price.data[${index - 1}]`, e.target.value, index , rowIndex)}
+                placeholder={`Price Month ${index}`}
+              />
+              
+              <Divider />
+              <Input
+                type="number"
+                value={record?.values[`quantity`]?.data[index - 1]}
+                onChange={(e) => handleCostPlanMonthChange(`values.quantity.data[${index - 1}]`, e.target.value, index , rowIndex)}
+                placeholder={`Quantity Month ${index}`}
+              />
+              <Divider />
+
+              <Input
+                type="number"
+                value={record?.values[`labour`]?.data[index - 1]}
+                onChange={(e) => handleCostPlanMonthChange(`values.labour.data[${index - 1}]`, e.target.value, index , rowIndex)}
+                placeholder={`Labour Month ${index}`}
+              />
+               <Divider />
+              <Input
+                type="number"
+                value={record?.values[`material`]?.data[index - 1]}
+                onChange={(e) => handleCostPlanMonthChange(`values.material.data[${index - 1}]`, e.target.value, index , rowIndex)}
+                placeholder={`Material Month ${index}`}
+              />
+           
+               <Divider />
+              <Input
+                type="number"
+                value={record?.values[`captitalExpenditure`]?.data[index - 1]}
+                onChange={(e) => handleCostPlanMonthChange(`values.captitalExpenditure.data[${index - 1}]`, e.target.value, index , rowIndex)}
+                placeholder={`Quantity Month ${index}`}
+              />
+              <Divider />
+              <Input
+                type="number"
+                value={record?.values[`others`]?.data[index - 1]}
+                onChange={(e) => handleCostPlanMonthChange(`values.others.data[${index - 1}]`, e.target.value, index , rowIndex)}
+                placeholder={`Quantity Month ${index}`}
+              />
+            </div>
+          );
+        },
+      };
+    }
+  });
+
   const handleSalesPlanMonthChange = (path, value, index, rowIndex) => {
     try {
       const pathArray = path.split('.');
@@ -279,6 +441,44 @@ const monthNames = [
 
     } catch (error) {
       console.error('Error in handleSalesPlanMonthChange:', error.message);
+    }
+  };
+
+  const handleCostPlanMonthChange= (path, value, index, rowIndex) => {
+    try {
+      const pathArray = path.split('.');
+      if (pathArray.length !== 3) {
+        throw new Error('Invalid path format');
+      }
+      const updatedCostPlan = [...inputValues.costPlan];
+      const match = /\[(\d+)\]/.exec(pathArray[2]);
+      if (!match) {
+        throw new Error('Invalid path format');
+      }
+      const dataIndex = parseInt(match[1]);
+      const parsedValue = parseFloat(value);
+      if (isNaN(parsedValue)) {
+        throw new Error('Invalid value');
+      }
+  
+      if (
+        updatedCostPlan[rowIndex] &&
+        updatedCostPlan[rowIndex][pathArray[0]] &&
+        updatedCostPlan[rowIndex][pathArray[0]][pathArray[1]] &&
+        updatedCostPlan[rowIndex][pathArray[0]][pathArray[1]].data &&
+        updatedCostPlan[rowIndex][pathArray[0]][pathArray[1]].data.length > dataIndex
+      ) {
+        updatedCostPlan[rowIndex][pathArray[0]][pathArray[1]].data[dataIndex] = parsedValue;
+      } else {
+        throw new Error('Invalid path or index');
+      }
+      setInputValues(prevState => ({
+        ...prevState,
+        costPlan: updatedCostPlan
+      }));
+
+    } catch (error) {
+      console.error('Error in handleCostPlanMonthChange:', error.message);
     }
   };
   
@@ -725,6 +925,144 @@ const monthNames = [
           </Button>
         )}
       />
+
+
+
+<Divider />
+      <Typography.Title level={3} style={{ color: 'white' }}>Cost Plan</Typography.Title>
+      <Typography.Title level={5} style={{ color: 'white' }}>Monthly spending plan</Typography.Title>
+     
+      <Table
+        dataSource={inputValues.costPlan}
+        columns={[
+          {
+            title: 'Product Name',
+            dataIndex: 'productName',
+            key: 'productName',
+            render: (_, record, index) => (
+              <Input.TextArea
+              className='w-32 h-full'
+                value={record.productName}
+                onChange={(e) => handleCostPlanChange('productName', e.target.value, index)}
+                placeholder="Enter Product Name"
+              />
+            ),
+          },
+          ...monthCostPlanColumns,
+        ]}
+        pagination={false}
+        bordered
+        summary={() => (
+          <>
+        <Table.Summary.Row>
+  <Table.Summary.Cell></Table.Summary.Cell>
+  <Table.Summary.Cell>Sum of Cost</Table.Summary.Cell>
+  {Array.from({ length: 12 }, (_, index) => (
+    <Table.Summary.Cell key={`price_${index}`}>{calculateTotalSpendingCostByMonth(inputValues.costPlan, index).sumOfCosts.toLocaleString()}</Table.Summary.Cell>
+  ))}
+</Table.Summary.Row>
+<Table.Summary.Row>
+  <Table.Summary.Cell>All Products:</Table.Summary.Cell>
+  <Table.Summary.Cell>Total Quantity:</Table.Summary.Cell>
+  {Array.from({ length: 12 }, (_, index) => (
+    <Table.Summary.Cell key={`quantity_${index}`}>
+      {calculateTotalSpendingCostProdcutQuantityByMonth(inputValues.costPlan, index).toLocaleString()}
+      </Table.Summary.Cell>
+  ))}
+</Table.Summary.Row>
+<Table.Summary.Row>
+  <Table.Summary.Cell></Table.Summary.Cell>
+  <Table.Summary.Cell>Overall Cost</Table.Summary.Cell>
+  {Array.from({ length: 12 }, (_, index) => (
+    <Table.Summary.Cell key={`income_${index}`}>{calculateTotalSpendingCostByMonth(inputValues.costPlan, index).totalCostByMonth.toLocaleString()}</Table.Summary.Cell>
+  ))}
+</Table.Summary.Row>
+          </>
+         
+        )}
+        footer={() => (
+          <Button 
+            onClick={handleAddCostPlanItem}
+            style={{
+              backgroundColor: '#1976d2',
+              color: 'white',
+              borderColor: '#2196f3',
+              transition: 'background-color 0.3s',
+            }}
+          >
+            Add Prodcut
+          </Button>
+        )}
+      />
+      <Divider />
+      <Typography.Title level={3} style={{ color: 'white' }}>Profit Plan</Typography.Title>
+      <Typography.Title level={5} style={{ color: 'white' }}>Net Monthly Profit Estimate</Typography.Title>
+     
+      <Table
+        dataSource={inputValues.costPlan}
+        columns={[
+          {
+            title: 'Product Name',
+            dataIndex: 'productName',
+            key: 'productName',
+            render: (_, record, index) => (
+              <Input.TextArea
+              className='w-32 h-full'
+                value={record.productName}
+                onChange={(e) => handleCostPlanChange('productName', e.target.value, index)}
+                placeholder="Enter Product Name"
+              />
+            ),
+          },
+          ...monthCostPlanColumns,
+        ]}
+        pagination={false}
+        bordered
+        summary={() => (
+          <>
+        <Table.Summary.Row>
+  <Table.Summary.Cell></Table.Summary.Cell>
+  <Table.Summary.Cell>Sum of Cost</Table.Summary.Cell>
+  {Array.from({ length: 12 }, (_, index) => (
+    <Table.Summary.Cell key={`price_${index}`}>{calculateTotalSpendingCostByMonth(inputValues.costPlan, index).sumOfCosts.toLocaleString()}</Table.Summary.Cell>
+  ))}
+</Table.Summary.Row>
+<Table.Summary.Row>
+  <Table.Summary.Cell>All Products:</Table.Summary.Cell>
+  <Table.Summary.Cell>Total Quantity:</Table.Summary.Cell>
+  {Array.from({ length: 12 }, (_, index) => (
+    <Table.Summary.Cell key={`quantity_${index}`}>
+      {calculateTotalSpendingCostProdcutQuantityByMonth(inputValues.costPlan, index).toLocaleString()}
+      </Table.Summary.Cell>
+  ))}
+</Table.Summary.Row>
+<Table.Summary.Row>
+  <Table.Summary.Cell></Table.Summary.Cell>
+  <Table.Summary.Cell>Overall Cost</Table.Summary.Cell>
+  {Array.from({ length: 12 }, (_, index) => (
+    <Table.Summary.Cell key={`income_${index}`}>{calculateTotalSpendingCostByMonth(inputValues.costPlan, index).totalCostByMonth.toLocaleString()}</Table.Summary.Cell>
+  ))}
+</Table.Summary.Row>
+          </>
+         
+        )}
+        footer={() => (
+          <Button 
+            onClick={handleAddCostPlanItem}
+            style={{
+              backgroundColor: '#1976d2',
+              color: 'white',
+              borderColor: '#2196f3',
+              transition: 'background-color 0.3s',
+            }}
+          >
+            Add Prodcut
+          </Button>
+        )}
+      />
+
+ 
+
       <CapitalForm />
       <WorkingCapitalForm />
     </div>
