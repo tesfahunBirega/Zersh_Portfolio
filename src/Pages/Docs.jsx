@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DynamicTabs from '../components/Commons/DynamicTabs'
 import EntrepreneurshipBusinessPlanMaker from '../components/Docs/Enterprnourship/EntreprenoushipDocMaker';
 import Dashboard from '../commons/Dashboard';
+import MindMap from '../components/Docs/mindMap/mindMap';
+import { ReactFlowProvider } from "reactflow";
+import "reactflow/dist/style.css";
 
 const Tab = ({ children }) => {
-  return <>{children}</>;
+  return <div className='w-full h-full'>{children}</div>;
 };
 function Docs() {  
+
+
   return (
   
     <Dashboard>
@@ -18,8 +23,11 @@ function Docs() {
       <Tab tabName="Strategy"> 
       Strategy
       </Tab>
-      <Tab tabName="Mind Map"> 
-      Mind Map
+      <Tab  tabName="Mind Map"> 
+      <ReactFlowProvider>
+      <MindMap />
+
+      </ReactFlowProvider>
       </Tab>
       <Tab tabName="Marketing"> 
       Marketing

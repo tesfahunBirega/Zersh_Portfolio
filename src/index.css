@@ -222,3 +222,17 @@
 .add-button:hover {
   background-color: #757575; /* Gray 600 color */
 }
+
+.mind-map {
+  height: 600px;
+  border: 1px solid #ccc;
+}
+
+.node {
+  width: 200px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
