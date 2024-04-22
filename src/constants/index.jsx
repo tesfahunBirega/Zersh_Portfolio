@@ -520,7 +520,12 @@ const projects = [
   },
 ];
 
-const baseUrl = "http://localhost:3000/api/v1/";
+// const baseUrl = "http://localhost:3000/api/v1/";
+ const baseUrl = "https://nahom-back.onrender.com/api/v1/";
+
+
+
+
 const imgBaseUrl = "http://localhost:3000";
 
 const carouselItemsBlogs = [
