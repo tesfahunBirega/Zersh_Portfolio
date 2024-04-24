@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, Table, Modal, Form, Input } from "antd";
 import Dashboard from "../commons/Dashboard";
+import { fetchNotes } from "../store/note/noteAction";
+import { fetchGoals } from "../store/okr/goalAction";
+import { connect } from "react-redux";
 
 const { Column } = Table;
 
-const Okr = () => {
+const Okr = ({fetchedgoals,
+  fetchNotes}) => {
   const [goals, setGoals] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
@@ -13,8 +17,11 @@ const Okr = () => {
     // Fetch goals data from backend API and set it to goals state
     // Example:
     // fetchGoalsData().then(data => setGoals(data));
+    fetchNotes()
   }, []); // Empty dependency array to run the effect only once on mount
 
+
+  console.log(fetchedgoals , "goalsssss");
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -44,6 +51,7 @@ const Okr = () => {
         </Button>
         <Modal
           title="Add Goal"
+          width={'40%'}
           open={isModalVisible}
           onOk={handleOk}
           onCancel={handleCancel}
@@ -61,7 +69,7 @@ const Okr = () => {
               label="Description"
               rules={[{ required: true, message: "Please enter description" }]}
             >
-              <Input.TextArea />
+              <Input.TextArea rows={4} />
             </Form.Item>
           </Form>
         </Modal>
@@ -72,7 +80,6 @@ const Okr = () => {
             dataIndex="description"
             key="description"
           />
-          {/* Add more columns for other fields */}
           <Column
             title="Action"
             key="action"
@@ -88,4 +95,22 @@ const Okr = () => {
   );
 };
 
-export default Okr;
+const mapStateToProps = (state) => {
+  return {
+    fetchedgoals: state.goal.goals,
+    goal: state.goal.goal,
+    loading: state.notes.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchNotes: () => dispatch(fetchGoals()),
+    createGoal: (data) => dispatch(createGoal(data)),
+    // updateNote: (data) => dispatch(updateNote(data)),
+    // deleteNote: (noteId) => dispatch(deleteNote(noteId)),
+    // fetchCatagory: () => dispatch(fetchCatagories()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Okr);

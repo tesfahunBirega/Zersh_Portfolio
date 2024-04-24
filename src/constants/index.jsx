@@ -520,9 +520,7 @@ const projects = [
   },
 ];
 
-// const baseUrl = "http://localhost:3000/api/v1/";
- const baseUrl = "https://nahom-back.onrender.com/api/v1/";
-
+const baseUrl = import.meta.env.ENV =="Development" ? import.meta.env.BASE_URL_DEV : import.meta.env.BASE_URL_PROD
 
 
 
@@ -577,40 +575,45 @@ const sidebarRoutes = [
     icon: <FileDoneOutlined />,
   },
   {
-    name: "Okr",
-    to: "okr",
-    icon: <FundProjectionScreenOutlined />,
+    name: "Goal",
+    to: "goal",
+    icon: ()=><FundProjectionScreenOutlined />,
+  },
+  {
+    name: "Task",
+    to: "task",
+    icon: ()=><FundProjectionScreenOutlined />,
   },
   {
     name: "Notes",
     to: "notes",
-    icon: <FileTextOutlined />,
+    icon: ()=> <FileTextOutlined />,
   },
   {
     name: "Blogs",
     to: "blogs",
-    icon: <ReadOutlined />,
+    icon: ()=> <ReadOutlined />,
   },
   {
     name: "Projects",
     to: "projects",
-    icon: <ProjectOutlined />,
+    icon: ()=> <ProjectOutlined />,
   },
   {
     name: "Finance",
     to: "finance",
-    icon: <AiFillInsurance />,
+    icon:()=>  <AiFillInsurance />,
   },
   {
     name: "Docs",
     to: "docs",
-    icon: <IoDocumentLockSharp />,
+    icon:()=>  <IoDocumentLockSharp />,
   },
   
   {
     name: "Settings",
     to: "settings",
-    icon: <SettingOutlined />,
+    icon: ()=>  <SettingOutlined />,
   },
   
 

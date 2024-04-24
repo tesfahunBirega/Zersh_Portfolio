@@ -78,7 +78,6 @@ const CreateBlogModal = ({
         <div className="">
           <label htmlFor="body">Body</label>
           <Form.Item name="body" rules={[{ required: true }]}>
-            {/* <Input.TextArea rows={4} /> */}
             <ReactQuill
               value={content}
               onChange={setContent}

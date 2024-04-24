@@ -5,6 +5,7 @@ import Dashboard from '../commons/Dashboard';
 import MindMap from '../components/Docs/mindMap/mindMap';
 import { ReactFlowProvider } from "reactflow";
 import "reactflow/dist/style.css";
+import ConversationPlans from '../components/Docs/ConversationPlan/ConversationPlan';
 
 const Tab = ({ children }) => {
   return <div className='w-full h-full'>{children}</div>;
@@ -20,13 +21,15 @@ function Docs() {
       <Tab tabName="Busisness Plan Doc"> 
       <EntrepreneurshipBusinessPlanMaker />
       </Tab>
+      <Tab tabName="ConversationPlan"> 
+      <ConversationPlans />
+      </Tab>
       <Tab tabName="Strategy"> 
       Strategy
       </Tab>
       <Tab  tabName="Mind Map"> 
       <ReactFlowProvider>
       <MindMap />
-
       </ReactFlowProvider>
       </Tab>
       <Tab tabName="Marketing"> 

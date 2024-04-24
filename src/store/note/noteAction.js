@@ -49,19 +49,9 @@ export const fetchNotes = createAsyncThunk(
 export const createNote = createAsyncThunk(
     'notes/create',
   async (noteData, thunkAPI) => {
+    console.log(noteData ,"noteData");
     try {
-      const response = await axios.post(`${baseUrl}notes`, noteData , {
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "*/*"
-        },
-      });
-    
-      if (response.
-        statusText
-         !='OK') {
-        throw new Error('Failed to create note');
-      }
+      const response = await axios.post(`${baseUrl}notes`, noteData);
      
       message.success("Note created successfully");
       return  response.data;

@@ -142,6 +142,8 @@ export default function Flow() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
+
+  console.log(nodes , 'nodes');
   const [target, setTarget] = useState(null);
   const [clickedNodeId, setClickedNodeId] = useState(null);
   const [nodeName, setNodeName] = useState("Node - 1");
