@@ -6,6 +6,7 @@ import { projectSlice } from "./project/projectSlice";
 import { CatagorySlice } from "./catagory/catagorySlice";
 import { FinancesSlice } from "./finance/financeSlice";
 import { ConversationSlice } from "./conversation/conversationSlice";
+import { businessPlanSlice } from "./bussinessPlan/bussinessPlanSlince";
 const rootReducer = combineReducers({
   blog:blogSlice.reducer,
   blogs:blogsSlice.reducer,
@@ -14,7 +15,9 @@ const rootReducer = combineReducers({
   project:projectSlice.reducer,
   catagories:CatagorySlice.reducer,
   finances:FinancesSlice.reducer,
-  conversations:ConversationSlice.reducer
+  conversations:ConversationSlice.reducer,
+  bussinessPlan:businessPlanSlice.reducer
+
 });
 
 export default rootReducer;

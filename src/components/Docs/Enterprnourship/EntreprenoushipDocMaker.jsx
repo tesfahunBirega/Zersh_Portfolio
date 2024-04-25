@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Input, Modal, Table, Typography, Divider, Col, Row } from 'antd';
 import CustomInput from '../../Commons/CustomInputs';
 
 import { DeleteOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import AddBussinessPlan from './AddBussinessPlan';
+import BusinessProposal from './bussienssPlanRender';
+import { connect } from 'react-redux';
+import { createBusinessPlan, deleteBusinessPlan, fetchBusinessPlans, updateBusinessPlan } from '../../../store/bussinessPlan/bussinessPlanAction';
 
-const EntrepreneurshipBusinessPlanMaker = () => {
+const EntrepreneurshipBusinessPlanMaker = ({
+  bussinessPlan,
+fetchBusinessPlans,
+createBusinessPlan,
+updateBusinessPlan,
+deleteBusinessPlan,
+}) => {
   const [inputValues, setInputValues] = useState({
     generalTitle: '',
     generalDescription: '',
@@ -31,6 +40,10 @@ const EntrepreneurshipBusinessPlanMaker = () => {
 
   console.log(inputValues ,"inputValues");
   
+  useEffect(()=>{
+    fetchBusinessPlans()
+  },[])
+  console.log(bussinessPlan,"bussinessPlan");
   const handleChange = (name, value) => {
     if (name.includes('.')) {
         const [parentKey, subKey] = name.split('.');
@@ -529,6 +542,10 @@ const monthNames = [
       };
     });
   };
+
+  const handleCreate =()=>{
+    createBusinessPlan(inputValues)
+  }
   // Capital input form component
   const CapitalForm = ({ visible, onCancel, onCreate }) => {
     const [name, setName] = useState('');
@@ -624,6 +641,9 @@ const monthNames = [
         Add Business Plan
       </Button>
     </div>
+    {bussinessPlan?.map((proposal, index) =>(
+      <BusinessProposal key={index} proposal={proposal} />
+    ))}
     <AddBussinessPlan
      calculateTotalByMonth={calculateTotalByMonth}
      calculateTotalSpendingCostByMonth={calculateTotalSpendingCostByMonth}
@@ -638,7 +658,7 @@ const monthNames = [
      handleCapitalItemsChange={handleCapitalItemsChange}
      handleChange={handleChange}
      handleCostPlanChange={handleCostPlanChange}
-     handleOk={()=>{}}
+     handleOk={handleCreate}
      handleSalesPlanChange={handleSalesPlanChange}
      handleWorkingCapitalChange={handleWorkingCapitalChange}
      inputValues={inputValues}
@@ -651,4 +671,21 @@ const monthNames = [
   );
 };
 
-export default EntrepreneurshipBusinessPlanMaker;
+
+const mapStateToProps = (state) => {
+  return {
+    bussinessPlan: state.bussinessPlan.businessPlans,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchBusinessPlans: () => dispatch(fetchBusinessPlans()),
+    createBusinessPlan: (data) => dispatch(createBusinessPlan(data)),
+    updateBusinessPlan: (data) => dispatch(updateBusinessPlan(data)),
+    deleteBusinessPlan: (goalId) => dispatch(deleteBusinessPlan(goalId)),
+
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EntrepreneurshipBusinessPlanMaker);
