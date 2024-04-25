@@ -520,8 +520,7 @@ const projects = [
   },
 ];
 
-const baseUrl = import.meta.env.ENV =="Development" ? import.meta.env.BASE_URL_DEV : import.meta.env.BASE_URL_PROD
-
+const baseUrl = import.meta.env.ENV =="development" ? import.meta.env.BASE_URL_DEV : import.meta.env.BASE_URL_PROD
 
 
 const imgBaseUrl = "http://localhost:3000";
