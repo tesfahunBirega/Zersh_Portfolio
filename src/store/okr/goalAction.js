@@ -49,7 +49,7 @@ export const createGoal = createAsyncThunk(
     'goal/create',
     async (goalData, thunkAPI) => {
       try {
-        const response = await axios.post(`${baseUrl}/goal`, goalData);
+        const response = await axios.post(`${baseUrl}goal`, goalData);
         message.success("Goal created successfully");
         return response.data;
       } catch (error) {
@@ -63,7 +63,7 @@ export const createGoal = createAsyncThunk(
     'goal/update',
     async ({ id, values }, thunkAPI) => {
       try {
-        const response = await axios.patch(`${baseUrl}/goal/${id}`, values);
+        const response = await axios.patch(`${baseUrl}goal/${id}`, values);
         message.success("Goal updated successfully");
         return response.data;
       } catch (error) {
@@ -77,7 +77,7 @@ export const createGoal = createAsyncThunk(
     'goal/delete',
     async (goalId, thunkAPI) => {
       try {
-        const response = await axios.delete(`${baseUrl}/goal/${goalId}`);
+        const response = await axios.delete(`${baseUrl}goal/${goalId}`);
         message.success("Goal deleted successfully");
         return goalId; // Return the deleted goal ID
       } catch (error) {
