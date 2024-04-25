@@ -577,43 +577,43 @@ const sidebarRoutes = [
   {
     name: "Goal",
     to: "goal",
-    icon: ()=><FundProjectionScreenOutlined />,
+    icon: <FundProjectionScreenOutlined />,
   },
   {
     name: "Task",
     to: "task",
-    icon: ()=><FundProjectionScreenOutlined />,
+    icon: <FundProjectionScreenOutlined />,
   },
   {
     name: "Notes",
     to: "notes",
-    icon: ()=> <FileTextOutlined />,
+    icon:  <FileTextOutlined />,
   },
   {
     name: "Blogs",
     to: "blogs",
-    icon: ()=> <ReadOutlined />,
+    icon:  <ReadOutlined />,
   },
   {
     name: "Projects",
     to: "projects",
-    icon: ()=> <ProjectOutlined />,
+    icon: <ProjectOutlined />,
   },
   {
     name: "Finance",
     to: "finance",
-    icon:()=>  <AiFillInsurance />,
+    icon: <AiFillInsurance />,
   },
   {
     name: "Docs",
     to: "docs",
-    icon:()=>  <IoDocumentLockSharp />,
+    icon: <IoDocumentLockSharp />,
   },
   
   {
     name: "Settings",
     to: "settings",
-    icon: ()=>  <SettingOutlined />,
+    icon:  <SettingOutlined />,
   },
   
 
