@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { Button, Table, Modal, Form, Input } from "antd";
+import { Button, Card, Popconfirm, Popover } from "antd";
 import Dashboard from "../commons/Dashboard";
-import { fetchNotes } from "../store/note/noteAction";
-import { fetchGoals } from "../store/okr/goalAction";
 import { connect } from "react-redux";
+import GoalForm from "../components/Goal/GoalForm";
+import { createGoal, deleteGoal, fetchGoals, updateGoal } from "../store/okr/goalAction";
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import CustomButton from "../components/Commons/CustomButton";
 
-const { Column } = Table;
-
-const Okr = ({fetchedgoals,
-  fetchNotes}) => {
-  const [goals, setGoals] = useState([]);
+const Okr = ({ fetchedGoals, fetchGoals, createGoal, updateGoal , deleteGoal }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [form] = Form.useForm();
+  const [selectedGoal, setSelectedGoal] = useState(null);
+
+  console.log(fetchedGoals );
 
   useEffect(() => {
-    // Fetch goals data from backend API and set it to goals state
-    // Example:
-    // fetchGoalsData().then(data => setGoals(data));
-    fetchNotes()
-  }, []); // Empty dependency array to run the effect only once on mount
+    fetchGoals();
+  }, []);
 
-
-  console.log(fetchedgoals , "goalsssss");
   const showModal = () => {
+    setSelectedGoal(null);
+    setIsModalVisible(true);
+  };
+
+  const showEditModal = (goal) => {
+    setSelectedGoal(goal);
     setIsModalVisible(true);
   };
 
@@ -30,66 +31,70 @@ const Okr = ({fetchedgoals,
     setIsModalVisible(false);
   };
 
-  const handleOk = () => {
-    form.validateFields().then((values) => {
-      // Submit form data to backend API to create new goal
-      // Example:
-      // createGoal(values).then(newGoal => {
-      //   setGoals([...goals, newGoal]);
-      // });
-      form.resetFields();
-      setIsModalVisible(false);
-    });
+  const handleCreateGoal = (values) => {
+    createGoal(values);
+    setIsModalVisible(false);
   };
+
+  const handleUpdateGoal = (id, values) => {
+    updateGoal({id, values});
+    setIsModalVisible(false);
+  };
+
+  
 
   return (
     <Dashboard>
       <div className="container mx-auto mt-8">
         <h1 className="text-3xl font-bold mb-4">Goals Management</h1>
-        <Button type="primary" onClick={showModal} className=" mb-4">
+        <Button type="primary" onClick={showModal} className="mb-4">
           Add Goal
         </Button>
-        <Modal
-          title="Add Goal"
-          width={'40%'}
-          open={isModalVisible}
-          onOk={handleOk}
+        <GoalForm
+          visible={isModalVisible}
+          initialValues={selectedGoal}
+          onCreate={handleCreateGoal}
+          onUpdate={handleUpdateGoal}
           onCancel={handleCancel}
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {fetchedGoals?.map((goal) => (
+          <Card
+          key={goal._id}
+          title={goal.title}
+          actions={[
+         
+            <CustomButton 
+            style={{ color: '#001529'  }}
+            type="text"
+            danger
+            tailWindClassName={""}
+            icon={<EditOutlined />}
+            onClick={() => showEditModal(goal)}
+           />,
+            <Popconfirm
+            title="Are you sure you want to delete?"
+            onConfirm={() => deleteGoal(goal._id)}
+            okText="Yes"
+            cancelText="No"
+            placement="topRight"
+            okButtonProps={{ style: { background: 'red', borderColor: 'red' } }}
+          >
+            <CustomButton 
+             style={{ color: 'red'  }}
+             type="danger"
+             danger
+             tailWindClassName={""}
+             icon={<DeleteOutlined />}
+            />
+          </Popconfirm>
+          ]}
+          style={{ width: 500 }}
         >
-          <Form form={form} layout="vertical">
-            <Form.Item
-              name="name"
-              label="Goal Name"
-              rules={[{ required: true, message: "Please enter goal name" }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="description"
-              label="Description"
-              rules={[{ required: true, message: "Please enter description" }]}
-            >
-              <Input.TextArea rows={4} />
-            </Form.Item>
-          </Form>
-        </Modal>
-        <Table dataSource={goals} rowKey="_id">
-          <Column title="Name" dataIndex="name" key="name" />
-          <Column
-            title="Description"
-            dataIndex="description"
-            key="description"
-          />
-          <Column
-            title="Action"
-            key="action"
-            render={(text, record) => (
-              <Button type="danger" onClick={() => handleDelete(record._id)}>
-                Delete
-              </Button>
-            )}
-          />
-        </Table>
+          <p className="max-w-full break-words">{goal.description}</p>
+        </Card>
+          ))}
+        </div>
       </div>
     </Dashboard>
   );
@@ -97,19 +102,17 @@ const Okr = ({fetchedgoals,
 
 const mapStateToProps = (state) => {
   return {
-    fetchedgoals: state.goal.goals,
-    goal: state.goal.goal,
-    loading: state.notes.loading,
+    fetchedGoals: state.goal.goals,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchNotes: () => dispatch(fetchGoals()),
+    fetchGoals: () => dispatch(fetchGoals()),
     createGoal: (data) => dispatch(createGoal(data)),
-    // updateNote: (data) => dispatch(updateNote(data)),
-    // deleteNote: (noteId) => dispatch(deleteNote(noteId)),
-    // fetchCatagory: () => dispatch(fetchCatagories()),
+    updateGoal: (data) => dispatch(updateGoal(data)),
+    deleteGoal: (goalId) => dispatch(deleteGoal(goalId)),
+
   };
 };
 

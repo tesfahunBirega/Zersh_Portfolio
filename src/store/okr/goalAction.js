@@ -22,64 +22,66 @@ export const fetchGoal = createAsyncThunk(
 )
 
 export const fetchGoals = createAsyncThunk(
-    'goals',
-    async(thinkApi)=>{
-
-        const abortController = new AbortController()
-
-        const response = await fetch(`${baseUrl}goal` 
-        ,
-         {
-            signal:abortController.signal
-        }
-        )
-        if(response.status !== 200){
-            abortController.abort()
-            return thinkApi.rejectWithValue("Failed to fetch goal data.")
-        }
-
-        return await response.json()
-    }
-)
-
-
-export const createConversation = createAsyncThunk(
-    'conversations/create',
-    async (conversationData, thunkAPI) => {
+    'goals/fetch',
+    async (_, thunkAPI) => {
+      const abortController = new AbortController();
+  
       try {
-        const response = await axios.post(`${baseUrl}/conversations`, conversationData);
-        message.success("Conversation created successfully");
+        const response = await fetch(`${baseUrl}goal`, {
+          signal: abortController.signal
+        });
+  
+        if (response.status !== 200) {
+          abortController.abort();
+          return thunkAPI.rejectWithValue("Failed to fetch goal data.");
+        }
+  
+        return await response.json();
+      } catch (error) {
+        console.error('Error fetching goals:', error);
+        return thunkAPI.rejectWithValue("Failed to fetch goal data.");
+      }
+    }
+  );
+
+
+export const createGoal = createAsyncThunk(
+    'goal/create',
+    async (goalData, thunkAPI) => {
+      try {
+        const response = await axios.post(`${baseUrl}/goal`, goalData);
+        message.success("Goal created successfully");
         return response.data;
       } catch (error) {
-        message.error(`Conversation creation failed! ${error.message}`);
+        message.error(`Goal creation failed! ${error.message}`);
         return thunkAPI.rejectWithValue(error.message);
       }
     }
   );
   
-  export const updateConversation = createAsyncThunk(
-    'conversations/update',
-    async ({ id, conversationData }, thunkAPI) => {
+  export const updateGoal = createAsyncThunk(
+    'goal/update',
+    async ({ id, values }, thunkAPI) => {
       try {
-        const response = await axios.patch(`${baseUrl}/conversations/${id}`, conversationData);
-        message.success("Conversation updated successfully");
+        const response = await axios.patch(`${baseUrl}/goal/${id}`, values);
+        message.success("Goal updated successfully");
         return response.data;
       } catch (error) {
-        message.error(`Conversation update failed! ${error.message}`);
+        message.error(`Goal update failed! ${error.message}`);
         return thunkAPI.rejectWithValue(error.message);
       }
     }
   );
   
-  export const deleteConversation = createAsyncThunk(
-    'conversations/delete',
-    async (id, thunkAPI) => {
+  export const deleteGoal = createAsyncThunk(
+    'goal/delete',
+    async (goalId, thunkAPI) => {
       try {
-        const response = await axios.delete(`${baseUrl}/conversations/${id}`);
-        message.success("Conversation deleted successfully");
-        return response.data;
+        const response = await axios.delete(`${baseUrl}/goal/${goalId}`);
+        message.success("Goal deleted successfully");
+        return goalId; // Return the deleted goal ID
       } catch (error) {
-        message.error(`Conversation deletion failed! ${error.message}`);
+        message.error(`Goal deletion failed! ${error.message}`);
         return thunkAPI.rejectWithValue(error.message);
       }
     }

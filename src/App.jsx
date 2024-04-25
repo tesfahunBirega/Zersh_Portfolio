@@ -17,11 +17,6 @@ import Docs from "./Pages/Docs";
 import TaskManager from "./Pages/TaskPage";
 
 const App = () => {
-  const appEnv = import.meta.env;
-
-// Access the ENV variable
-const environment = appEnv.ENV;
-  console.log(environment,"import.meta.env.ENV");
   return (
     <BrowserRouter>
       <Routes>
