@@ -46,7 +46,7 @@ function DashboardBlogs({
 
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const currentBlogs = blogs.length > 0 && blogs.slice(startIndex, endIndex);
+  const currentBlogs = blogs?.length > 0 && blogs?.slice(startIndex, endIndex);
   useEffect(() => {
     fetchBlogs();
   }, []);
@@ -82,7 +82,7 @@ function DashboardBlogs({
             </Button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {currentBlogs.length >= 1 ? (
+            {currentBlogs?.length >= 1 ? (
               currentBlogs?.map((blog, index) => (
                 <React.Fragment key={index}>
                   <div className="grid items-center ">
@@ -100,7 +100,7 @@ function DashboardBlogs({
 
                       <Popconfirm
                         title="Are you sure you want to delete this blog?"
-                        onConfirm={() => handleDelete(blog._id)}
+                        onConfirm={() => handleDelete(blog?._id)}
                         okText="Yes"
                         cancelText="No"
                       >
