@@ -22,6 +22,7 @@ function DashboardBlogs({
   blogs,
   fetchBlogs,
   createBlog,
+  updateBlog,
   deleteBlog,
   loading,
 }) {
@@ -55,10 +56,10 @@ function DashboardBlogs({
     setIsCreateModalVisible(false);
   };
 
-  const handleEditModalOk = () => {
-    updateBlog(selectedBlog.id, updatedBlogData);
-    setIsEditModalVisible(false);
-  };
+  // const handleEditModalOk = (updatedBlogData) => {
+  //   // updateBlog(selectedBlog.id, updatedBlogData);
+  //   setIsEditModalVisible(false);
+  // };
 
   const handleDelete = (blogId) => {
     deleteBlog(blogId);
@@ -133,12 +134,14 @@ function DashboardBlogs({
         visible={isCreateModalVisible}
       />
 
-      <UpdateBlogModal
+  
+       <UpdateBlogModal
         blog={selectedBlog}
         visible={isEditModalVisible}
+        onUpdate={updateBlog}
         onCancel={() => setIsEditModalVisible(false)}
-        onUpdate={handleEditModalOk}
         loading={loading}
+        setVisible={setIsEditModalVisible}
       />
     </Dashboard>
   );
@@ -155,7 +158,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchBlogs: () => dispatch(fetchBlogs()),
     createBlog: (blogData) => dispatch(createBlog(blogData)),
-    updateBlog: (blogId, blogData) => dispatch(updateBlog(blogId, blogData)),
+    updateBlog: (data) => dispatch(updateBlog(data)),
     deleteBlog: (blogId) => dispatch(deleteBlog(blogId)),
   };
 };
