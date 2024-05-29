@@ -49,7 +49,7 @@ const UpdateBlogModal = ({
     }
   }, [blog, form, imgBaseUrl]);
 
-  // console.log(blog.imageUrl, imageFile,"imageFile");
+  console.log(blog?.imageUrl, imageFile,"imageFile");
 
   const handleSubmit = async () => {
     try {
