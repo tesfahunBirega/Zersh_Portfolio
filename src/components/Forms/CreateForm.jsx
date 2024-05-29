@@ -121,13 +121,6 @@ const CreateBlogModal = ({
         <div className="">
           <label htmlFor="category">Image</label>
           <Form.Item name="image" rules={[{ required: true }]}>
-            {/* <Upload
-              customRequest={() => {}}
-              showUploadList={false}
-              onChange={handleImageChange}
-            >
-              <Button icon={<UploadOutlined />}>Select Image</Button>
-            </Upload> */}
             <input
               type="file"
               accept="image/*"
