@@ -5,7 +5,7 @@ import useTimerStore from '../../../store/zustand/timerStore';
 
 const { Option } = Select;
 
-const TaskAddModal = ({ modalVisible, setModalVisible }) => {
+const TaskAddModal = ({ modalVisible, setModalVisible , type ,day}) => {
   const [newTaskName, setNewTaskName] = useState('');
   const [newTaskBatches, setNewTaskBatches] = useState(1);
 
@@ -21,7 +21,9 @@ const TaskAddModal = ({ modalVisible, setModalVisible }) => {
         timerId: null,
         productiveTime: 0,
         wastedTime: 0,
-        duration: newTaskBatches * (30 * 60), // Each batch is 30 minutes
+        duration: newTaskBatches * (30 * 60),
+        type:type,
+        day:day
       });
       setModalVisible(false);
       setNewTaskName('');
