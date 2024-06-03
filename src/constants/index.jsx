@@ -521,8 +521,8 @@ const projects = [
 ];
 
 // const baseUrl = import.meta.env.ENV =="development" ? import.meta.env.BASE_URL_DEV : import.meta.env.BASE_URL_PROD
-const baseUrl = "https://nahom-back.onrender.com/api/v1/"
-// const baseUrl = "http://localhost:3000/api/v1/"
+// const baseUrl = "https://nahom-back.onrender.com/api/v1/"
+const baseUrl = "http://localhost:3000/api/v1/"
 
 const imgBaseUrl = "https://nahom-back.onrender.com";
 
