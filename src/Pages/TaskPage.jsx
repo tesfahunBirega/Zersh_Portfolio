@@ -57,7 +57,6 @@ const TaskManager = () => {
             const minutes = Math.floor((timer.remaining % 3600) / 60);
             const seconds = timer.remaining % 60;
 
-            console.log(hours , minutes , seconds ,'secssss');
             return (
               <List.Item
                 key={task.id}
@@ -88,7 +87,7 @@ const TaskManager = () => {
                 }
               >
                 <List.Item.Meta
-                  title={<span>{task.name}</span>}
+                  title={<span className='text-white font-bold text-sm'>{task.name}</span>}
                   description={
                     <div className="flex justify-start items-center gap-4">
                       <Card title="Number Batches" size="small">
