@@ -24,7 +24,9 @@ const TaskManager = () => {
   const startTimer = useTimerStore((state) => state.startTimer);
   const stopTimer = useTimerStore((state) => state.stopTimer);
   const pauseTimer = useTimerStore((state) => state.pauseTimer);
+  const resumeTimer= useTimerStore((state) => state.resumeTimer)
   const fetchTasks = useTimerStore((state) => state.fetchTasks);
+  const complateTask = useTimerStore((state) => state.completeTask)
   const productiveTime = useTimerStore((state) => state.productiveTime);
   const wastedTime = useTimerStore((state) => state.wastedTime);
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,6 +46,9 @@ const TaskManager = () => {
         <List
           itemLayout="vertical"
           size="large"
+          style={{
+            width: "100%"
+          }}
           dataSource={taskList}
           renderItem={(task) => {
             const timer = timers[task._id] || { remaining: task.duration * 60, isRunning: false };
@@ -52,38 +57,33 @@ const TaskManager = () => {
             const minutes = Math.floor((timer.remaining % 3600) / 60);
             const seconds = timer.remaining % 60;
 
+            console.log(hours , minutes , seconds ,'secssss');
             return (
               <List.Item
                 key={task.id}
                 extra={
                   <div className="grid justify-center items-center gap-4">
-                    <DisplayTime duration={task.duration} />
-                    {console.log(task,"status")}
-                    {task.status !== 'completed' ? (
-                    <TimeButton
-                      status={
-                        task.status === 'active' ? 0 :
-                        task.status === 'paused' ? 1 :
-                        task.status === 'reset' ? 2 :
-                        task.status === 'resume' ? 3 :
-                        task.status === 'created' ? 4 :
-                        null
-                      }
-                      hours={hours}
-                      minutes={minutes}
-                      seconds={seconds}
-                      isRunning={timer.isRunning}
-                      resume={() => startTimer(task._id, timer.remaining)}
-                      reset={() => stopTimer(task._id)}
-                      pause={() => pauseTimer(task._id)}
-                      start={() => handleStartButtonClick(task._id, task.duration)}
-                      complete={() => handleCompleteButtonClick(task._id)}
-                    />
-                  ) : (
-                    <Button type="primary" disabled>
-                      Completed
-                    </Button>
-                  )}
+                    <DisplayTime duration={task.duration} />                    
+                  {task.status == "complete" ? <div className='text-white font-bold flex justify-center items-center'>Task Complated</div>: <TimeButton
+                   status={
+                     task.status === 'active' ? 0 :
+                     task.status === 'paused' ? 1 :
+                     task.status === 'reset' ? 2 :
+                     task.status === 'resume' ? 3 :
+                     task.status === 'created' ? 4 :
+                     task.status === 'complete' ? 5 :
+                     null
+                   }
+                   hours={hours}
+                   minutes={minutes}
+                   seconds={seconds}
+                   isRunning={timer.isRunning}
+                   resume={() => resumeTimer(task._id)}
+                   reset={() => stopTimer(task._id)}
+                   pause={() => pauseTimer(task._id)}
+                   start={() => handleStartButtonClick(task._id, task.duration)}
+                   complete={() => complateTask(task._id)}
+                 /> }
                   </div>
                 }
               >
@@ -139,7 +139,7 @@ const TaskManager = () => {
           </div>
 
           <div className="flex" style={{ width: '100%' }}>
-            <div className="m-4" style={{ width: 'calc(100% - 300px)' }}>
+            <div className="m-4" style={{ width: 'calc(100% - 50px)' }}>
               <Button type="primary" onClick={() => setModalVisible(true)}>
                 Add Task
               </Button>
