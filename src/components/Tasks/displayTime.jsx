@@ -11,9 +11,9 @@ const DisplayTime = ({ duration }) => {
 
   return (
     <div className="clock">
-      <span>{formatTime(hours)}:</span>
-      <span>{formatTime(minutes)}:</span>
-      <span>{formatTime(seconds)}</span>
+     {hours && <span>{formatTime(hours)}:</span>} 
+     {minutes &&  <span>{formatTime(minutes)}:</span> }
+      {seconds &&  <span>{formatTime(seconds)}</span>}
     </div>
   );
 };
