@@ -1,74 +1,145 @@
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { StarsCanvas } from "./canvas";
 import Navbar from "./Navbar";
-import { useParams } from "react-router-dom";
+import { fetchProject } from "../store/project/projectAction";
+import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 
-const ProjectDetail = ({ title, description, uiDesigns, userJourneyMaps }) => {
+const ProjectDetail = ({ title, description, imageUrl, videoUrl, topics, projectLink, gitHubLink, descImageUrl1, descImageUrl2  ,description1,
+  description2}) => {
   return (
-    <div className="flex flex-col md:flex-row md:grid md:grid-cols-2 md:justify-evenly gap-4 md:gap-8 mt-0 h-screen">
-      <div className="md:col-span-2">
-        <h2 className="text-3xl font-bold">Project Name : {title}</h2>
-        <p className="text-gray-600 mt-4">{description}</p>
-      </div>
-      <div className="md:col-span-1">
-        <h3 className="text-2xl font-bold mt-4">UI Designs</h3>
-        {uiDesigns.map((design, index) => (
-          <div key={index} className="mt-4">
-            <img
-              src={design.imageSrc}
-              alt={`UI Design ${index + 1}`}
-              className="w-full"
-            />
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 50 }}
+      transition={{ duration: 0.5 }}
+      className="container mx-auto p-4 sm:p-6"
+    >
+      <div className="bg-transparent shadow-white-100 shadow-md rounded-lg overflow-hidden">
+        <div className="p-4 md:p-8">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">{title}</h2>
+
+          {imageUrl && (
+            <div className="mb-6">
+              <motion.img
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                src={imageUrl}
+                alt={title}
+                className="w-full h-auto rounded-md shadow-md"
+              />
+            </div>
+          )}
+
+          {videoUrl && (
+            <div className="mb-6">
+              <motion.video
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                controls
+                className="w-full h-auto rounded-md shadow-md"
+              >
+                <source src={videoUrl} type="video/mp4" />
+              </motion.video>
+            </div>
+          )}
+
+          <div className="mb-6">
+            <h3 className="text-xl md:text-2xl font-bold mb-2">Topics</h3>
+            <ul className="list-disc list-inside">
+              {topics?.map((topic) => (
+                <li key={topic._id} className={`text-${topic.color}`}>
+                  {topic.name}
+                </li>
+              ))}
+            </ul>
           </div>
-        ))}
-      </div>
-      <div className="md:col-span-1">
-        <h3 className="text-2xl font-bold mt-4">User Journey Maps</h3>
-        {userJourneyMaps.map((journey, index) => (
-          <div key={index} className="mt-4">
-            <img
-              src={journey.imageSrc}
-              alt={`User Journey Map ${index + 1}`}
-              className="w-full"
-            />
+          <div className="mb-6">{description}</div>
+          <div className="grid gap-4 space-y-8">
+            <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
+              <div className="description mb-2 md:mb-0 md:mr-4">
+                <p>{description1}</p>
+              </div>
+              <div className="image">
+                <img src={descImageUrl1} alt="Description Image 1" className="max-w-full h-auto rounded-lg" />
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
+              <div className="image mb-2 md:mb-0 md:mr-4">
+                <img src={descImageUrl2} alt="Description Image 2" className="w-full h-auto rounded-lg" />
+              </div>
+              <div className="description">
+                <p>{description2}</p>
+              </div>
+            </div>
           </div>
-        ))}
+
+          <div className="mb-6 mt-8 space-y-4">
+            <a
+              href={projectLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline text-xl flex items-center"
+            >
+              <FaExternalLinkAlt className="mr-2" />
+              Project Link
+            </a>
+            <a
+              href={gitHubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline text-xl flex items-center"
+            >
+              <FaGithub className="mr-2" />
+              GitHub Link
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
-const ProjectDetailPage = () => {
-  const projectName = useParams();
-  console.log(projectName.id);
-  const projectTitle = projectName.id;
+const ProjectDetailPage = ({ project, loading, fetchProject }) => {
+  const { id } = useParams();
 
-  const projectDescription = "Detailed project description goes here.";
-  const uiDesigns = [
-    { link: "https://figma.com/design1" },
-    { link: "https://figma.com/design2" },
-  ];
-  const userJourneyMaps = [
-    { link: "https://journeymap1.com" },
-    { link: "https://journeymap2.com" },
-  ];
+  useEffect(() => {
+    fetchProject(id);
+  }, [fetchProject, id]);
+
+  if (loading || !project) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-500" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative z-0 bg-primary">
       <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
         <Navbar project />
-        {/* <Hero /> */}
-
-        {/* <div className=""> */}
         <StarsCanvas />
-
-        {/* </div> */}
-        <div className="mt-0 pt-28  px-32">
+        <div className="mt-0 pt-28 px-4 sm:px-8 md:px-32">
           <ProjectDetail
-            title={projectTitle}
-            description={projectDescription}
-            uiDesigns={uiDesigns}
-            userJourneyMaps={userJourneyMaps}
+            title={project.title}
+            description={project.description}
+            imageUrl={project.imageUrl}
+            videoUrl={project.videoUrl}
+            topics={project.topics}
+            projectLink={project.projectLink}
+            descImageUrl1={project.descImageUrl1}
+            descImageUrl2={project.descImageUrl2}
+            gitHubLink={project.gitHubLink}
+            description1={project?.description1}
+            description2={project?.description2}
           />
         </div>
       </div>
@@ -76,4 +147,17 @@ const ProjectDetailPage = () => {
   );
 };
 
-export default ProjectDetailPage;
+const mapStateToProps = (state) => {
+  return {
+    project: state.project.project,
+    loading: state.project.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProject: (id) => dispatch(fetchProject(id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetailPage);
