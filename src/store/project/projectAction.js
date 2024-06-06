@@ -41,32 +41,28 @@ export const fetchProjects = createAsyncThunk(
 )
 
 export const createProject = createAsyncThunk(
-    'projects/create',
+  'projects/create',
   async (project, thunkAPI) => {
-    const formData = new FormData();
-    formData.append('title', project.title);
-    formData.append('description', project.description);
-    project.topics.forEach((topic, index) => {
-      formData.append(`topics[${index}][name]`, topic.name);
-      formData.append(`topics[${index}][color]`, topic.color);
-    });
-    formData.append('image', project.image);
-    formData.append('gitHubLink', project.gitHubLink);
-    formData.append('projectLink', project.projectLink);
-
-
     try {
       const response = await fetch(`${baseUrl}project`, {
         method: 'POST',
         headers: {
-          "Accept":"*/*"
-
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: formData,
+        body: JSON.stringify(project),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create blog');
+        // Try to parse the response body for more detailed error information
+        let errorDetail = 'Failed to create project';
+        try {
+          const errorResponse = await response.json();
+          errorDetail = errorResponse.message || errorDetail;
+        } catch (parseError) {
+          // Fallback to generic error message if parsing fails
+        }
+        throw new Error(errorDetail);
       }
 
       return await response.json();
@@ -74,7 +70,7 @@ export const createProject = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
+);
 
 export const updateProject = createAsyncThunk(
     'projects/update',
