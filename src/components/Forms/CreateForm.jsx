@@ -3,23 +3,27 @@ import { Modal, Form, Input, Button, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
+import axios from "axios";
+import { baseUrl } from "../../constants";
 
 const CreateBlogModal = ({
   visible,
   onCreate,
   onCancel,
   loading,
-  width = "50%",
+  width = "60%",
   setVisible,
 }) => {
   const [form] = Form.useForm();
   const [content, setContent] = useState("");
-  const [imageFile, setImageFile] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
+  const [uploading, setUploading] = useState(false);
+
 
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
-      onCreate({ ...values, image: imageFile, body: content });
+      onCreate({ ...values, image: imageUrl, body: content });
       setTimeout(() => {
         setVisible((prev) => !prev);
       }, 3000);
@@ -28,9 +32,39 @@ const CreateBlogModal = ({
     }
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange =async (e , setImageUrlCallback) => {
     if (e.target.files && e.target.files[0]) {
-      setImageFile(e.target.files[0]);
+      const file = e.target.files[0];
+      const base64 = await convertBase64(file);
+      uploadSingleImage(base64, setImageUrlCallback);
+    }
+  };
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const uploadSingleImage = async (base64, setImageUrlCallback) => {
+    setUploading(true);
+    try {
+      const response = await axios.post(`${baseUrl}/upload-image`, { image: base64 });
+      setImageUrlCallback(response.data.imageUrl);
+      message.success("Image uploaded successfully");
+    } catch (error) {
+      message.error("Error uploading image");
+      console.error(error.message);
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -125,13 +159,13 @@ const CreateBlogModal = ({
               type="file"
               accept="image/*"
               name="image"
-              onChange={handleImageChange}
+              onChange={(e)=> handleImageChange(e , setImageUrl)}
             />
           </Form.Item>
-          {imageFile && (
+          {imageUrl && (
             <img
-              src={URL.createObjectURL(imageFile)}
-              alt="Selected"
+              src={imageUrl}
+              alt="uploaded"
               style={{ maxWidth: "100%" }}
             />
           )}
