@@ -1,97 +1,4 @@
-// import React, { useCallback } from 'react';
-// import { Button, Card, Input } from 'antd';
-// import ReactFlow, { useNodesState, useEdgesState, addEdge } from 'reactflow';
-
-// const { Meta } = Card;
-
-// function MindMap() {
-//   // Initial nodes and edges
-//   const initialNodes = [
-//     { id: '1', position: { x: 0, y: 0 }, data: { label: 'Node 1', children: [] }, draggable: true },
-//     { id: '2', position: { x: 0, y: 100 }, data: { label: 'Node 2', children: [] }, draggable: true },
-//   ];
-//   const initialEdges = [];
-
-//   // State management for nodes and edges
-//   const [nodes, setNodes] = useNodesState(initialNodes);
-//   const [edges, setEdges] = useEdgesState(initialEdges);
-
-//   // Function to add a new card (idea)
-//   const handleAddCard = () => {
-//     const newNodeId = `node-${nodes.length + 1}`;
-//     const newNode = {
-//       id: newNodeId,
-//       position: { x: 0, y: 0 },
-//       data: { label: '', children: [] },
-//       draggable: true,
-//     };
-//     setNodes([...nodes, newNode]);
-//   };
-
-//   // Function to handle the input change for a node
-//   const handleInputChange = (event, nodeId) => {
-//     const updatedNodes = nodes.map((node) =>
-//       node.id === nodeId ? { ...node, data: { ...node.data, label: event.target.value } } : node
-//     );
-//     setNodes(updatedNodes);
-//   };
-
-//   // Function to handle connecting nodes
-//   const handleConnect = useCallback((params) => {
-//     const { source, target } = params;
-//     const updatedNodes = nodes.map((node) => {
-//       if (node.id === source || node.id === target) {
-//         const updatedChildren = [...node.data.children, node.id === source ? target : source];
-//         return { ...node, data: { ...node.data, children: updatedChildren } };
-//       }
-//       return node;
-//     });
-//     setNodes(updatedNodes);
-//     setEdges((edges) => addEdge(params, edges));
-//   }, [setNodes, setEdges, nodes]);
-
-//   return (
-//     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-//       {/* Render the ReactFlow component */}
-//       <ReactFlow
-//         elements={nodes.concat(edges)}
-//         onConnect={handleConnect}
-//         snapToGrid={true}
-//         snapGrid={[15, 15]}
-//       />
-//       {/* Button to add a new card */}
-//       <Button type="primary" onClick={handleAddCard} style={{ position: 'absolute', top: 20, right: 20 }}>
-//         Add Card
-//       </Button>
-//       {/* Render Card components for each node */}
-//       {nodes.map((node) => (
-//         <Card
-//           key={node.id}
-//           style={{ position: 'absolute', left: node.position.x, top: node.position.y, width: 200 }}
-//           title={`Node ${node.id}`}
-//           draggable={true}
-//         >
-//           <Input
-//             value={node.data.label}
-//             onChange={(event) => handleInputChange(event, node.id)}
-//             placeholder="Enter idea"
-//           />
-//         </Card>
-//       ))}
-//     </div>
-//   );
-// }
-
-// export default MindMap;
-
-
-
-
-
-
-
 import React, { useEffect, useState, useRef, useCallback } from "react";
-// mui
 import {
   Container,
   Grid,
@@ -102,8 +9,6 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-// routes
-// sections
 import ResizableNode from "./ResizableNode";
 
 import ReactFlow, {
@@ -116,6 +21,9 @@ import ReactFlow, {
   useEdgesState,
   addEdge,
 } from "reactflow";
+import { connect } from "react-redux";
+import { createMindmap, deleteMindmap, fetchMindmaps, updateMindmap } from "../../../store/mindmap/mindmapAction";
+import MindmapCards from "./MindMapCards";
 
 // ----------------------------------------------------------------------
 
@@ -125,7 +33,20 @@ const nodeTypes = {
 
 // ----------------------------------------------------------------------
 
-export default function Flow() {
+ const  Flow =({
+  mindmaps,
+  loading,
+  fetchMindMaps,
+  createMindMap,
+  updateMindMap,
+deleteMindMap
+ }) => {
+
+  useEffect(()=>
+    {
+      fetchMindMaps()
+    }
+  ,[])
   let id = 0;
   const getId = () => `dndnode_${id++}`;
 
@@ -143,10 +64,11 @@ export default function Flow() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
 
-  console.log(nodes , 'nodes');
   const [target, setTarget] = useState(null);
   const [clickedNodeId, setClickedNodeId] = useState(null);
   const [nodeName, setNodeName] = useState("Node - 1");
+  const [title, setTitle]  = useState('')
+
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
@@ -162,8 +84,6 @@ export default function Flow() {
     const centerX = node.position.x + node.width / 2;
     const centerY = node.position.y + node.height / 2;
     // find a node where the center point is inside
-    console.log(centerX);
-    console.log(centerY);
     const targetNode = nodes.find(
       (n) =>
         centerX > n.position.x &&
@@ -174,7 +94,6 @@ export default function Flow() {
         n.id !== node.id
     );
     setTarget(targetNode);
-    console.log(target);
   };
 
   const onNodeDragStop = (evt, node) => {
@@ -199,8 +118,14 @@ export default function Flow() {
     dragRef.current = null;
   };
 
+  const [sources, setSources] = useState([])
+
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
+    (params) => {
+      setEdges((eds) =>{  
+        setSources(prev => [...prev , ...addEdge(params, eds) ])
+       return addEdge(params, eds);
+      } )},
     [setEdges]
   );
 
@@ -208,7 +133,6 @@ export default function Flow() {
     if (node && node.id) {
       setClickedNodeId(node.id);
       setNodeName(node.data.label);
-      console.log(node);
     }
   };
 
@@ -279,8 +203,48 @@ export default function Flow() {
     setViewport({ x: 10, y: 10, zoom: 1 }, { duration: 800 });
   }, [setViewport]);
 
+  const [newMindmap , setNewMindmap] = useState(false)
+
+
+  const [selectedMindmap , setSelectedMindmap] = useState(null)
+  const handleSave =()=>{
+    if(newMindmap){
+      createMindMap({ nodes:nodes,name: title , sources} )
+
+    }else{
+      updateMindMap({id:selectedMindmap?._id ,mindmapData:{ nodes:nodes,name: title , sources} })
+    }
+  }
+
+  const handleTextChange = (e) => {
+    setTitle(e.target.value)
+  }
+
+  const handleMindmapSelect = (mindmap) => {
+    setSelectedMindmap(mindmap);
+    setTitle(mindmap?.name );
+    setNodes(mindmap?.nodes);
+
+    mindmap?.sources?.map(src =>{
+      onConnect(src)
+    }) 
+  };
   return (
     <div className="w-full h-full">
+      <button  type="submit" className="bg-primary rounded-lg px-4 py-2 hover:bg-black hover:font-bold text-center hover:transition-all hover:duration-100 hover:translate-y-0.5" onClick={()=> setNewMindmap(true)} >
+        New  
+      </button>
+
+      <MindmapCards handleMindmapDelete={(id)=>deleteMindMap(id)} handleMindmapSelect={handleMindmapSelect} mindmaps={mindmaps}/>
+
+      {(selectedMindmap || newMindmap )&&  <>
+      
+       <div className="my-8 flex justify-between items-center mr-8 ">
+        <input value={title}  onChange={handleTextChange} type="text" placeholder="insert the title of the mind map" className="border border-gray-300 rounded-md p-2 focus placeholder-gray-500 text-sm" />
+      <button  type="submit" className="bg-primary rounded-lg px-4 py-2 hover:bg-black hover:font-bold text-center hover:transition-all hover:duration-100 hover:translate-y-0.5" onClick={handleSave} >
+        Save 
+      </button>
+      </div>
     <Container maxWidth={"1684px"} className="w-full h-full">
       <Grid container>
         <Grid item xs={12} sm={2} md={1}>
@@ -344,11 +308,14 @@ export default function Flow() {
         </Grid>
       </Grid>
     </Container>
+      </>}
+
+     
     </div>
   );
 }
 
-// ------------------------------------------------------------------
+// ------------------------------------------------------------------ //
 const Sidebar = () => {
   const onDragStart = (event, nodeType) => {
     event.dataTransfer.setData("application/reactflow", nodeType);
@@ -401,3 +368,25 @@ const Sidebar = () => {
     </Box>
   );
 };
+
+
+const mapStateToProps = (state) => {
+  return {
+    mindmaps: state?.mindmaps?.mindmaps,
+    mindmap:state?.mindmaps?.mindmap,
+    loading: state?.mindmaps?.loading,
+    error: state?.mindmaps?.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchMindMaps: () => dispatch(fetchMindmaps()),
+    createMindMap: (data) => dispatch(createMindmap(data)),
+    updateMindMap: (data) => dispatch(updateMindmap(data)),
+    deleteMindMap:(id)=>dispatch(deleteMindmap(id))
+
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Flow);
