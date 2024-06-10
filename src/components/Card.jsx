@@ -17,7 +17,7 @@ const Card = ({
       className="bg-tertiary hover:translate-y-[-10px] transition-transform cursor-pointer rounded-md shadow-md white-200 border-2-white"
     >
       <img
-        src={`${imgBaseUrl}${imageUrl}`}
+        src={`${imageUrl}`}
         alt={title}
         className="mb-4 w-full h-48 object-cover rounded-md"
       />
