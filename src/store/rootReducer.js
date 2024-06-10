@@ -7,6 +7,7 @@ import { CatagorySlice } from "./catagory/catagorySlice";
 import { FinancesSlice } from "./finance/financeSlice";
 import { ConversationSlice } from "./conversation/conversationSlice";
 import { businessPlanSlice } from "./bussinessPlan/bussinessPlanSlince";
+import { mindmapSlice } from "./mindmap/mindmapSlice";
 const rootReducer = combineReducers({
   blog:blogSlice.reducer,
   blogs:blogsSlice.reducer,
@@ -16,7 +17,9 @@ const rootReducer = combineReducers({
   catagories:CatagorySlice.reducer,
   finances:FinancesSlice.reducer,
   conversations:ConversationSlice.reducer,
-  bussinessPlan:businessPlanSlice.reducer
+  bussinessPlan:businessPlanSlice.reducer,
+  mindmaps:mindmapSlice.reducer
+
 
 });
 
