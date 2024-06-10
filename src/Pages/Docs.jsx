@@ -24,22 +24,10 @@ function Docs() {
       <Tab tabName="ConversationPlan"> 
       <ConversationPlans />
       </Tab>
-      <Tab tabName="Strategy"> 
-      Strategy
-      </Tab>
       <Tab  tabName="Mind Map"> 
       <ReactFlowProvider>
       <MindMap />
       </ReactFlowProvider>
-      </Tab>
-      <Tab tabName="Marketing"> 
-      Marketing
-      </Tab>
-      <Tab tabName="Opportunity"> 
-      Opportunity
-      </Tab>
-      <Tab tabName="Investment"> 
-      Investment
       </Tab>
       </DynamicTabs>
       </Dashboard>
