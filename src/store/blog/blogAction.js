@@ -44,24 +44,28 @@ export const createBlog = createAsyncThunk(
     'blogs/create',
   async (blogData, thunkAPI) => {
     try {
-      const formData = new FormData();
-    formData.append('title', blogData.title);
-    formData.append('author', blogData.author);
-    formData.append('description', blogData.description);
-    formData.append('body', blogData.body);
-    formData.append('category', blogData.category);
-    formData.append('image', blogData.image);
-      const response = await fetch(`${baseUrl}blogs`, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          "Accept":"*/*"
-        },
-      });
-      console.log(response , "response");
-      if (!response.ok) {
-        throw new Error('Failed to create blog');
+    const response = await fetch(`${baseUrl}blogs`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(blogData),
+    });
+
+    if (!response.ok) {
+      // Try to parse the response body for more detailed error information
+      let errorDetail = 'Failed to create blog!';
+      try {
+        const errorResponse = await response.json();
+        errorDetail = errorResponse.message || errorDetail;
+      } catch (parseError) {
+        // Fallback to generic error message if parsing fails
       }
+      throw new Error(errorDetail);
+    }
+
+    return await response.json();
 
       return await response.json();
     } catch (error) {
