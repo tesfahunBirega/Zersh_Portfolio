@@ -73,7 +73,7 @@ function SingleBlog({ blog, fetchBlog }) {
                 {blog.createdDate}
               </p>
               <img
-                src={`${imgBaseUrl}${blog.imageUrl}`}
+                src={`${blog.imageUrl}`}
                 alt={blog.title}
                 className="w-full mb-6 rounded-md"
               />
