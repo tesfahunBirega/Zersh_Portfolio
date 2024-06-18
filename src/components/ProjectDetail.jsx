@@ -60,24 +60,24 @@ const ProjectDetail = ({ title, description, imageUrl, videoUrl, topics, project
           </div>
           <div className="mb-6">{description}</div>
           <div className="grid gap-4 space-y-8">
-            <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
-              <div className="description mb-2 md:mb-0 md:mr-4">
-                <p>{description1}</p>
-              </div>
-              <div className="image">
-                <img src={descImageUrl1} alt="Description Image 1" className="max-w-full h-auto rounded-lg" />
-              </div>
-            </div>
+  <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
+    <div className="description mb-2 md:mb-0 md:mr-2 md:w-1/2">
+      <p>{description1}</p>
+    </div>
+    <div className="image md:w-1/2 md:mr-4 mb-4 md:mb-0">
+      <img src={descImageUrl1} alt="Description Image 1" className="max-w-full h-auto rounded-lg" />
+    </div>
+  </div>
+  <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
+    <div className="image md:w-1/2 md:mr-4 mb-4 md:mb-0">
+      <img src={descImageUrl2} alt="Description Image 2" className="max-w-full h-auto rounded-lg" />
+    </div>
+    <div className="description mb-2 md:mb-0 md:mr-2 md:w-1/2">
+      <p>{description2}</p>
+    </div>
+  </div>
+</div>
 
-            <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
-              <div className="image mb-2 md:mb-0 md:mr-4">
-                <img src={descImageUrl2} alt="Description Image 2" className="w-full h-auto rounded-lg" />
-              </div>
-              <div className="description">
-                <p>{description2}</p>
-              </div>
-            </div>
-          </div>
 
           <div className="mb-6 mt-8 space-y-4">
             <a
