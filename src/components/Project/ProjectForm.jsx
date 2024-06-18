@@ -7,6 +7,8 @@ import * as z from "zod";
 const projectSchema = z.object({
   title: z.string().nonempty("Title is required"),
   description: z.string().nonempty("Description is required"),
+  description1: z.string(),
+  description2: z.string(),
   topics: z.string().nonempty("At least one topic is required"),
   gitHubLink: z.string().url().optional(),
   projectLink: z.string().url().optional(),
@@ -67,7 +69,6 @@ function ProjectForm({ visible, setVisible, loading, onSubmit, onCancel }) {
       if (parsedValues.gitHubLink && !parsedValues.gitHubLink.startsWith("https://")) {
         parsedValues.gitHubLink = "https://" + parsedValues.gitHubLink;
       }
-
       onSubmit({ ...parsedValues, imageUrl, descImageUrl1, descImageUrl2, topics });
       setVisible(false);
     } catch (error) {
