@@ -20,7 +20,6 @@ function Reports() {
     { name: 'Created', value: tasks.filter(task => task.status === 'created').length },
   ];
 
-  // Calculate productive and wasted time
   const productiveTime = tasks.reduce((acc, task) => acc + task.productiveTime, 0);
   const wastedTime = tasks.reduce((acc, task) => acc + task.wastedTime, 0);
 
