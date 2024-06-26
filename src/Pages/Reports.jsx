@@ -13,7 +13,6 @@ function Reports() {
       .then(response => setTasks(response.data))
       .catch(error => console.error('Error fetching tasks:', error));
   }, []);
-  // Calculatak status distribution
   const taskStatusData = [
     { name: 'Completed', value: tasks.filter(task => task.status === 'completed').length },
     { name: 'Active', value: tasks.filter(task => task.status === 'active').length },
@@ -25,7 +24,6 @@ function Reports() {
   const productiveTime = tasks.reduce((acc, task) => acc + task.productiveTime, 0);
   const wastedTime = tasks.reduce((acc, task) => acc + task.wastedTime, 0);
 
-  // Prepare data for time distribution chart
   const timeData = [
     { name: 'Productive Time', value: productiveTime },
     { name: 'Wasted Time', value: wastedTime },
