@@ -6,6 +6,10 @@ import {
   CartesianGrid, ComposedChart, Cell, ResponsiveContainer
 } from 'recharts';
 import Plot from "react-plotly.js";
+import BubbleChart from "../components/Reports/Charts/BubbleChart";
+import DoughnutChart from "../components/Reports/Charts/DoughnutChart";
+import BarChartComponent from "../components/Reports/Charts/BarChart";
+import LineChartComponent from "../components/Reports/Charts/LineChart";
 
 function Reports() {
   const [tasks, setTasks] = useState([]);
@@ -96,7 +100,7 @@ function Reports() {
         <h1 className="text-2xl font-bold mb-4">Task Dashboard</h1>
         
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
           <div className={`p-4 rounded shadow ${  'dark:bg-gray-800 bg-white'}`}>
             <h2 className="text-lg font-semibold mb-2">Task Status Distribution</h2>
             <ResponsiveContainer width="100%" height={400}>
@@ -187,26 +191,38 @@ function Reports() {
 
           <div className={`p-4 rounded shadow ${  'dark:bg-gray-800 bg-white'}`}>
             <h2 className="text-lg font-semibold mb-2">Bubble Chart</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              {/* <Scatter data={bubbleData}>
-                <XAxis dataKey="x" name="Day" />
-                <YAxis dataKey="y" name="Duration (hours)" />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Legend />
-                {
-                  bubbleData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.z > 360 ? '#8884d8' : '#82ca9d'} />
-                  ))
-                }
-              </Scatter> */}
-              <div className="p-4 rounded shadow dark:bg-gray-800 bg-white">
-      <h2 className="text-lg font-semibold mb-2">Bubble Chart</h2>
-      <Plot
-        data={data}
-        layout={layout}
-        style={{ width: '100%', height: '400px' }}
-      />
-    </div>
+            <ResponsiveContainer width="100%" height={"100%"}>
+              
+            <BubbleChart data={tasks} />
+            </ResponsiveContainer>
+          </div>
+
+          <div className={`p-4 rounded shadow ${  'dark:bg-gray-800 bg-white'}`}>
+            <h2 className="text-lg font-semibold mb-2">Bubble Chart</h2>
+            <ResponsiveContainer width="100%" height={"100%"}>
+              
+            <BarChartComponent data={tasks} />
+
+            </ResponsiveContainer>
+          </div>
+
+          <div className={`p-4 rounded shadow ${  'dark:bg-gray-800 bg-white'}`}>
+            <h2 className="text-lg font-semibold mb-2">Bubble Chart</h2>
+            <ResponsiveContainer width="100%" height={"100%"}>
+              
+            <LineChartComponent data={tasks} />
+
+
+            </ResponsiveContainer>
+          </div>
+
+          <div className={`p-4 rounded shadow ${  'dark:bg-gray-800 bg-white'}`}>
+            <h2 className="text-lg font-semibold mb-2">Bubble Chart</h2>
+            <ResponsiveContainer width="100%" height={"100%"}>
+              
+
+            <DoughnutChart data={tasks} />
+
             </ResponsiveContainer>
           </div>
         </div>
