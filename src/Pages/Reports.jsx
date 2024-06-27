@@ -5,6 +5,7 @@ import {
   PieChart, Pie, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, LineChart, Line, RadialBarChart, RadialBar,
   CartesianGrid, ComposedChart, Cell, ResponsiveContainer
 } from 'recharts';
+import Plot from "react-plotly.js";
 
 function Reports() {
   const [tasks, setTasks] = useState([]);
