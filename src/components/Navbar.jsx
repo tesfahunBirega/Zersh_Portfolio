@@ -128,18 +128,6 @@ const Navbar = ({ project }) => {
               Blogs
             </p>
           </Link>
-          <div className="flex justify-end items-center p-4">
-            <Menu className="rounded" theme="dark" mode="horizontal">
-              <SubMenu title="Account">
-                <Menu.Item key="login">
-                  <Link to="/login">Login</Link>
-                </Menu.Item>
-                <Menu.Item key="signup">
-                  <Link to="/signup">Sign Up</Link>
-                </Menu.Item>
-              </SubMenu>
-            </Menu>
-          </div>
         </div>
       </div>
     </nav>
