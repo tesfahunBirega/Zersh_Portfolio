@@ -47,12 +47,14 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
       >
-        I'm a skilled software developer with experience in JavaScript, and
-        expertise in frameworks & libraries like React,Redux,Redux
-        Thunk,Tailwindcss,Express.js ,Typeorm. I'm a quick learner and
-        collaborate closely with clients to create efficient, scalable, and
-        user-friendly solutions that solve real-world problems. Let's work
-        together to bring your ideas to life!
+        Experienced Data Analyst with a proven track record of teaching and
+        mentoring over 100 students in advanced analytics techniques, including
+        SQL, Python, Tableau, and spreadsheet analysis. Adept at analyzing
+        market trends, developing interactive dashboards, and optimizing pricing
+        strategies, resulting in significant business growth and efficiency
+        improvements. Skilled in coordinating research projects and developing
+        data-driven curriculum content, with a strong commitment to enhancing
+        both theoretical and practical applications of data analytics.
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-10">

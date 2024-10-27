@@ -5,10 +5,21 @@ import { motion } from "framer-motion";
 import { StarsCanvas } from "./canvas";
 import Navbar from "./Navbar";
 import { fetchProject } from "../store/project/projectAction";
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 
-const ProjectDetail = ({ title, description, imageUrl, videoUrl, topics, projectLink, gitHubLink, descImageUrl1, descImageUrl2  ,description1,
-  description2}) => {
+const ProjectDetail = ({
+  title,
+  description,
+  imageUrl,
+  videoUrl,
+  topics,
+  projectLink,
+  gitHubLink,
+  descImageUrl1,
+  descImageUrl2,
+  description1,
+  description2,
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -60,24 +71,31 @@ const ProjectDetail = ({ title, description, imageUrl, videoUrl, topics, project
           </div>
           <div className="mb-6">{description}</div>
           <div className="grid gap-4 space-y-8">
-  <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
-    <div className="description mb-2 md:mb-0 md:mr-2 md:w-1/2">
-      <p>{description1}</p>
-    </div>
-    <div className="image md:w-1/2 md:mr-4 mb-4 md:mb-0">
-      <img src={descImageUrl1} alt="Description Image 1" className="max-w-full h-auto rounded-lg" />
-    </div>
-  </div>
-  <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
-    <div className="image md:w-1/2 md:mr-4 mb-4 md:mb-0">
-      <img src={descImageUrl2} alt="Description Image 2" className="max-w-full h-auto rounded-lg" />
-    </div>
-    <div className="description mb-2 md:mb-0 md:mr-2 md:w-1/2">
-      <p>{description2}</p>
-    </div>
-  </div>
-</div>
-
+            <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
+              <div className="description mb-2 md:mb-0 md:mr-2 md:w-1/2">
+                <p>{description1}</p>
+              </div>
+              <div className="image md:w-1/2 md:mr-4 mb-4 md:mb-0">
+                <img
+                  src={descImageUrl1}
+                  alt="Description Image 1"
+                  className="max-w-full h-auto rounded-lg"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
+              <div className="image md:w-1/2 md:mr-4 mb-4 md:mb-0">
+                <img
+                  src={descImageUrl2}
+                  alt="Description Image 2"
+                  className="max-w-full h-auto rounded-lg"
+                />
+              </div>
+              <div className="description mb-2 md:mb-0 md:mr-2 md:w-1/2">
+                <p>{description2}</p>
+              </div>
+            </div>
+          </div>
 
           <div className="mb-6 mt-8 space-y-4">
             <a
@@ -115,7 +133,10 @@ const ProjectDetailPage = ({ project, loading, fetchProject }) => {
   if (loading || !project) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-500" role="status">
+        <div
+          className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-500"
+          role="status"
+        >
           <span className="visually-hidden">Loading...</span>
         </div>
       </div>

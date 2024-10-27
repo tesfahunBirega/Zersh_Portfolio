@@ -2,60 +2,53 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseUrl } from "../../constants";
 
 export const fetchProject = createAsyncThunk(
-    'projects/fetchbyid',
-    async(blogId, thinkApi)=>{
+  "projects/fetchbyid",
+  async (blogId, thinkApi) => {
+    const abortController = new AbortController();
 
-        const abortController = new AbortController()
-
-        const response = await fetch(`${baseUrl}project/${blogId}` , {
-            signal:abortController.signal
-        })
-        if(response.status !== 200){
-            abortController.abort()
-            return thinkApi.rejectWithValue("Failed to fetch user data.")
-        }
-
-        return await response.json()
+    const response = await fetch(`${baseUrl}project/${blogId}`, {
+      signal: abortController.signal,
+    });
+    console.log(response, "responseresponse");
+    if (response.status !== 200) {
+      abortController.abort();
+      return thinkApi.rejectWithValue("Failed to fetch user data.");
     }
-)
 
-export const fetchProjects = createAsyncThunk(
-    'projects',
-    async(thinkApi)=>{
+    return await response.json();
+  }
+);
 
-        const abortController = new AbortController()
+export const fetchProjects = createAsyncThunk("projects", async (thinkApi) => {
+  const abortController = new AbortController();
 
-        const response = await fetch(`${baseUrl}project` 
-        ,
-         {
-            signal:abortController.signal
-        }
-        )
-        if(response.status !== 200){
-            abortController.abort()
-            return thinkApi.rejectWithValue("Failed to fetch projects data.")
-        }
+  const response = await fetch(`${baseUrl}project`, {
+    signal: abortController.signal,
+  });
+  if (response.status !== 200) {
+    abortController.abort();
+    return thinkApi.rejectWithValue("Failed to fetch projects data.");
+  }
 
-        return await response.json()
-    }
-)
+  return await response.json();
+});
 
 export const createProject = createAsyncThunk(
-  'projects/create',
+  "projects/create",
   async (project, thunkAPI) => {
     try {
       const response = await fetch(`${baseUrl}project`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(project),
       });
 
       if (!response.ok) {
         // Try to parse the response body for more detailed error information
-        let errorDetail = 'Failed to create project';
+        let errorDetail = "Failed to create project";
         try {
           const errorResponse = await response.json();
           errorDetail = errorResponse.message || errorDetail;
@@ -73,19 +66,19 @@ export const createProject = createAsyncThunk(
 );
 
 export const updateProject = createAsyncThunk(
-    'projects/update',
-  async (id,blogData, thunkAPI) => {
+  "projects/update",
+  async (id, blogData, thunkAPI) => {
     try {
       const response = await fetch(`${baseUrl}project/${id}`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(blogData),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to update blog');
+        throw new Error("Failed to update blog");
       }
 
       return await response.json();
@@ -93,21 +86,21 @@ export const updateProject = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
+);
 
 export const deleteProject = createAsyncThunk(
-    'projects/delete',
+  "projects/delete",
   async (id, thunkAPI) => {
     try {
       const response = await fetch(`${baseUrl}project/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
       if (!response.ok) {
-        throw new Error('Failed to update blog');
+        throw new Error("Failed to update blog");
       }
 
       return await response.json();
@@ -115,4 +108,4 @@ export const deleteProject = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     }
   }
-)
+);

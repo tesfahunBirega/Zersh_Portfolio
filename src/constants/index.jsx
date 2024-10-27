@@ -65,90 +65,104 @@ export const navLinks = [
 
 const services = [
   {
-    title: "Web Developer",
+    title: "Data Analyst",
     icon: web,
   },
   {
-    title: "Mobile Developer",
+    title: "Business Intelligence Developer",
     icon: mobile,
   },
   {
-    title: "Backend Developer",
+    title: "Data Visualization Specialist",
     icon: backend,
   },
   {
-    title: "UI/UX",
+    title: "Data Scientist",
     icon: backend,
   },
 ];
 
 const skillsFrontend = [
   {
-    title: "React.js | Redux , Redux Thunk",
+    title: "SQL (MySQL, PostgreSQL)",
     level: 95,
   },
   {
-    title: "Next.js",
-    level: 80,
-  },
-  {
-    title: "Flutter",
-    level: 70,
-  },
-  {
-    title: "Three.js / React Three Fiber",
-    level: 40,
-  },
-  {
-    title: "Tailwind , CSS",
+    title: "Python (Pandas, NumPy, Scikit-learn)",
     level: 90,
   },
   {
-    title: "Framer-motion",
-    level: 80,
+    title: "Excel & Spreadsheets",
+    level: 85,
   },
   {
-    title: "Figma",
-    level: 70,
-  },
-];
-const skillsBackend = [
-  {
-    title: "Express.js",
+    title: "Tableau / Power BI",
     level: 90,
   },
   {
-    title: "Next.js",
-    level: 70,
-  },
-  {
-    title: "TypeORM",
-    level: 95,
-  },
-  {
-    title: "Prisma",
-    level: 95,
-  },
-  {
-    title: "Postgresql",
-    level: 80,
-  },
-  {
-    title: "Mongodb",
+    title: "R (Data Analysis & Visualization)",
     level: 75,
   },
-];
-const skillsDevops = [
   {
-    title: "Docker",
-    level: 90,
+    title: "Google Data Studio",
+    level: 80,
   },
   {
-    title: "Nginx",
+    title: "Data Cleaning & Transformation",
+    level: 95,
+  },
+];
+
+const skillsBackend = [
+  {
+    title: "ETL Pipelines (Airflow, Talend)",
+    level: 85,
+  },
+  {
+    title: "Big Data Tools (Hadoop, Spark)",
+    level: 75,
+  },
+  {
+    title: "APIs & Data Integration",
+    level: 80,
+  },
+  {
+    title: "AWS (S3, Redshift, RDS)",
+    level: 85,
+  },
+  {
+    title: "NoSQL Databases (MongoDB, Cassandra)",
     level: 70,
   },
   {
-    title: "Jenkinks",
+    title: "Data Warehousing",
+    level: 90,
+  },
+];
+
+const skillsDevops = [
+  {
+    title: "Scikit-learn",
+    level: 85,
+  },
+  {
+    title: "TensorFlow / Keras",
+    level: 75,
+  },
+  {
+    title: "Natural Language Processing (NLP)",
+    level: 80,
+  },
+  {
+    title: "Regression & Classification Models",
+    level: 90,
+  },
+  {
+    title: "Model Deployment (Flask, FastAPI)",
+    level: 80,
+  },
+  {
+    title: "Data Preprocessing & Feature Engineering",
     level: 95,
   },
 ];
@@ -210,40 +224,39 @@ const technologies = [
 ];
 const experiences = [
   {
-    title: "Upwork Freelance",
-    company_name: "Stocky | Upwork Freelance",
+    title: "Data Analytics Instructor & Mentor",
+    company_name: "Masterschool | Upwork Freelance",
     icon: stocky,
     iconBg: "#383E56",
-    date: `10 2023 -  ${moment("10-10-2023").format("MM-YYYY")}`,
+    date: `April 2024 - Present`,
     points: [
-      "Creating a Company Landing Page and dashboard to validate , analysis the cusotmers interaction using React , express.js , JavaScript library and the Tailwind CSS framework involves utilizing these tools to develop user-friendly, visually appealing, and highly functional applications",
-      "Collaborating with the CEO of Stocky , to create high-quality products.",
+      "Taught 100+ students in data analytics courses, covering  spreadsheet techniques, SQL, Tableau, and Python.",
+      "Mentored students on individual and group projects, providing personalized guidance that led to a 20% improvement in their analytical skills.",
+      "Developed and updated curriculum content, hands-on projects, and assessments, resulting in a 15% increase in student engagement and course completion rates.",
     ],
   },
   {
-    title: "Full-stack Developer",
-    company_name: "IE Network Solutions",
-    icon: "https://scm.ienetworks.co/static/media/White.c831409c3eec4e852dfb.png",
+    title: "Data Analyst & Scientist",
+    company_name: "Berlin Bussiness aoutomation",
+    icon: "https://www.digitalvidya.com/blog/wp-content/uploads/2019/07/How-To-Become-Data-Analyst-1170x630_db990027fe5f44bd66f9ec06f24f27c1.webp",
     iconBg: "#383E56",
-    date: `02 2023 -  ${moment(Date.now()).format("MM-YYYY")}`,
+    date: `Jan 2024 - May 2024`,
     points: [
-      "Creating software as a service (SaaS) products using the React , express.js , JavaScript library and the Tailwind CSS framework involves utilizing these tools to develop user-friendly, visually appealing, and highly functional applications",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Conducted market research and competitive analysis, contributing to a 10% increase in price prediction accuracy.",
+      "Designed and maintained interactive dashboards in Tableau to track KPIs, improving business performance monitoring efficiency by 25%.",
+      "Analyzed product price fluctuations, identifying trends that informed pricing strategies, leading to a 12% revenue increase.",
     ],
   },
   {
-    title: "Flutter Mobile Developer",
+    title: "Data Analyst",
     company_name: "Endebete",
     icon: endebete,
     iconBg: "#E6DEDD",
     date: "Jan 2022 - May 2022",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Analyzed real estate market trends and property data, optimizing pricing strategies, resulting in a 10% sales increase.",
+      "Created and maintained Tableau dashboards for tracking sales performance and supporting strategic decision-making.",
+      "Conducted data-driven research to refine property pricing, increasing profitability by 8%.",
     ],
   },
 ];
@@ -279,7 +292,7 @@ const projects = [
   {
     name: "Stocky",
     description:
-      "Developed 'Stocky,' a dynamic stock market analysis platform. It offers trend analysis for products from both buyer and seller perspectives, utilizing user preferences and market data to provide valuable insights for informed decision-making.",
+      "Developed 'Stocky,' a dynamic stock market analysis platform that utilizes data analysis techniques to provide trend analysis from both buyer and seller perspectives, leveraging user preferences and market data for valuable insights that inform decision-making.",
     tags: [
       {
         name: "react.js",
@@ -299,9 +312,9 @@ const projects = [
     source_code_link: "https://github.com/nand-n/Dashboard_1.0",
   },
   {
-    name: "Service Desc ",
+    name: "Service Desc",
     description:
-      "Created 'SD,' a versatile CRM and ticket management tool for clients and registered company employees. It streamlines communication and issue resolution, enhancing overall customer satisfaction.",
+      "Created 'Service Desc,' a versatile CRM and ticket management tool designed for clients and registered company employees, streamlining communication and issue resolution to enhance overall customer satisfaction through effective data analysis.",
     tags: [
       {
         name: "react.js",
@@ -321,9 +334,9 @@ const projects = [
     source_code_link: "https://github.com/nand-n/Dashboard_1.0",
   },
   {
-    name: "Project Management tool ",
+    name: "Project Management Tool",
     description:
-      "Developed an intuitive project management tool with task assignment, progress tracking, and seamless communication features, boosting team efficiency and project delivery..",
+      "Developed an intuitive project management tool that includes task assignment, progress tracking, and seamless communication features, significantly boosting team efficiency and project delivery through data-driven insights.",
     tags: [
       {
         name: "react.js",
@@ -345,7 +358,7 @@ const projects = [
   {
     name: "Rigid Dashboard",
     description:
-      "A Comprehancive dashboard to vishalize and  a convenient and efficient solution for transportation needs.",
+      "A comprehensive dashboard that visualizes transportation data, providing a convenient and efficient solution for transportation needs, emphasizing the role of data analysis in optimizing logistics.",
     tags: [
       {
         name: "react.js",
@@ -367,7 +380,7 @@ const projects = [
   {
     name: "Dolche Pay",
     description:
-      "'Dolche Pay,' an innovative finance platform that integrates credit scoring, peer-to-peer transactions, lending, and equity crowdfunding (Equb). It empowers users to assess creditworthiness, facilitate transactions, access credit, unified platform. ",
+      "'Dolche Pay' is an innovative finance platform that integrates credit scoring, peer-to-peer transactions, lending, and equity crowdfunding (Equb), empowering users to assess creditworthiness, facilitate transactions, and access credit in a unified platform, supported by robust data analysis.",
     tags: [
       {
         name: "react.js",
@@ -389,7 +402,7 @@ const projects = [
   {
     name: "Dolche SaaS",
     description:
-      "Created 'Dolche,'a SaaS fintech platform for comprehensive business finance management, offering income and expense tracking, invoicing, and data-driven insights to empower MSMEs and entrepreneurs.",
+      "Created 'Dolche,' a SaaS fintech platform for comprehensive business finance management that offers income and expense tracking, invoicing, and data-driven insights to empower MSMEs and entrepreneurs through effective data analysis.",
     tags: [
       {
         name: "react.js",
@@ -409,9 +422,9 @@ const projects = [
     source_code_link: "https://github.com/",
   },
   {
-    name: "Bigo game",
+    name: "Bigo Game",
     description:
-      " Bigo an exciting virtual lottery and number-based game. Customers can participate, guess the winning numbers, and have the chance to earn money while having fun. Bigo offers an entertaining and rewarding gaming experience for players of all levels.",
+      "'Bigo' is an exciting virtual lottery and number-based game where customers can participate, guess the winning numbers, and earn money while having fun, offering an entertaining and rewarding gaming experience for players of all levels, leveraging data analysis to enhance user engagement.",
     tags: [
       {
         name: "react.js",
@@ -431,9 +444,9 @@ const projects = [
     source_code_link: "https://github.com/nand-n/Agency-website.git",
   },
   {
-    name: "Modern web 3",
+    name: "Modern Web 3",
     description:
-      "A fully responseive visually apeal and beautiful interactive , web 3 like lading page.",
+      "A fully responsive, visually appealing, and beautifully interactive Web 3-like landing page, showcasing the power of data visualization and user interaction.",
     tags: [
       {
         name: "react.js",
@@ -453,9 +466,9 @@ const projects = [
     source_code_link: "https://github.com/",
   },
   {
-    name: "Agency Landing page",
+    name: "Agency Landing Page",
     description:
-      "Agency Landing page for , dashboard , view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "An Agency Landing page that features a dashboard, allowing users to view estimated salary ranges for positions and locate available jobs based on their current location, employing data analysis to improve user experience.",
     tags: [
       {
         name: "react.js",
@@ -477,7 +490,7 @@ const projects = [
   {
     name: "Endebete",
     description:
-      "A Home Rental Companyt for retail based company,dashboard,view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "A home rental company dashboard that allows users to view estimated salary ranges for positions and locate available jobs based on their current location, utilizing data analytics to enhance decision-making for users.",
     tags: [
       {
         name: "react.js",
@@ -499,7 +512,7 @@ const projects = [
   {
     name: "Agri-Connect",
     description:
-      "A Company Landing page for agri tech ,dashboard , view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "A company landing page for agri-tech that features a dashboard, allowing users to view estimated salary ranges for positions and locate available jobs based on their current location, supported by data analysis for improved functionality.",
     tags: [
       {
         name: "react.js",
@@ -521,7 +534,7 @@ const projects = [
 ];
 
 // const baseUrl = import.meta.env.ENV =="development" ? import.meta.env.BASE_URL_DEV : import.meta.env.BASE_URL_PROD
-const baseUrl = "https://nahom-back.onrender.com/api/v1/"
+const baseUrl = "https://nahom-back.onrender.com/api/v1/";
 // const baseUrl = "http://localhost:3000/api/v1/"
 
 const imgBaseUrl = "https://nahom-back.onrender.com";
@@ -587,12 +600,12 @@ const sidebarRoutes = [
   {
     name: "Notes",
     to: "notes",
-    icon:  <FileTextOutlined />,
+    icon: <FileTextOutlined />,
   },
   {
     name: "Blogs",
     to: "blogs",
-    icon:  <ReadOutlined />,
+    icon: <ReadOutlined />,
   },
   {
     name: "Projects",
@@ -609,14 +622,12 @@ const sidebarRoutes = [
     to: "docs",
     icon: <IoDocumentLockSharp />,
   },
-  
+
   {
     name: "Settings",
     to: "settings",
-    icon:  <SettingOutlined />,
+    icon: <SettingOutlined />,
   },
-  
-
 ];
 
 const getRandomColor = () => {
@@ -626,11 +637,9 @@ const getRandomColor = () => {
     "pink-text-gradient",
     "red-text-gradient",
     "yellow-text-gradient",
-
   ];
   return colors[Math.floor(Math.random() * colors.length)];
 };
-
 
 export {
   services,
@@ -646,5 +655,5 @@ export {
   imgBaseUrl,
   carouselItemsBlogs,
   exploreBlogsTags,
-  getRandomColor
+  getRandomColor,
 };

@@ -6,6 +6,7 @@ import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
 import { Avatar, Menu } from "antd";
 import avatarlogo from "/log1.svg";
+import zershlogo from "/ZershImage.jpg";
 import { Icosahedron } from "@react-three/drei";
 import SubMenu from "antd/es/menu/SubMenu";
 
@@ -66,10 +67,14 @@ const Navbar = ({ project }) => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={avatarlogo} alt="logo" className="w-9 h-9 object-contain" />
-          <p className="text-white text-[18px] font-bold cursor-pointer flex ">
-            Nahom &nbsp;
-            <span className="sm:block hidden"> | Debele</span>
+          <img
+            src={zershlogo}
+            alt="logo"
+            className="w-12 h-12 object-contain"
+          />
+          <p className="text-white text-[25px] font-bold cursor-pointer flex ">
+            Zerihun &nbsp;
+            <span className="sm:block hidden"> | Birega</span>
           </p>
         </Link>
 
