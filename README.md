@@ -5,7 +5,7 @@
 ![Project Banner](readme_assets/readme_banner.png#gh-dark-mode-only)
 ![Project Banner](readme_assets/readme_banner-light.png#gh-light-mode-only)
 
-  <h1>Nahom Debele Portfolio</h1>
+  <h1>Zerihun Birega Portfolio</h1>
   
   <p>
    Using  Three.js 3D Portfolio is a modern UI/UX and functional Developer Portfolio Web built with React & Three.js
