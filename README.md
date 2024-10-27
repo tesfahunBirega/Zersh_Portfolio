@@ -8,8 +8,7 @@
   <h1>Zerihun Birega Portfolio</h1>
   
   <p>
-   Using  Three.js 3D Portfolio is a modern UI/UX and functional Developer Portfolio Web built with React & Three.js
-  </p>
+Using Three.js, this 3D portfolio is designed for a Data Analyst and Data Science, showcasing projects built with machine learning.  </p>
 
 <!-- Badges -->
 <p>
